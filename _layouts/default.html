@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>{{ page.title }}</title>
     <link rel="stylesheet" type="text/css" href="/styles.css">
@@ -8,23 +8,19 @@
   </head>
   <body>
 
-    <div class="topnav" id="myTopnav">
-        <a href="/index.html">Home</a>
-        <a href="/research.html">Research</a>
-        <a href="/computing.html">Computing</a>
-        <a href="/teaching.html">Teaching</a>
-        <a href="/assets/cv/wiemann_CV_2021_11_06.pdf">CV</a>
-        <a style="float:right" href="/contact.html">Contact</a>
-        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-            <i class="fa fa-bars"></i>
-        </a>
+    <div class="topnav">
+          <a href="/index.html">Home</a>
+          <a href="/research.html">Research</a>
+          <a href="/computing.html">Computing</a>
+          <a href="/teaching.html">Teaching</a>
+          <a href="/assets/cv/wiemann_CV_2021_11_06.pdf">CV</a>
+          <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+              <i class="fa fa-bars"></i>
+          </a>
+          <span style="float:right">Thomas Wiemann</span>
     </div>
-
-    <div class="content">
 
       {{ content }}
-
-    </div>
 
     <div class="footer">
         <img src="/assets/images/universityofchicagoseal.png" alt="University of Chicago Seal" style="width:65px">
