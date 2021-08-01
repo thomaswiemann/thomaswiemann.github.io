@@ -3,5 +3,22 @@ layout: default
 title: Computing
 ---
 
-<h1>Computing</h1>
-<p>Coming soon!</p>
+<h1>Coputing</h1>
+
+<h2> Software </h2>
+
+<section>
+  <p>Coming soon.</p>
+</section>
+
+<h2> Blog Posts </h2>
+
+<section>
+  <ul>
+    {% for post in site.posts %}
+      <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
