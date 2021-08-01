@@ -8,11 +8,13 @@
     font-family: Arial, Helvetica, sans-serif;
     margin: 10px;
     padding: 10px;
+
 }
+
 
 .topnav {
     background-color:#767676;
-    overflow: hidden;
+    overflow-x: hidden;
     position: relative;
     top: 0px;
     width: 100%;
@@ -78,9 +80,19 @@
     max-width: 100%;
     height: auto;
 }
-
+.footer-box img {
+  display: inline;
+}
+.footer-box {
+  width:100%;
+  float: none !important;
+}
+#text-8 {
+  text-align: center;
+}
 .footer {
     padding: 5px;
+    position: relative;
     text-align: center;
     background: #ddd;
     font-family: Arial, Helvetica, sans-serif;
