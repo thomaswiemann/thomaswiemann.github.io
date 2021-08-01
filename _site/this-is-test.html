@@ -4,7 +4,7 @@
 
     <title>This is a Test</title>
 
-    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/styles.css">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width , initial-scale=1">
@@ -13,19 +13,22 @@
     <script src="load-mathjax.js" async></script>
 
   </head>
+
+  <div class="topnav">
+        <a href="/index.html">Home</a>
+        <a href="/research.html">Research</a>
+        <a href="/computing.html">Computing</a>
+        <a href="/teaching.html">Teaching</a>
+        <a href="/assets/cv/wiemann_CV_2021_11_06.pdf">CV</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+        <span style="float:right">Thomas Wiemann</span>
+  </div>
+
   <body>
 
-    <div class="topnav">
-          <a href="/index.html">Home</a>
-          <a href="/research.html">Research</a>
-          <a href="/computing.html">Computing</a>
-          <a href="/teaching.html">Teaching</a>
-          <a href="/assets/cv/wiemann_CV_2021_11_06.pdf">CV</a>
-          <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-              <i class="fa fa-bars"></i>
-          </a>
-          <span style="float:right">Thomas Wiemann</span>
-    </div>
+    <p>Thomas Wiemann</p>
 
       <h1 id="this-is-a-test">This is a Test</h1>
 
@@ -38,7 +41,6 @@
 <ul>
   <li><strong>bold</strong></li>
   <li><em>italic</em></li>
-  <li>~crossed-out~</li>
 </ul>
 
 <p>Displaying code is a nice feature:</p>
@@ -47,7 +49,7 @@
 <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
 </code></pre></div></div>
 
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># or R</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># or R</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">ddml</span><span class="p">)</span><span class="w">
 </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w">
 </span></code></pre></div></div>
@@ -57,6 +59,21 @@
 <span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="x">(</span><span class="n">MyMethods</span><span class="o">.</span><span class="n">jl</span><span class="x">)</span>
 </code></pre></div></div>
 
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">ddml</span><span class="p">)</span><span class="w">
+</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
+<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
 <p>Last but not least, there should be some nice options for displaying math in-text – like $\beta$ – as well as via proper equations:
 \begin{equation}
 \beta \sim \mathcal{N}(0,1)
@@ -65,11 +82,11 @@
 <h4 id="neat">Neat!</h4>
 
 
-      <div class="footer">
-          <img src="/assets/images/universityofchicagoseal.png" alt="University of Chicago Seal" style="width:65px">
-           &copy; Thomas Wiemann
-           <meta name="viewport" content="width=device-width, initial-scale=1">
-      </div>
-
   </body>
+
+  <div class="footer">
+      <img src="/assets/images/universityofchicagoseal.png" alt="University of Chicago Seal" style="width:65px">
+       &copy; Thomas Wiemann
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+  </div>
 </html>

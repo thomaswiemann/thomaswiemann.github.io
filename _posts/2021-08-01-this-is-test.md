@@ -1,6 +1,7 @@
 ---
 layout: default
 title: This is a Test
+published: true
 ---
 
 # {{ page.title }}
@@ -13,7 +14,6 @@ Lists are also pretty nice, as is bold and italic text:
 
 - **bold**
 - _italic_
-- ~crossed-out~
 
 Displaying code is a nice feature:
 ```python
@@ -22,7 +22,7 @@ import torch
 1 + 1
 ```
 
-```R
+```r
 # or R
 library(ddml)
 x <- 1
@@ -33,6 +33,19 @@ x <- 1
 use Pkg
 Pkg.add(MyMethods.jl)
 ```
+
+{% highlight R%}
+library(ddml)
+x <- matrix(c(1:4), col = 2, row = 2)
+{% endhighlight %}
+
+{% highlight ruby linenos%}
+def print_hi(name)
+  puts "Hi, #{name}"
+end
+print_hi('Tom')
+#=> prints 'Hi, Tom' to STDOUT.
+{% endhighlight %}
 
 Last but not least, there should be some nice options for displaying math in-text -- like $\beta$ -- as well as via proper equations:
 \begin{equation}

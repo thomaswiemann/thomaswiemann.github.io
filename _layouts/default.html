@@ -4,7 +4,7 @@
 
     <title>{{ page.title }}</title>
 
-    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/styles.css">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width , initial-scale=1">
@@ -13,27 +13,30 @@
     <script src="load-mathjax.js" async></script>
 
   </head>
+
+  <div class="topnav">
+        <a href="/index.html">Home</a>
+        <a href="/research.html">Research</a>
+        <a href="/computing.html">Computing</a>
+        <a href="/teaching.html">Teaching</a>
+        <a href="/assets/cv/wiemann_CV_2021_11_06.pdf">CV</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+        <span style="float:right">Thomas Wiemann</span>
+  </div>
+
   <body>
 
-    <div class="topnav">
-          <a href="/index.html">Home</a>
-          <a href="/research.html">Research</a>
-          <a href="/computing.html">Computing</a>
-          <a href="/teaching.html">Teaching</a>
-          <a href="/assets/cv/wiemann_CV_2021_11_06.pdf">CV</a>
-          <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-              <i class="fa fa-bars"></i>
-          </a>
-          <span style="float:right">Thomas Wiemann</span>
-    </div>
+    <p>Thomas Wiemann</p>
 
       {{ content }}
 
-      <div class="footer">
-          <img src="/assets/images/universityofchicagoseal.png" alt="University of Chicago Seal" style="width:65px">
-           &copy; Thomas Wiemann
-           <meta name="viewport" content="width=device-width, initial-scale=1">
-      </div>
-
   </body>
+
+  <div class="footer">
+      <img src="/assets/images/universityofchicagoseal.png" alt="University of Chicago Seal" style="width:65px">
+       &copy; Thomas Wiemann
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+  </div>
 </html>
