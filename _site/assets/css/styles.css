@@ -1,47 +1,15 @@
 @import "/assets/css/my-markdown.css";
 
-.topnav {
-    background-color:#767676;
-    overflow-x: hidden;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    clear: both;
-}
-
-.topnav a {
-    float: left;
-    color: rgb(255, 255, 255);
-    text-align: center;
-    display: block;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 18px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.topnav span {
-    float: right;
-    color: rgb(255, 255, 255);
-    text-align: center;
-    display: block;
-    padding: 10px 16px;
-    text-decoration: none;
-    font-size: 25px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.topnav a:hover {
-    color: #800000;
-}
-
 .active {
     color: #800000;
 }
 
-.body {
-    font-family: Arial, Helvetica, sans-serif;
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.42857143;
+    color: #333333;
+    background-color: #ffffff;
     top: 0px;
     height: 100%;
     width: 100%;
@@ -54,7 +22,6 @@
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 .side {
@@ -62,7 +29,6 @@
     flex: 30%;
     background-color: #ffffff;
     padding: 20px;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 .main {
@@ -73,7 +39,6 @@
     margin:30px auto;
     min-height: 85vh;
     max-width:800px;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 .responsive {
@@ -85,8 +50,6 @@
     padding: 5px;
     position: relative;
     text-align: center;
-    background: #ddd;
-    font-family: Arial, Helvetica, sans-serif;
     margin:0 auto;
     width: 100% auto;
     left: 0 auto;
@@ -111,7 +74,7 @@
 
 .tex sub, .latex sub {
   font-family: Times, Times New Roman, serif;
-  vertical-align: -0.5ex;
+  vertical-align: 0.125ex;
   margin-left: -0.1667em;
   margin-right: -0.125em;
 }
@@ -124,7 +87,7 @@
 .latex sup {
   font-family: Times, Times New Roman, serif;
   font-size: 0.85em;
-  vertical-align: 0.15em;
+  vertical-align: -0.3em;
   margin-left: -0.36em;
   margin-right: -0.15em;
 }
