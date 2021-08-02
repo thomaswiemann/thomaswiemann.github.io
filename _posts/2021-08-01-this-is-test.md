@@ -1,6 +1,7 @@
 ---
 layout: default
 title: This is a Test
+usemathjax: true
 published: true
 ---
 
