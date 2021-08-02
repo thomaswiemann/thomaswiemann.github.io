@@ -1,25 +1,11 @@
-
-
-{
-    box-sizing: border-box;
-}
-
-@import "/assets/css/my-markdown.css"; // 'monokai' as example
-
-
-
-.body {
-    font-family: Arial, Helvetica, sans-serif;
-    top: 10px;
-    max-width:65px;
-    padding: 10px;
-}
+@import "/assets/css/my-markdown.css";
 
 .topnav {
     background-color:#767676;
     overflow-x: hidden;
     position: fixed;
-    top: 0px;
+    top: 0;
+    left: 0;
     width: 100%;
     clear: both;
 }
@@ -54,6 +40,15 @@
     color: #800000;
 }
 
+.body {
+    font-family: Arial, Helvetica, sans-serif;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
 .row {
     display: -ms-flexbox;
     display: flex;
@@ -76,6 +71,7 @@
     background-color: white;
     padding: 20px;
     margin:30px auto;
+    min-height: 85vh;
     max-width:800px;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -83,6 +79,20 @@
 .responsive {
     max-width: 100%;
     height: auto;
+}
+
+.footer {
+    padding: 5px;
+    position: relative;
+    text-align: center;
+    background: #ddd;
+    font-family: Arial, Helvetica, sans-serif;
+    margin:0 auto;
+    width: 100% auto;
+    left: 0 auto;
+    right: 0 auto;
+    bottom: 0 auto;
+    margin: 0 auto;
 }
 
 .footer-box img {
@@ -94,17 +104,27 @@
   float: none !important;
 }
 
-#text-8 {
-  text-align: center;
+.tex sub, .latex sub, .latex sup {
+  font-family: Times, Times New Roman, serif;
+  text-transform: uppercase;
 }
 
-.footer {
-    padding: 5px;
-    position: relative;
-    text-align: center;
-    background: #ddd;
-    font-family: Arial, Helvetica, sans-serif;
-    width: 100%;
-    left: 0;
-    bottom: 0;
+.tex sub, .latex sub {
+  font-family: Times, Times New Roman, serif;
+  vertical-align: -0.5ex;
+  margin-left: -0.1667em;
+  margin-right: -0.125em;
+}
+
+.tex, .latex, .tex sub, .latex sub {
+  font-family: Times, Times New Roman, serif;
+  font-size: 1em;
+}
+
+.latex sup {
+  font-family: Times, Times New Roman, serif;
+  font-size: 0.85em;
+  vertical-align: 0.15em;
+  margin-left: -0.36em;
+  margin-right: -0.15em;
 }
