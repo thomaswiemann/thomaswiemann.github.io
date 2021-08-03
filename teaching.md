@@ -8,12 +8,12 @@ group: "navigation"
 
 ## Courses
 
-**Econometrics -- Econ 21020 (Spring 2022)**
+**Econometrics -- Econ 21020 (Spring 2022)** \
 Coming soon.
 
 ## TA Positions
 
-**Applied Microeconometrics -- Econ 31720 (Fall 2021)**
+**Applied Microeconometrics -- Econ 31720 (Fall 2021)** \
 Coming soon.
 
 **Econometrics -- Econ 21020 (Spring 2021)**
@@ -28,5 +28,5 @@ Coming soon.
 - Julia package for applied econometrics ([link](https://github.com/thomaswiemann/MyMethods.jl))
 
 **<span class="latex">L<sup>a</sup>T<sub>e</sub>X</span> Templates**
-- Problem set template ([link]())
-- Problem set template ([link]())
+- Problem set template ([link](/assets/teaching/other/pset_template.zip))
+- UChicago presentation template ([link](/assets/teaching/other/uchicago_beamer_template.zip))
