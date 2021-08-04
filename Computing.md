@@ -2,6 +2,7 @@
 layout: default
 title: Computing
 group: "navigation"
+order: 3
 ---
 
 # Computing

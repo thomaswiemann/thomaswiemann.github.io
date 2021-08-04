@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Home
-group: "home"
+group: "navigation"
+order: 1
 ---
 
 # Welcome!

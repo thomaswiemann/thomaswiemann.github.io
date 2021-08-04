@@ -38,10 +38,7 @@
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          {% assign pages_list = site.pages %}
-          {% assign group = 'home' %}
-          {% include pages_list %}
-          {% assign pages_list = site.pages %}
+          {% assign pages_list = site.pages | sort:"order" %}
           {% assign group = 'navigation' %}
           {% include pages_list %}
           <li><a href="/assets/cv/wiemann_CV_2021_11_06.pdf">CV</a></li>

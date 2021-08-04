@@ -2,6 +2,7 @@
 layout: default
 title: Teaching
 group: "navigation"
+order: 4
 ---
 
 # Teaching

@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Research
-group: "home"
+group: "navigation"
+order: 2
 ---
 
 # Research
