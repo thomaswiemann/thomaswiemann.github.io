@@ -26,6 +26,7 @@ Coming soon.
 ## Student Resources
 
 **Code**
+- Curated list of links related to coding in economics ([link](https://github.com/code-econ/awesome-econ))
 - Julia package for applied econometrics ([link](https://github.com/thomaswiemann/MyMethods.jl))
 
 **<span class="latex">L<sup>a</sup>T<sub>e</sub>X</span> Templates**
