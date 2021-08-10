@@ -1,8 +1,8 @@
 ---
 layout: default
 title: This is a Test
-usemathjax: true
-published: false
+usemathjax: false
+published: true
 ---
 
 # {{ page.title }}
@@ -39,5 +39,7 @@ Last but not least, there should be some nice options for displaying math in-tex
 \begin{equation}
 \beta \sim \mathcal{N}(0,1)
 \end{equation}
+
+$$\beta$$
 
 #### Neat!
