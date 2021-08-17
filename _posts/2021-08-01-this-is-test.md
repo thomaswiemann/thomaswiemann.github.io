@@ -1,8 +1,8 @@
 ---
 layout: default
 title: This is a Test
-usemathjax: false
-published: true
+usemathjax: true
+published: false
 ---
 
 # {{ page.title }}
