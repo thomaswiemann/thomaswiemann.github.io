@@ -24,6 +24,12 @@ img.center {
   width: 80%;
 }
 
+img.wrapped_right {
+    float: right;
+    margin: 0 15px;
+    height: auto;
+}
+
 body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 18px;
