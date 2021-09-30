@@ -11,7 +11,6 @@ order: 3
 Coming soon.
 
 ## Blog Posts
-Coming soon.
 <ul>
   {% for post in site.posts %}
     <li>

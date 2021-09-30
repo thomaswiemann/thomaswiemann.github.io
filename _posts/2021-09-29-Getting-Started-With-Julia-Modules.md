@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: blog
 title: Getting Started with Julia Modules
 usemathjax: true
 published: true
@@ -7,7 +7,7 @@ published: true
 
 # {{ page.title }}
 
-Modules in Julia allow you to collect sets of objects, methods, and functions. The benefit is that modules can easily be loaded and shared, which makes the research workflow a lot more efficient, especially if code is relevant for multiple projects.
+Modules in Julia allow you to collect sets of objects, methods, and functions. The benefit is that modules can easily be loaded and shared, which makes the research workflow a lot more efficient if code is relevant for multiple projects.
 
 This post is a tutorial on how to create a personal Julia module. As an illustration, I use my applied econometrics module ``MyMethods.jl``. You can find the most recent version of the package on [github.com/thomaswiemann/MyMethods.jl](https://www.github.com/thomaswiemann/MyMethods.jl).
 
@@ -21,9 +21,9 @@ Before you get started, make sure you've completed the preliminaries:
 
 ## 1. Creating a blank module
 
-In theory, we could create all the files of our module from scratch, but starting at zero is a pain. Luckily, ``PkgTemplates.jl`` provides the kick start we need: the basic structure of our Julia module to which we can then add the interesting bits.
+In theory, we could create all the files of the module from scratch, but starting at zero is a pain. Luckily, ``PkgTemplates.jl`` provides the kick start we need: the basic structure of our Julia module to which we can then add the interesting bits.
 
-Open your favorite IDE and make sure that ``PkgTemplates.jl`` is installed. (If not: ``using Pkg; Pkg.add("PkgTemplates")``). For my module, I then simply ran the following bits of code:
+Open your favorite IDE and make sure that ``PkgTemplates.jl`` is installed. (If not ``using Pkg; Pkg.add("PkgTemplates")`` will do the trick). For my module, I then simply run the following bits of code:
 ```julia
 using PkgTemplates
 
@@ -43,15 +43,15 @@ t = Template(user = "thomaswiemann",
 t("MyMethods")
 ```
 
-The function ``Template()`` allows us to specify a handful of options for the module. I typically surpress Git here and instead configure it manually (see the next section). Make sure to edit the name, email and working directory of your module before running the code yourself. The last line of the code specifies the module name. It is convention in Julia that module names start with a capital letter, but otherwise you can be creative.
+The function ``Template()`` allows us to specify a handful of options. I typically suppress Git here and instead configure it manually (see the next section). Make sure to edit the name, email and working directory of your module before running the code yourself. The last line of the code specifies the module name. It is convention in Julia that module names start with a capital letter, but otherwise you can be creative.
 
-Once you've initialized your package, navigate to the module folder. In my case this is ``/homas/thomas/GitHub/MyMethods``. You should see a few files and two folders there, lets go over each:
+Once you've initialized your package, navigate to the module folder. In my case this is ``/home/thomas/GitHub/MyMethods``. You should see a few files and two folders there, lets go over each:
 - ``Project.toml`` contains package info such as dependencies and authors.
-- ``Manifest.toml`` is a machine generated file -- best to leave it be.
+- ``Manifest.toml`` is a machine generated file &ndash; best to leave it be.
 - ``README.md``, like any other readme file, can contain useful descriptions or comments on your package.
 - ``LICENSE`` specifies how others may use and share your code.
 - The ``src`` folder contains the content (or: source code) of your package. At the moment, it contains a single ``.jl`` file with your project name.
-- The test folder contains a single file ``runtests.jl``, which we will use later to ensure our module is working as intended.
+- The test folder contains a single file ``runtests.jl``, which we will use later to ensure the module is working as intended.
 
 Notice that there is no a version control file in the project folder. This will change in the next section.
 
@@ -59,11 +59,11 @@ Notice that there is no a version control file in the project folder. This will 
 
 Git and GitHub are excellent utilities for keeping track of your project and sharing it with others. This section illustrates how your newly created (still empty) module can be hosted on GitHub.
 
-To get started, we need a GitHub repository. Once you're logged in, you can create one on [GitHub.com](https://github.com). Make sure to give the repository the same name as your module _but_ append a ``.jl`` at the end. Do not create a license or README file.
+To get started, login at [GitHub.com](https://github.com) and create a new repository. Make sure to give the repository the same name as your module but append a ``.jl`` at the end of the repository name. Do not create a license or README file.
 
 <img src="/assets/blog/2021-09-29-Getting-Started-With-Julia-Modules/github.png" alt="drawing" width="500" class="center"/>
 
-Once the repository is created, we will need to initialize Git in the local module directory and sync it with the GitHub repository. This is easily done with the terminal. Simply open a terminal and navigate to the folder where your module is stored (in my case, this is ``/homas/thomas/GitHub/MyMethods``). Then execute the following commands:
+Once the repository is created, we will need to initialize Git in the local module directory and sync it with the GitHub repository. This is easily done with the terminal. Simply open a terminal and navigate to the folder where your module is stored (in my case, this is ``/home/thomas/GitHub/MyMethods``). Then execute the following commands:
 ```Git
 git init # this initializes git for the module
 git add . # this adds all current files
@@ -79,9 +79,9 @@ You should now be able to see your module on GitHub. But of course it's still em
 
 This section illustrates the development workflow. As an example, we will walk through adding a simple linear regression object to the ``MyMethods.jl`` module.
 
-When working on a new feature of a module, it's useful to work with both the Julia REPL and your favorite IDE. The REPL allows for convenient package operations such as adding dependencies, while the IDE is best suited for developing code.
+When working on a new feature of a module, it's useful to work with both the Julia REPL and your favorite IDE. The REPL allows for convenient package operations such as adding dependencies. The IDE is best suited for developing code.
 
-Once you've opened the REPL, navigate to the module directory (in my case, this is ``/homas/thomas/GitHub/MyMethods``). It's useful to set Julia into development mode. This will continuously update your enviroment with changes you've made to your module. (Otherwise, you'd have to restart your Julia kernel _very often_.). To do so, install the ``Revise.jl`` and enter the package mode (via ``]``). Then execute the command ``dev .``.
+Once you've opened the REPL, navigate to the module directory (in my case, this is ``/home/thomas/GitHub/MyMethods``). It's useful to set Julia into development mode. This will continuously update your environment with changes you've made to your module. (Otherwise, you'd have to restart your Julia kernel _very often_.) To do so, install the ``Revise.jl`` and enter the package mode (via ``]``). Then execute the command ``dev .``.
 
 While you're still in the package mode, run the command ``activate .`` The terminal should now start with your package name rather than specify the version number of Julia. Leave the Julia REPL running. We'll need it for adding dependencies.
 
@@ -95,7 +95,7 @@ Let's now start with the least squares implementation. For this purpose, I creat
 
 The file contains two main parts. First, I define an object (in julia: ``struct``) that takes a vector ``y`` of outcomes and a matrix ``X`` of features and calculates the least squared coefficient (i.e., $\hat{\beta}=(X^\top X)^{-1}X^\top y$). The coefficient and the inputs are then are combined into a new object of type ``myLS``. Second, I create set of complementary methods that can be called on an object of type ``myLS``. This includes a method called ``inference`` which calculates (heteroskedasticity robust) standard errors.
 
-As one expects, calculation of the least squares coefficient required some linear algebra functions. A good collection is contained in the package ``LinearAlgebra.jl``, which needs to added to the package dependencies. To do so, select the REPL. It should be set to active -- if not, repeat the commands from the beginning of the section. Then, simply type ``add LinearAlgebra``. This will automatically amend your ``Project.toml`` and ``Manifest.toml`` files with the necessary details.
+As one expects, calculation of the least squares coefficient required some linear algebra functions. A good collection is contained in the package ``LinearAlgebra.jl``, which needs to added to the package dependencies. To do so, select the REPL. It should be set to active &ndash; if not, repeat the commands from the beginning of the section. Then, simply type ``add LinearAlgebra``. This will automatically amend your ``Project.toml`` and ``Manifest.toml`` files with the necessary details. The other dependencies &ndash; ``Distributions``, ``Random``, and ``DataFrames`` &ndash; can be added in the same fashion.
 
 We're now ready to include the newly defined object in our project. This is done by editing the ``MyMethods.jl`` file in the ``src`` folder. In addition to the dependencies, we need to specify which objects and methods should be available to users who load the module, as well as specify the location of our source code. In my case, the edited file reads:
 ```julia
@@ -115,7 +115,7 @@ Ok, this looks good already! As a final step, we should make sure the added feat
 
 <img src="/assets/blog/2021-09-29-Getting-Started-With-Julia-Modules/terminal2.png" alt="drawing" class="wrapped_right" width="40%"/>
 
-Once you've written your test, you can run it in the REPL. If your project is already active, simply writing ``test`` suffices. If you're as lucky as me,good news awaits! Otherwise, revise your implementation and retry your test.
+Once you've written your test, you can run it in the REPL. If your project is already active, simply writing ``test`` suffices. If you're as lucky as me, good news awaits! Otherwise, revise your implementation and retry your tests.
 
 Once all your tests are successful, your newly created functions are ready for
 use. I recommend committing your changes in git and uploading the new version of
@@ -127,3 +127,6 @@ git add . # this adds all files to the new commit
 git commit -m "adds myLS.jl" # commit your changes
 git push # this uploads your code to GitHub
 ```
+
+This concludes the basic workflow of 1) adding features to the module, 2) testing
+the module, and finally 3) committing the changes to Git and uploading the new improvements to GitHub.

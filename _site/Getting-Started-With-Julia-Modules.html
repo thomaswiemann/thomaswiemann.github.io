@@ -94,7 +94,7 @@
   <div class="main">
         <h1 id="getting-started-with-julia-modules">Getting Started with Julia Modules</h1>
 
-<p>Modules in Julia allow you to collect sets of objects, methods, and functions. The benefit is that modules can easily be loaded and shared, which makes the research workflow a lot more efficient, especially if code is relevant for multiple projects.</p>
+<p>Modules in Julia allow you to collect sets of objects, methods, and functions. The benefit is that modules can easily be loaded and shared, which makes the research workflow a lot more efficient if code is relevant for multiple projects.</p>
 
 <p>This post is a tutorial on how to create a personal Julia module. As an illustration, I use my applied econometrics module <code class="language-plaintext highlighter-rouge">MyMethods.jl</code>. You can find the most recent version of the package on <a href="https://www.github.com/thomaswiemann/MyMethods.jl">github.com/thomaswiemann/MyMethods.jl</a>.</p>
 
@@ -110,9 +110,9 @@
 
 <h2 id="1-creating-a-blank-module">1. Creating a blank module</h2>
 
-<p>In theory, we could create all the files of our module from scratch, but starting at zero is a pain. Luckily, <code class="language-plaintext highlighter-rouge">PkgTemplates.jl</code> provides the kick start we need: the basic structure of our Julia module to which we can then add the interesting bits.</p>
+<p>In theory, we could create all the files of the module from scratch, but starting at zero is a pain. Luckily, <code class="language-plaintext highlighter-rouge">PkgTemplates.jl</code> provides the kick start we need: the basic structure of our Julia module to which we can then add the interesting bits.</p>
 
-<p>Open your favorite IDE and make sure that <code class="language-plaintext highlighter-rouge">PkgTemplates.jl</code> is installed. (If not: <code class="language-plaintext highlighter-rouge">using Pkg; Pkg.add("PkgTemplates")</code>). For my module, I then simply ran the following bits of code:</p>
+<p>Open your favorite IDE and make sure that <code class="language-plaintext highlighter-rouge">PkgTemplates.jl</code> is installed. (If not <code class="language-plaintext highlighter-rouge">using Pkg; Pkg.add("PkgTemplates")</code> will do the trick). For my module, I then simply run the following bits of code:</p>
 <div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="n">PkgTemplates</span>
 
 <span class="c"># Create a template</span>
@@ -131,16 +131,16 @@
 <span class="n">t</span><span class="x">(</span><span class="s">"MyMethods"</span><span class="x">)</span>
 </code></pre></div></div>
 
-<p>The function <code class="language-plaintext highlighter-rouge">Template()</code> allows us to specify a handful of options for the module. I typically surpress Git here and instead configure it manually (see the next section). Make sure to edit the name, email and working directory of your module before running the code yourself. The last line of the code specifies the module name. It is convention in Julia that module names start with a capital letter, but otherwise you can be creative.</p>
+<p>The function <code class="language-plaintext highlighter-rouge">Template()</code> allows us to specify a handful of options. I typically suppress Git here and instead configure it manually (see the next section). Make sure to edit the name, email and working directory of your module before running the code yourself. The last line of the code specifies the module name. It is convention in Julia that module names start with a capital letter, but otherwise you can be creative.</p>
 
-<p>Once you’ve initialized your package, navigate to the module folder. In my case this is <code class="language-plaintext highlighter-rouge">/homas/thomas/GitHub/MyMethods</code>. You should see a few files and two folders there, lets go over each:</p>
+<p>Once you’ve initialized your package, navigate to the module folder. In my case this is <code class="language-plaintext highlighter-rouge">/home/thomas/GitHub/MyMethods</code>. You should see a few files and two folders there, lets go over each:</p>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">Project.toml</code> contains package info such as dependencies and authors.</li>
   <li><code class="language-plaintext highlighter-rouge">Manifest.toml</code> is a machine generated file – best to leave it be.</li>
   <li><code class="language-plaintext highlighter-rouge">README.md</code>, like any other readme file, can contain useful descriptions or comments on your package.</li>
   <li><code class="language-plaintext highlighter-rouge">LICENSE</code> specifies how others may use and share your code.</li>
   <li>The <code class="language-plaintext highlighter-rouge">src</code> folder contains the content (or: source code) of your package. At the moment, it contains a single <code class="language-plaintext highlighter-rouge">.jl</code> file with your project name.</li>
-  <li>The test folder contains a single file <code class="language-plaintext highlighter-rouge">runtests.jl</code>, which we will use later to ensure our module is working as intended.</li>
+  <li>The test folder contains a single file <code class="language-plaintext highlighter-rouge">runtests.jl</code>, which we will use later to ensure the module is working as intended.</li>
 </ul>
 
 <p>Notice that there is no a version control file in the project folder. This will change in the next section.</p>
@@ -149,11 +149,11 @@
 
 <p>Git and GitHub are excellent utilities for keeping track of your project and sharing it with others. This section illustrates how your newly created (still empty) module can be hosted on GitHub.</p>
 
-<p>To get started, we need a GitHub repository. Once you’re logged in, you can create one on <a href="https://github.com">GitHub.com</a>. Make sure to give the repository the same name as your module <em>but</em> append a <code class="language-plaintext highlighter-rouge">.jl</code> at the end. Do not create a license or README file.</p>
+<p>To get started, login at <a href="https://github.com">GitHub.com</a> and create a new repository. Make sure to give the repository the same name as your module but append a <code class="language-plaintext highlighter-rouge">.jl</code> at the end of the repository name. Do not create a license or README file.</p>
 
 <p><img src="/assets/blog/2021-09-29-Getting-Started-With-Julia-Modules/github.png" alt="drawing" width="500" class="center" /></p>
 
-<p>Once the repository is created, we will need to initialize Git in the local module directory and sync it with the GitHub repository. This is easily done with the terminal. Simply open a terminal and navigate to the folder where your module is stored (in my case, this is <code class="language-plaintext highlighter-rouge">/homas/thomas/GitHub/MyMethods</code>). Then execute the following commands:</p>
+<p>Once the repository is created, we will need to initialize Git in the local module directory and sync it with the GitHub repository. This is easily done with the terminal. Simply open a terminal and navigate to the folder where your module is stored (in my case, this is <code class="language-plaintext highlighter-rouge">/home/thomas/GitHub/MyMethods</code>). Then execute the following commands:</p>
 <pre><code class="language-Git">git init # this initializes git for the module
 git add . # this adds all current files
 git commit -m “initial commit” # our first commit
@@ -168,9 +168,9 @@ git push -u origin main # this uploads the code to GitHub
 
 <p>This section illustrates the development workflow. As an example, we will walk through adding a simple linear regression object to the <code class="language-plaintext highlighter-rouge">MyMethods.jl</code> module.</p>
 
-<p>When working on a new feature of a module, it’s useful to work with both the Julia REPL and your favorite IDE. The REPL allows for convenient package operations such as adding dependencies, while the IDE is best suited for developing code.</p>
+<p>When working on a new feature of a module, it’s useful to work with both the Julia REPL and your favorite IDE. The REPL allows for convenient package operations such as adding dependencies. The IDE is best suited for developing code.</p>
 
-<p>Once you’ve opened the REPL, navigate to the module directory (in my case, this is <code class="language-plaintext highlighter-rouge">/homas/thomas/GitHub/MyMethods</code>). It’s useful to set Julia into development mode. This will continuously update your enviroment with changes you’ve made to your module. (Otherwise, you’d have to restart your Julia kernel <em>very often</em>.). To do so, install the <code class="language-plaintext highlighter-rouge">Revise.jl</code> and enter the package mode (via <code class="language-plaintext highlighter-rouge">]</code>). Then execute the command <code class="language-plaintext highlighter-rouge">dev .</code>.</p>
+<p>Once you’ve opened the REPL, navigate to the module directory (in my case, this is <code class="language-plaintext highlighter-rouge">/home/thomas/GitHub/MyMethods</code>). It’s useful to set Julia into development mode. This will continuously update your environment with changes you’ve made to your module. (Otherwise, you’d have to restart your Julia kernel <em>very often</em>.) To do so, install the <code class="language-plaintext highlighter-rouge">Revise.jl</code> and enter the package mode (via <code class="language-plaintext highlighter-rouge">]</code>). Then execute the command <code class="language-plaintext highlighter-rouge">dev .</code>.</p>
 
 <p>While you’re still in the package mode, run the command <code class="language-plaintext highlighter-rouge">activate .</code> The terminal should now start with your package name rather than specify the version number of Julia. Leave the Julia REPL running. We’ll need it for adding dependencies.</p>
 
@@ -184,7 +184,7 @@ git push -u origin main # this uploads the code to GitHub
 
 <p>The file contains two main parts. First, I define an object (in julia: <code class="language-plaintext highlighter-rouge">struct</code>) that takes a vector <code class="language-plaintext highlighter-rouge">y</code> of outcomes and a matrix <code class="language-plaintext highlighter-rouge">X</code> of features and calculates the least squared coefficient (i.e., $\hat{\beta}=(X^\top X)^{-1}X^\top y$). The coefficient and the inputs are then are combined into a new object of type <code class="language-plaintext highlighter-rouge">myLS</code>. Second, I create set of complementary methods that can be called on an object of type <code class="language-plaintext highlighter-rouge">myLS</code>. This includes a method called <code class="language-plaintext highlighter-rouge">inference</code> which calculates (heteroskedasticity robust) standard errors.</p>
 
-<p>As one expects, calculation of the least squares coefficient required some linear algebra functions. A good collection is contained in the package <code class="language-plaintext highlighter-rouge">LinearAlgebra.jl</code>, which needs to added to the package dependencies. To do so, select the REPL. It should be set to active – if not, repeat the commands from the beginning of the section. Then, simply type <code class="language-plaintext highlighter-rouge">add LinearAlgebra</code>. This will automatically amend your <code class="language-plaintext highlighter-rouge">Project.toml</code> and <code class="language-plaintext highlighter-rouge">Manifest.toml</code> files with the necessary details.</p>
+<p>As one expects, calculation of the least squares coefficient required some linear algebra functions. A good collection is contained in the package <code class="language-plaintext highlighter-rouge">LinearAlgebra.jl</code>, which needs to added to the package dependencies. To do so, select the REPL. It should be set to active – if not, repeat the commands from the beginning of the section. Then, simply type <code class="language-plaintext highlighter-rouge">add LinearAlgebra</code>. This will automatically amend your <code class="language-plaintext highlighter-rouge">Project.toml</code> and <code class="language-plaintext highlighter-rouge">Manifest.toml</code> files with the necessary details. The other dependencies – <code class="language-plaintext highlighter-rouge">Distributions</code>, <code class="language-plaintext highlighter-rouge">Random</code>, and <code class="language-plaintext highlighter-rouge">DataFrames</code> – can be added in the same fashion.</p>
 
 <p>We’re now ready to include the newly defined object in our project. This is done by editing the <code class="language-plaintext highlighter-rouge">MyMethods.jl</code> file in the <code class="language-plaintext highlighter-rouge">src</code> folder. In addition to the dependencies, we need to specify which objects and methods should be available to users who load the module, as well as specify the location of our source code. In my case, the edited file reads:</p>
 <div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">module</span> <span class="n">MyMethods</span>
@@ -203,7 +203,7 @@ git push -u origin main # this uploads the code to GitHub
 
 <p><img src="/assets/blog/2021-09-29-Getting-Started-With-Julia-Modules/terminal2.png" alt="drawing" class="wrapped_right" width="40%" /></p>
 
-<p>Once you’ve written your test, you can run it in the REPL. If your project is already active, simply writing <code class="language-plaintext highlighter-rouge">test</code> suffices. If you’re as lucky as me,good news awaits! Otherwise, revise your implementation and retry your test.</p>
+<p>Once you’ve written your test, you can run it in the REPL. If your project is already active, simply writing <code class="language-plaintext highlighter-rouge">test</code> suffices. If you’re as lucky as me, good news awaits! Otherwise, revise your implementation and retry your tests.</p>
 
 <p>Once all your tests are successful, your newly created functions are ready for
 use. I recommend committing your changes in git and uploading the new version of
@@ -215,6 +215,13 @@ git commit -m "adds myLS.jl" # commit your changes
 git push # this uploads your code to GitHub
 </code></pre>
 
+<p>This concludes the basic workflow of 1) adding features to the module, 2) testing
+the module, and finally 3) committing the changes to Git and uploading the new improvements to GitHub.</p>
+
+
+      <em style="font-size:medium">You made it &ndash; thanks a lot for sticking with me till the end! If you've found
+        this post helpful or have any comments or suggestions, please don't hesitate
+        to reach out. My email is wiemann@uchicago.edu. I'd be happy about any feedback.<em>
   </div>
 
   <hr>
