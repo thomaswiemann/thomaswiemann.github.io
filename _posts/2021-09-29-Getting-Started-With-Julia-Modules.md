@@ -14,7 +14,7 @@ This post is a tutorial on how to create a personal Julia module. As an illustra
 Three key aspects will be covered:
 1. Creating a blank module
 2. Setting up Git and GitHub
-3. Developing features for module
+3. Development workflow
 
 Before you get started, make sure you've completed the preliminaries:
 1) [Julia](https://julialang.org/downloads/) is installed together with your favorite IDE (e.g., [Atom](https://atom.io/)); 2) [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) is installed and configured; 3) You have a [GitHub](https://github.com/) account.
@@ -80,7 +80,7 @@ Pkg.add(url="https://github.com/thomaswiemann/MyMethods.jl")
 ```
 But of course it's still empty and of little use in it's current form. We'll change this in the next section.
 
-## 3. Develop your Package
+## 3. Development workflow
 
 This section illustrates the development workflow. As an example, we will walk through adding a simple linear regression object to the ``MyMethods.jl`` module.
 
