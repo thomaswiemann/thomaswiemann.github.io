@@ -88,9 +88,9 @@
   <div class="main">
         <h1 id="gpu-vs-cpu-benchmarks-with-fluxjl">GPU vs CPU benchmarks with Flux.jl</h1>
 
-<p>This script compares the training time of a simple convolutional neural network on a GPU and CPU, respectively. The data, network architecture, and training loops are based on those provided in the fluxml.ai <a href="https://fluxml.ai/tutorials/2020/09/15/deep-learning-flux.html">tutorial</a> on deep learning with Flux.jl.</p>
+<p>This script compares the training time of a simple convolutional neural network on a GPU and CPU, respectively. The data, network architecture, and training loops are based on those provided in the fluxml.ai <a href="https://fluxml.ai/tutorials/2020/09/15/deep-learning-flux.html">tutorial</a> on deep learning.</p>
 
-<p>The hardware I am using is a Dell XPS 13 laptop with an Intel i7-7500U CPU, connected to an Nvidia GTX 1080 using the Razer Core X external GPU dock. Neither the CPU nor the GPU are particularly fast compared to 2021 hardware, so you can expect to see much faster results on modern machines.</p>
+<p>I am using is a Dell XPS 13 laptop with an Intel i7-7500U CPU, connected to an Nvidia GTX 1080 using the Razer Core X external GPU dock. Neither the CPU nor the GPU are particularly fast compared to 2021 hardware, so you can expect to see much faster results on modern machines.</p>
 
 <p>You can download the notebook containing all the code <a href="/assets/blog/2021-10-03-GPU-vs-CPU-benchmarks-with-Flux.jl/GPU-vs-CPU-benchmarks-with-Flux.jl.ipynb">here</a>.</p>
 
@@ -133,7 +133,7 @@
 
 <h3 id="neural-network-construction">Neural network construction</h3>
 
-<p>The convolutional neural network here has a total of 39,558 trainable parameters. We need to define one for both the GPU and CPU separately.</p>
+<p>The constructed convolutional neural network has a total of 39,558 trainable parameters. We need to define one for both the GPU and CPU separately.</p>
 
 <div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Define neural networks for both gpu and cpu</span>
 <span class="n">m_gpu</span> <span class="o">=</span> <span class="n">Chain</span><span class="x">(</span>

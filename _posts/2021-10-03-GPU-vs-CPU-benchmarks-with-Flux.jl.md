@@ -7,9 +7,9 @@ published: true
 
 # {{ page.title }}
 
-This script compares the training time of a simple convolutional neural network on a GPU and CPU, respectively. The data, network architecture, and training loops are based on those provided in the fluxml.ai [tutorial](https://fluxml.ai/tutorials/2020/09/15/deep-learning-flux.html) on deep learning with Flux.jl.
+This script compares the training time of a simple convolutional neural network on a GPU and CPU, respectively. The data, network architecture, and training loops are based on those provided in the fluxml.ai [tutorial](https://fluxml.ai/tutorials/2020/09/15/deep-learning-flux.html) on deep learning.
 
-The hardware I am using is a Dell XPS 13 laptop with an Intel i7-7500U CPU, connected to an Nvidia GTX 1080 using the Razer Core X external GPU dock. Neither the CPU nor the GPU are particularly fast compared to 2021 hardware, so you can expect to see much faster results on modern machines.
+I am using is a Dell XPS 13 laptop with an Intel i7-7500U CPU, connected to an Nvidia GTX 1080 using the Razer Core X external GPU dock. Neither the CPU nor the GPU are particularly fast compared to 2021 hardware, so you can expect to see much faster results on modern machines.
 
 You can download the notebook containing all the code [here](/assets/blog/2021-10-03-GPU-vs-CPU-benchmarks-with-Flux.jl/GPU-vs-CPU-benchmarks-with-Flux.jl.ipynb).
 
@@ -56,7 +56,7 @@ train_cpu = ([(cat(imgs[i]..., dims = 4),
 
 ### Neural network construction
 
-The convolutional neural network here has a total of 39,558 trainable parameters. We need to define one for both the GPU and CPU separately.
+The constructed convolutional neural network has a total of 39,558 trainable parameters. We need to define one for both the GPU and CPU separately.
 
 ```julia
 # Define neural networks for both gpu and cpu
