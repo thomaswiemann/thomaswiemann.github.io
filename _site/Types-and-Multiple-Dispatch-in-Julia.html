@@ -1,0 +1,210 @@
+<p>introductionconciseness—
+layout: blog
+title: Types and Multiple Dispatch in Julia
+usemathjax: true
+published: true
+—</p>
+
+<h1 id="types-and-multiple-dispatch-in-julia">Types And Multiple Dispatch In Julia</h1>
+
+<p>Julia is primarily a functional programming language. Instead of building classes and defining methods for these classes – as you would in an object-oriented programming languange – you typically focus on writing functions that manipulate data.</p>
+
+<p>This is not to say that Julia doesn’t make use of object-oriented concepts at all. Each value in Julia is assigned a type (similar to a class in other languages), which limits the space of possible values it can store. Having a (rough) understanding of Julia’s type system for developing efficient code and can be leveraged for structuring your own research projects.</p>
+
+<p>This post is a tutorial on how to define your own types and methods. As a running example, I use user-defined types and methods from my applied econometrics module <code class="language-plaintext highlighter-rouge">MyMethods.jl</code>. You can find the most recent version of the package on <a href="https://www.github.com/thomaswiemann/MyMethods.jl">github.com/thomaswiemann/MyMethods.jl</a>.</p>
+
+<p>There are three topics that seem particularly useful for taking advantage of Julia’s type system. These are:</p>
+<ol>
+  <li>Composite types</li>
+  <li>Multiple dispatch</li>
+  <li>Abstract types and type hierarchy</li>
+</ol>
+
+<p>Let’s discuss each in turn!</p>
+
+<h2 id="composite-types">Composite types</h2>
+
+<p>There are two types of <em>concrete</em> types – i.e., types that store data – in Julia: <em>primitive</em> types and  <em>composite</em> types. While primitive types directly carry bits (e.g., <code class="language-plaintext highlighter-rouge">Float64</code> is 64-bits wide), composite types carry a set of named fields. These named fields can be assigned primitive types or other composite types.</p>
+
+<p>Collecting values within composite types allows for easier manipulation of data and often improves structure, which can make them a convenient tool for larger research projects.</p>
+
+<p>Suppose we are interested in implementing a simple least squares estimator in Julia. At first, we may be tempted to simply define a function, say <code class="language-plaintext highlighter-rouge">myLS</code>, that takes two arrays and returns the coefficient:</p>
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span><span class="nf"> myLS</span><span class="x">(</span><span class="n">y</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">},</span> <span class="n">X</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">})</span>
+    <span class="c"># Calculate and return the LS coefficient</span>
+    <span class="k">return</span> <span class="x">(</span><span class="n">X</span><span class="err">'</span> <span class="o">*</span> <span class="n">X</span><span class="x">)</span> <span class="o">\</span> <span class="x">(</span><span class="n">X</span><span class="err">'</span> <span class="o">*</span> <span class="n">y</span><span class="x">)</span>
+<span class="k">end</span> <span class="c">#MYLS</span>
+</code></pre></div></div>
+<p>Most projects don’t stop at there, however. We might want to calculate the coefficient’s standard errors, or use it for prediction. These could be simply implemented in another Julia function:</p>
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span><span class="nf"> predict</span><span class="x">(</span><span class="n">β</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">},</span> <span class="n">X</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">})</span>
+    <span class="c"># Calculate and return the predictions</span>
+    <span class="k">return</span> <span class="n">X</span> <span class="o">*</span> <span class="n">β</span>
+<span class="k">end</span> <span class="c">#PREDICT</span>
+
+<span class="k">function</span><span class="nf"> inference</span><span class="x">(</span><span class="n">β</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">},</span> <span class="n">y</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">},</span> <span class="n">X</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">})</span>
+  <span class="c"># Obtain data parameters</span>
+  <span class="n">N</span> <span class="o">=</span> <span class="n">length</span><span class="x">(</span><span class="n">y</span><span class="x">);</span> <span class="n">K</span> <span class="o">=</span> <span class="n">size</span><span class="x">(</span><span class="n">X</span><span class="x">,</span> <span class="mi">2</span><span class="x">)</span>
+  <span class="c"># Calculate the covariance under homoskedasticity</span>
+  <span class="n">u</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">predict</span><span class="x">(</span><span class="n">β</span><span class="x">,</span> <span class="n">X</span><span class="x">)</span> <span class="c"># residuals</span>
+  <span class="n">XX_inv</span> <span class="o">=</span> <span class="n">inv</span><span class="x">(</span><span class="n">X</span><span class="err">'</span> <span class="o">*</span> <span class="n">X</span><span class="x">)</span>
+  <span class="n">covar</span> <span class="o">=</span> <span class="n">sum</span><span class="x">(</span><span class="n">u</span><span class="o">.^</span><span class="mi">2</span><span class="x">)</span> <span class="o">*</span> <span class="n">XX_inv</span>
+  <span class="n">covar</span> <span class="o">=</span> <span class="n">covar</span> <span class="o">.*</span> <span class="x">(</span><span class="mi">1</span> <span class="o">/</span> <span class="x">(</span><span class="n">N</span> <span class="o">-</span> <span class="n">K</span><span class="x">))</span> <span class="c"># dof adjustment</span>
+  <span class="c"># Get standard errors, t-statistics, and p-values</span>
+  <span class="n">se</span> <span class="o">=</span> <span class="n">sqrt</span><span class="o">.</span><span class="x">(</span><span class="n">covar</span><span class="x">[</span><span class="n">diagind</span><span class="x">(</span><span class="n">covar</span><span class="x">)])</span>
+  <span class="n">t_stat</span> <span class="o">=</span> <span class="n">β</span> <span class="o">./</span> <span class="n">se</span>
+  <span class="n">p_val</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cdf</span><span class="o">.</span><span class="x">(</span><span class="n">Normal</span><span class="x">(),</span> <span class="o">-</span><span class="n">abs</span><span class="o">.</span><span class="x">(</span><span class="n">t_stat</span><span class="x">))</span>
+  <span class="c"># Organize and return output</span>
+  <span class="n">output</span> <span class="o">=</span> <span class="x">(</span><span class="n">β</span> <span class="o">=</span> <span class="n">β</span><span class="x">,</span> <span class="n">se</span> <span class="o">=</span> <span class="n">se</span><span class="x">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">t_stat</span><span class="x">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p_val</span><span class="x">)</span>
+  <span class="k">return</span> <span class="n">output</span>
+<span class="k">end</span> <span class="c">#INFERENCE</span>
+</code></pre></div></div>
+
+<p>Notice that each time we want to calculate predictions, we need to pass both the regression coefficient <code class="language-plaintext highlighter-rouge">β</code> as well as an array of features <code class="language-plaintext highlighter-rouge">X</code>. When calculating standard errors, we’d also need to pass the outcomes <code class="language-plaintext highlighter-rouge">y</code>. This can quickly become bothersome and increase clutter in your code.</p>
+
+<p>This is where the named fields of a composite type come in handy! Instead of defining the least squares implementation using the <code class="language-plaintext highlighter-rouge">function</code> keyword, we can define our own Julia type using <code class="language-plaintext highlighter-rouge">struct</code>:</p>
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span><span class="nc"> myLS</span>
+    <span class="n">β</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">}</span> <span class="c"># coefficient</span>
+    <span class="n">y</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">}</span> <span class="c"># response</span>
+    <span class="n">X</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">}</span> <span class="c"># features</span>
+
+    <span class="c"># Define constructor function</span>
+    <span class="k">function</span><span class="nf"> myLS</span><span class="x">(</span><span class="n">y</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">},</span> <span class="n">X</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">})</span>
+    <span class="c"># Calculate LS</span>
+    <span class="n">β</span> <span class="o">=</span> <span class="x">(</span><span class="n">X</span><span class="err">'</span> <span class="o">*</span> <span class="n">X</span><span class="x">)</span> <span class="o">\</span> <span class="x">(</span><span class="n">X</span><span class="err">'</span> <span class="o">*</span> <span class="n">y</span><span class="x">)</span>
+    <span class="c"># Organize and return output</span>
+    <span class="n">new</span><span class="x">(</span><span class="n">β</span><span class="x">,</span> <span class="n">y</span><span class="x">,</span> <span class="n">X</span><span class="x">)</span>
+    <span class="k">end</span> <span class="c">#MYLS</span>
+<span class="k">end</span> <span class="c">#MYLS</span>
+</code></pre></div></div>
+<p>There are two key parts to these bits of code. The first few lines define the named fields of the newly defined type. These are <code class="language-plaintext highlighter-rouge">β</code>, <code class="language-plaintext highlighter-rouge">y</code>, and <code class="language-plaintext highlighter-rouge">X</code>. In the second part, we define the (inner) constructor function. Notice that it is in essence similar to how we defined the least squares function at the beginning of this section. The key difference is that instead of using <code class="language-plaintext highlighter-rouge">return</code> to pass the results, a new object is constructed using <code class="language-plaintext highlighter-rouge">new()</code>.</p>
+
+<p>So how can the prediction and inference functions take advantage of the new type? Instead of passing multiple arguments, it is now possible to define the functions using only an object of type <code class="language-plaintext highlighter-rouge">myLS</code> as input. For example:</p>
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span><span class="nf"> predict</span><span class="x">(</span><span class="n">fit</span><span class="o">::</span><span class="n">myLS</span><span class="x">,</span> <span class="n">data</span> <span class="o">=</span> <span class="nb">nothing</span><span class="x">)</span>
+  <span class="c"># Check for new data, then calculate and return predictions</span>
+  <span class="n">isnothing</span><span class="x">(</span><span class="n">data</span><span class="x">)</span> <span class="o">?</span> <span class="n">fitted</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">X</span> <span class="o">*</span> <span class="n">fit</span><span class="o">.</span><span class="n">β</span> <span class="o">:</span> <span class="n">fitted</span> <span class="o">=</span> <span class="n">data</span> <span class="o">*</span> <span class="n">fit</span><span class="o">.</span><span class="n">β</span>
+  <span class="k">return</span><span class="x">(</span><span class="n">fitted</span><span class="x">)</span>
+<span class="k">end</span> <span class="c">#PREDICT.MYLS</span>
+
+<span class="k">function</span><span class="nf"> inference</span><span class="x">(</span><span class="n">fit</span><span class="o">::</span><span class="n">myLS</span><span class="x">)</span>
+  <span class="c"># Obtain data parameters</span>
+  <span class="n">N</span> <span class="o">=</span> <span class="n">length</span><span class="x">(</span><span class="n">fit</span><span class="o">.</span><span class="n">y</span><span class="x">);</span> <span class="n">K</span> <span class="o">=</span> <span class="n">size</span><span class="x">(</span><span class="n">fit</span><span class="o">.</span><span class="n">X</span><span class="x">,</span> <span class="mi">2</span><span class="x">)</span>
+  <span class="c"># Calculate the covariance under homoskedasticity</span>
+  <span class="n">u</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">predict</span><span class="x">(</span><span class="n">fit</span><span class="o">.</span><span class="n">β</span><span class="x">,</span> <span class="n">fit</span><span class="o">.</span><span class="n">X</span><span class="x">)</span> <span class="c"># residuals</span>
+  <span class="n">XX_inv</span> <span class="o">=</span> <span class="n">inv</span><span class="x">(</span><span class="n">fit</span><span class="o">.</span><span class="n">X</span><span class="err">'</span> <span class="o">*</span> <span class="n">fit</span><span class="o">.</span><span class="n">X</span><span class="x">)</span>
+  <span class="n">covar</span> <span class="o">=</span> <span class="n">sum</span><span class="x">(</span><span class="n">u</span><span class="o">.^</span><span class="mi">2</span><span class="x">)</span> <span class="o">*</span> <span class="n">XX_inv</span>
+  <span class="n">covar</span> <span class="o">=</span> <span class="n">covar</span> <span class="o">.*</span> <span class="x">(</span><span class="mi">1</span> <span class="o">/</span> <span class="x">(</span><span class="n">N</span> <span class="o">-</span> <span class="n">K</span><span class="x">))</span> <span class="c"># dof adjustment</span>
+  <span class="c"># Get standard errors, t-statistics, and p-values</span>
+  <span class="n">se</span> <span class="o">=</span> <span class="n">sqrt</span><span class="o">.</span><span class="x">(</span><span class="n">covar</span><span class="x">[</span><span class="n">diagind</span><span class="x">(</span><span class="n">covar</span><span class="x">)])</span>
+  <span class="n">t_stat</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">β</span> <span class="o">./</span> <span class="n">se</span>
+  <span class="n">p_val</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cdf</span><span class="o">.</span><span class="x">(</span><span class="n">Normal</span><span class="x">(),</span> <span class="o">-</span><span class="n">abs</span><span class="o">.</span><span class="x">(</span><span class="n">t_stat</span><span class="x">))</span>
+  <span class="c"># Organize and return output</span>
+  <span class="n">output</span> <span class="o">=</span> <span class="x">(</span><span class="n">β</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">β</span><span class="x">,</span> <span class="n">se</span> <span class="o">=</span> <span class="n">se</span><span class="x">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">t_stat</span><span class="x">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p_val</span><span class="x">)</span>
+  <span class="k">return</span> <span class="n">output</span>
+<span class="k">end</span> <span class="c">#INFERENCE.MYLS</span>
+</code></pre></div></div>
+
+<p>If you’re not yet incredibly excited – don’t fret. While collecting related values through composite types is often handy, the real payoff from leveraging Julia’s type system is through it’s multiple dispatch process.</p>
+
+<h2 id="multiple-dispatch">Multiple dispatch</h2>
+
+<p>Whenever a command is run, a dispatch process is launched in which the function to be executed is determined. In Julia, this process – called <em>multiple dispatch</em> – determines the function using the types of the function arguments. This implies that the multiple functions can carry the same name as long as their argument types differ.</p>
+
+<p>If you have already been coding in Julia, you likely made use of multiple dispatch many times. Consider, for example, the following bits of code:</p>
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"hello, "</span> <span class="o">*</span> <span class="s">"world!"</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="s">"hello, world!"</span>
+
+<span class="mi">21</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">42</span>
+</code></pre></div></div>
+<p>The operator <code class="language-plaintext highlighter-rouge">*</code> thus maps to different functions, which are evidently different depending on whether its arguments are of type <code class="language-plaintext highlighter-rouge">String</code> or of type <code class="language-plaintext highlighter-rouge">Int64</code>. And this thankfully so. Coding Julia would be substantially more cumbersome if functions would only take  arguments of a predefined type (just think about all the subscripts we’d need for basic arithmetic operations alone!).</p>
+
+<p>To showcase how multiple dispatch can be leveraged to streamline your research projects, consider that in addition to the <code class="language-plaintext highlighter-rouge">myLS</code> type of the previous section, we also wanted to implement a two-stage least squares estimator and call it’s type, say, <code class="language-plaintext highlighter-rouge">myTSLS</code>. Using the <code class="language-plaintext highlighter-rouge">struct</code> keyword as before, this can be done as follows:</p>
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span><span class="nc"> myTSLS</span>
+    <span class="n">β</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">}</span> <span class="c"># coefficient</span>
+    <span class="n">y</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">}</span> <span class="c"># response</span>
+    <span class="n">Z</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">}</span> <span class="c"># combined first stage variables</span>
+    <span class="n">X</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">}</span> <span class="c"># combined second stage variables</span>
+    <span class="n">FS</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">}</span> <span class="c"># first stage coefficients</span>
+
+    <span class="c"># Define constructor function</span>
+    <span class="k">function</span><span class="nf"> myTSLS</span><span class="x">(</span><span class="n">y</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">},</span> <span class="n">D</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">},</span>
+                    <span class="n">instrument</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">},</span> <span class="n">control</span> <span class="o">=</span> <span class="nb">nothing</span><span class="x">)</span>
+    <span class="c"># Add constant if no control is passed</span>
+    <span class="k">if</span> <span class="n">isnothing</span><span class="x">(</span><span class="n">control</span><span class="x">)</span> <span class="n">control</span> <span class="o">=</span> <span class="n">ones</span><span class="x">(</span><span class="n">length</span><span class="x">(</span><span class="n">y</span><span class="x">))</span> <span class="k">end</span>
+		<span class="c"># Define data matrices</span>
+		<span class="n">Z</span> <span class="o">=</span> <span class="n">hcat</span><span class="x">(</span><span class="n">control</span><span class="x">,</span> <span class="n">instrument</span><span class="x">)</span> <span class="c"># combined first stage variables</span>
+		<span class="n">X</span> <span class="o">=</span> <span class="n">hcat</span><span class="x">(</span><span class="n">D</span><span class="x">,</span> <span class="n">control</span><span class="x">)</span> <span class="c"># combined second stage variables</span>
+		<span class="c"># Calculate matrix products</span>
+		<span class="n">ZZ</span> <span class="o">=</span> <span class="n">Z</span><span class="err">'</span> <span class="o">*</span> <span class="n">Z</span>
+		<span class="n">DZ</span> <span class="o">=</span> <span class="n">X</span><span class="err">'</span> <span class="o">*</span> <span class="n">Z</span>
+		<span class="n">Zy</span> <span class="o">=</span> <span class="n">Z</span><span class="err">'</span> <span class="o">*</span> <span class="n">y</span>
+		<span class="n">FS</span> <span class="o">=</span> <span class="n">inv</span><span class="x">(</span><span class="n">ZZ</span><span class="x">)</span> <span class="o">*</span> <span class="n">DZ</span><span class="err">'</span>
+		<span class="c"># Calculate TSLS coefficient</span>
+		<span class="n">β</span> <span class="o">=</span> <span class="x">(</span><span class="n">DZ</span> <span class="o">*</span> <span class="n">FS</span><span class="x">)</span><span class="err">'</span> <span class="o">\</span> <span class="x">(</span><span class="n">FS</span><span class="err">'</span> <span class="o">*</span> <span class="n">Zy</span><span class="x">)</span>
+		<span class="c"># Return output</span>
+		<span class="n">new</span><span class="x">(</span><span class="n">β</span><span class="x">,</span> <span class="n">y</span><span class="x">,</span> <span class="n">Z</span><span class="x">,</span> <span class="n">X</span><span class="x">,</span> <span class="n">FS</span><span class="x">)</span>
+	<span class="k">end</span> <span class="c">#MYTSLS</span>
+<span class="k">end</span> <span class="c">#MYTSLS</span>
+</code></pre></div></div>
+
+<p>As with the least squares implementation, a set of functions that use the two-stage least squares output, e.g., for prediction and inference, would be helpful. Instead of renaming the functions defined for the <code class="language-plaintext highlighter-rouge">myLS</code> object  defined earlier or giving the new functions for the <code class="language-plaintext highlighter-rouge">myTSLS</code> object obscure names (such as <code class="language-plaintext highlighter-rouge">predict_myTSLS()</code> and <code class="language-plaintext highlighter-rouge">inference_myTSLS()</code> [uff]), we can simple create functions under the same name but with a different argument type. For example:</p>
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span><span class="nf"> predict</span><span class="x">(</span><span class="n">fit</span><span class="o">::</span><span class="n">myTSLS</span><span class="x">,</span> <span class="n">data</span> <span class="o">=</span> <span class="nb">nothing</span><span class="x">)</span>
+  <span class="c"># Check for new data, then calculate and return predictions</span>
+  <span class="n">isnothing</span><span class="x">(</span><span class="n">data</span><span class="x">)</span> <span class="o">?</span> <span class="n">fitted</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">X</span> <span class="o">*</span> <span class="n">fit</span><span class="o">.</span><span class="n">β</span> <span class="o">:</span> <span class="n">fitted</span> <span class="o">=</span> <span class="n">data</span> <span class="o">*</span> <span class="n">fit</span><span class="o">.</span><span class="n">β</span>
+  <span class="k">return</span><span class="x">(</span><span class="n">fitted</span><span class="x">)</span>
+<span class="k">end</span> <span class="c">#PREDICT.MYTSLS</span>
+
+<span class="k">function</span><span class="nf"> inference</span><span class="x">(</span><span class="n">fit</span><span class="o">::</span><span class="n">myTSLS</span><span class="x">)</span>
+  <span class="c"># Obtain data parameters</span>
+  <span class="n">N</span> <span class="o">=</span> <span class="n">length</span><span class="x">(</span><span class="n">fit</span><span class="o">.</span><span class="n">y</span><span class="x">)</span>
+  <span class="n">Kz</span> <span class="o">=</span> <span class="n">size</span><span class="x">(</span><span class="n">fit</span><span class="o">.</span><span class="n">Z</span><span class="x">,</span> <span class="mi">2</span><span class="x">)</span>
+  <span class="n">Kx</span> <span class="o">=</span> <span class="n">size</span><span class="x">(</span><span class="n">fit</span><span class="o">.</span><span class="n">X</span><span class="x">,</span> <span class="mi">2</span><span class="x">)</span>
+  <span class="c"># Calculate the covariance under homoskedasticity</span>
+  <span class="n">u</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">predict</span><span class="x">(</span><span class="n">fit</span><span class="x">)</span> <span class="c"># residuals</span>
+  <span class="n">PZ</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">Z</span> <span class="o">*</span> <span class="n">fit</span><span class="o">.</span><span class="n">FS</span>
+  <span class="n">PZZPinv</span> <span class="o">=</span> <span class="n">inv</span><span class="x">(</span><span class="n">PZ</span><span class="err">'</span> <span class="o">*</span> <span class="n">PZ</span><span class="x">)</span>
+  <span class="n">covar</span> <span class="o">=</span> <span class="n">sum</span><span class="x">(</span><span class="n">u</span><span class="o">.^</span><span class="mi">2</span><span class="x">)</span> <span class="o">.*</span> <span class="n">PZZPinv</span> <span class="o">./</span> <span class="x">(</span><span class="n">N</span> <span class="o">-</span> <span class="n">Kz</span><span class="x">)</span>
+  <span class="c"># Get standard errors, t-statistics, and p-values</span>
+  <span class="n">se</span> <span class="o">=</span> <span class="n">sqrt</span><span class="o">.</span><span class="x">(</span><span class="n">covar</span><span class="x">[</span><span class="n">diagind</span><span class="x">(</span><span class="n">covar</span><span class="x">)])</span>
+  <span class="n">t_stat</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">β</span> <span class="o">./</span> <span class="n">se</span>
+  <span class="n">p_val</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cdf</span><span class="o">.</span><span class="x">(</span><span class="n">Normal</span><span class="x">(),</span> <span class="o">-</span><span class="n">abs</span><span class="o">.</span><span class="x">(</span><span class="n">t_stat</span><span class="x">))</span>
+  <span class="c"># Organize and return output</span>
+  <span class="n">output</span> <span class="o">=</span> <span class="x">(</span><span class="n">β</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">β</span><span class="x">,</span> <span class="n">se</span> <span class="o">=</span> <span class="n">se</span><span class="x">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">t_stat</span><span class="x">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p_val</span><span class="x">)</span>
+  <span class="k">return</span> <span class="n">output</span>
+<span class="k">end</span> <span class="c">#INFERENCE.MYTSLS</span>
+</code></pre></div></div>
+
+<p>Instead of cluttering our code with subscripts, Julia’s multiple dispatch will determine the correct prediction or inference function depending on whether we pass an object of type <code class="language-plaintext highlighter-rouge">myLS</code> or <code class="language-plaintext highlighter-rouge">myTSLS</code>. This should come in pretty handy, especially as we add additional types of estimators, for which we also want to define prediction and inference functions.</p>
+
+<p>If you’ve gone through the code carefully, you may have noticed that the prediction functions are identical except for the type of input argument. There are many reasons against copying code in this manner, including worse readability. The next section discusses how type hierarchies can be used for sharing methods across objects of different types.</p>
+
+<h2 id="abstract-types-and-type-hierarchy">Abstract types and type hierarchy</h2>
+
+<p>In addition to concrete types, Julia also has <em>abstract</em> types. Some abstract types defined in Base Julia are <code class="language-plaintext highlighter-rouge">Real</code> or <code class="language-plaintext highlighter-rouge">AbstractFloat</code> (duh!). Abstract types do not carry any data and cannot be explicitly constructed. Instead, their use lies in grouping objects so that functions can be shared across their <em>sub</em>-types.</p>
+
+<p>In the previous section, we encountered a scenario where <code class="language-plaintext highlighter-rouge">predict()</code> is the same for arguments of type <code class="language-plaintext highlighter-rouge">myLS</code> and <code class="language-plaintext highlighter-rouge">myTSLS</code>. Because the <code class="language-plaintext highlighter-rouge">inference()</code> differs across both objects, we want some functions to be shared but some functions to be type-specific. It might there fore be useful to group the two existing types under the umbrella of an abstract type, say <code class="language-plaintext highlighter-rouge">myEstimator</code>. The below figure illustrates the type hierarchy and how the prediction and inference functions should be shared.</p>
+
+<p><img src="/assets/blog/2021-10-01-Types-and-Multiple-Dispatch-in-Julia/type_diagram.png" alt="drawing" class="center" width="80%" /></p>
+
+<p>To define the <code class="language-plaintext highlighter-rouge">myEstimator</code> abstract type, we use the keywords <code class="language-plaintext highlighter-rouge">abstract type</code>:</p>
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">abstract type</span><span class="nc"> myEstimator</span> <span class="k">end</span>
+</code></pre></div></div>
+<p>The <code class="language-plaintext highlighter-rouge">&lt;:</code> operator is used to define a subtype relationship. Instead of defining the <code class="language-plaintext highlighter-rouge">myLS</code> and <code class="language-plaintext highlighter-rouge">myTSLS</code> objects as before, we need to add <code class="language-plaintext highlighter-rouge">&lt;: myEstimator</code> next to the type names as follows:</p>
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span><span class="nc"> myLS</span> <span class="o">&lt;:</span> <span class="n">myEstimator</span>
+  <span class="c"># [insert code from earlier here]</span>
+<span class="k">end</span> <span class="c">#MYLS</span>
+
+<span class="k">struct</span><span class="nc"> myTSLS</span> <span class="o">&lt;:</span> <span class="n">myEstimator</span>
+   <span class="c"># [insert code from earlier here]</span>
+<span class="k">end</span> <span class="c">#MYTSLS</span>
+</code></pre></div></div>
+<p><em>(Of course, you should include the code from the earlier definitions of the objects here. I don’t here, but purely for reasons of conciseness.)</em></p>
+
+<p>Instead of defining a prediction function for both <code class="language-plaintext highlighter-rouge">myLS</code> and <code class="language-plaintext highlighter-rouge">myTSLS</code>, it then suffices to only define one for arguments of type <code class="language-plaintext highlighter-rouge">myEstimator</code>:</p>
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span><span class="nf"> predict</span><span class="x">(</span><span class="n">fit</span><span class="o">::</span><span class="n">myEstimator</span><span class="x">,</span> <span class="n">data</span> <span class="o">=</span> <span class="nb">nothing</span><span class="x">)</span>
+  <span class="c"># Calculate and return predictions</span>
+  <span class="n">isnothing</span><span class="x">(</span><span class="n">data</span><span class="x">)</span> <span class="o">?</span> <span class="n">fitted</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">X</span> <span class="o">*</span> <span class="n">fit</span><span class="o">.</span><span class="n">β</span> <span class="o">:</span> <span class="n">fitted</span> <span class="o">=</span> <span class="n">data</span> <span class="o">*</span> <span class="n">fit</span><span class="o">.</span><span class="n">β</span>
+  <span class="k">return</span><span class="x">(</span><span class="n">fitted</span><span class="x">)</span>
+<span class="k">end</span> <span class="c">#PREDICT.MYESTIMATOR</span>
+</code></pre></div></div>
+
+<p>This concludes my introduction to types and multiple dispatch in Julia.</p>

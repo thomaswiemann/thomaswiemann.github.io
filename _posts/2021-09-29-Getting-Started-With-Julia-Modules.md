@@ -1,4 +1,4 @@
----
+non-breaking---
 layout: blog
 title: Getting Started with Julia Modules
 usemathjax: true
@@ -7,7 +7,7 @@ published: true
 
 # {{ page.title }}
 
-Modules in Julia allow you to collect sets of objects, methods, and functions. The benefit is that modules can easily be loaded and shared, which makes the research workflow a lot more efficient if code is relevant for multiple projects.
+Julia Modules allow you to collect sets of objects, methods, and functions. The benefit is that modules can easily be loaded and shared, which makes the research workflow a lot more efficient if code is relevant for multiple projects.
 
 This post is a tutorial on how to create a personal Julia module. As an illustration, I use my applied econometrics module ``MyMethods.jl``. You can find the most recent version of the package on [github.com/thomaswiemann/MyMethods.jl](https://www.github.com/thomaswiemann/MyMethods.jl).
 
@@ -19,7 +19,7 @@ Three key aspects will be covered:
 Before you get started, make sure you've completed the preliminaries:
 1) [Julia](https://julialang.org/downloads/) is installed together with your favorite IDE (e.g., [Atom](https://atom.io/)); 2) [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) is installed and configured; 3) You have a [GitHub](https://github.com/) account.
 
-## 1. Creating a blank module
+## Creating a blank module
 
 In theory, we could create all the files of the module from scratch, but starting at zero is a pain. Luckily, ``PkgTemplates.jl`` provides the kick start we need: the basic structure of our Julia module to which we can then add the interesting bits.
 
@@ -55,7 +55,7 @@ Once you've initialized your package, navigate to the module folder. In my case 
 
 Notice that there is no a version control file in the project folder. This will change in the next section.
 
-## 2. Setting up Git and GitHub
+## Setting up Git and GitHub
 
 Git and GitHub are excellent utilities for keeping track of your project and sharing it with others. This section illustrates how your newly created (still empty) module can be hosted on GitHub.
 
@@ -80,7 +80,7 @@ Pkg.add(url="https://github.com/thomaswiemann/MyMethods.jl")
 ```
 But of course it's still empty and of little use in it's current form. We'll change this in the next section.
 
-## 3. Development workflow
+## Development workflow
 
 This section illustrates the development workflow. As an example, we will walk through adding a simple linear regression object to the ``MyMethods.jl`` module.
 
@@ -101,6 +101,12 @@ Let's now start with the least squares implementation. For this purpose, I creat
 The file contains two main parts. First, I define an object (in Julia: ``struct``) that takes a vector ``y`` of outcomes and a matrix ``X`` of features and calculates the least squared coefficient (i.e., $\hat{\beta}=(X^\top X)^{-1}X^\top y$). The coefficient and the inputs are then are combined into a new object of type ``myLS``. Second, I create set of complementary methods that can be called on an object of type ``myLS``. This includes a method called ``inference`` which calculates (heteroskedasticity robust) standard errors.
 
 As one expects, calculation of the least squares coefficient required some linear algebra functions. A good collection is contained in the package ``LinearAlgebra.jl``, which needs to added to the package dependencies. To do so, select the REPL. It should be set to active &ndash; if not, repeat the commands from the beginning of the section. Then, simply type ``add LinearAlgebra``. This will automatically amend your ``Project.toml`` and ``Manifest.toml`` files with the necessary details. The other dependencies &ndash; ``Distributions``, ``Random``, and ``DataFrames`` &ndash; can be added in the same fashion.
+
+[comment]: <> (
+  possibly restructure, where the active development mode is introduced only with the addition of dependencies.
+
+  To add dependencies: 1. Start the Julia REPL. 2. enter package mode. 3. activate. add command.
+  )
 
 We're now ready to include the newly defined object in our project. This is done by editing the ``MyMethods.jl`` file in the ``src`` folder. In addition to the dependencies, we need to specify which objects and methods should be available to users who load the module, as well as specify the location of our source code. In my case, the edited file reads:
 ```julia
@@ -132,6 +138,16 @@ git add . # this adds all files to the new commit
 git commit -m "adds myLS.jl" # commit your changes
 git push # this uploads your code to GitHub
 ```
+
+[comment]: <> (
+  Semantic versioning https://semver.org/. <major>.<minor>.<patch>
+
+  major: when changed means that a major change has been introduced in the release that is incompatible with the previous release.
+
+  minor: when changes means that there are non-breaking enhancements introduced in the release.
+
+  patch: when changed means that there are nonbreaking bug fixes in the release
+  )
 
 This concludes the basic workflow of 1) adding features to the module, 2) testing
 the module, and finally 3) committing the changes to Git and uploading the new improvements to GitHub.
