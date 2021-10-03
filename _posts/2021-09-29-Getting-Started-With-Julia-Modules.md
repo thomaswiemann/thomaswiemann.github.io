@@ -1,4 +1,4 @@
-non-breaking---
+---
 layout: blog
 title: Getting Started with Julia Modules
 usemathjax: true
