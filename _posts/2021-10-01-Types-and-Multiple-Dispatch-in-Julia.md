@@ -9,7 +9,7 @@ published: true
 
 Julia is primarily a functional programming language. Instead of building classes and defining methods for these classes &ndash; as you would in an object-oriented programming languange &ndash; you typically focus on writing functions that manipulate data.
 
-This is not to say that Julia doesn't make use of object-oriented concepts at all. Each value in Julia is assigned a type (similar to a class in other languages), which limits the space of possible values it can store. Having a (rough) understanding of Julia's type system for developing efficient code and can be leveraged for structuring your own research projects.
+This is not to say that Julia doesn't make use of object-oriented concepts at all. Each value in Julia is assigned a type (similar to a class in other languages), which limits the space of possible values it can store. Having a (rough) understanding of Julia's type system is useful for developing efficient code and can be leveraged for structuring your own research projects.
 
 This post is a tutorial on how to define your own types and methods. As a running example, I use user-defined types and methods from my applied econometrics module ``MyMethods.jl``. You can find the most recent version of the package on [github.com/thomaswiemann/MyMethods.jl](https://www.github.com/thomaswiemann/MyMethods.jl).
 
@@ -60,7 +60,7 @@ end #INFERENCE
 
 Notice that each time we want to calculate predictions, we need to pass both the regression coefficient ``β`` as well as an array of features ``X``. When calculating standard errors, we'd also need to pass the outcomes ``y``. This can quickly become bothersome and increase clutter in your code.
 
-This is where the named fields of a composite type come in handy! Instead of defining the least squares implementation using the ``function`` keyword, we can define our own Julia type using ``struct``:
+That's where the named fields of a composite type come in handy! Instead of defining the least squares implementation using the ``function`` keyword, we can define our own Julia type using ``struct``:
 ```julia
 struct myLS
     β::Array{Float64} # coefficient
@@ -108,7 +108,7 @@ If you're not yet incredibly excited &ndash; don't fret. While collecting relate
 
 ## Multiple dispatch
 
-Whenever a command is run, a dispatch process is launched in which the function to be executed is determined. In Julia, this process &ndash; called _multiple dispatch_ &ndash; determines the function using the types of the function arguments. This implies that the multiple functions can carry the same name as long as their argument types differ.
+Whenever a command is run, a dispatch process is launched in which the function to be executed is determined. In Julia, this process &ndash; called _multiple dispatch_ &ndash; determines the function using the types of the function arguments. This implies that multiple functions can carry the same name as long as their argument types differ.
 
 If you have already been coding in Julia, you likely made use of multiple dispatch many times. Consider, for example, the following bits of code:
 ```julia
@@ -120,7 +120,7 @@ julia> 42
 ```
 The operator ``*`` thus maps to different functions, which are evidently different depending on whether its arguments are of type ``String`` or of type ``Int64``. And this thankfully so. Coding Julia would be substantially more cumbersome if functions would only take  arguments of a predefined type (just think about all the subscripts we'd need for basic arithmetic operations alone!).
 
-To showcase how multiple dispatch can be leveraged to streamline your research projects, consider that in addition to the ``myLS`` type of the previous section, we also wanted to implement a two-stage least squares estimator and call it's type, say, ``myTSLS``. Using the ``struct`` keyword as before, this can be done as follows:
+To showcase how multiple dispatch can be leveraged to streamline your research projects, consider that in addition to the ``myLS`` type of the previous section, we also wanted to implement a two-stage least squares estimator and call its type, say, ``myTSLS``. Using the ``struct`` keyword as before, this can be done as follows:
 ```julia
 struct myTSLS
     β::Array{Float64} # coefficient
@@ -150,7 +150,7 @@ struct myTSLS
 end #MYTSLS
 ```
 
-As with the least squares implementation, a set of functions that use the two-stage least squares output, e.g., for prediction and inference, would be helpful. Instead of renaming the functions defined for the ``myLS`` object  defined earlier or giving the new functions for the ``myTSLS`` object obscure names (such as ``predict_myTSLS()`` and ``inference_myTSLS()`` [uff]), we can simple create functions under the same name but with a different argument type. For example:
+As with the least squares implementation, a set of functions that use the two-stage least squares output, e.g., for prediction and inference, would be helpful. Instead of renaming the functions defined for the ``myLS`` object  defined earlier, or giving the new functions for the ``myTSLS`` object obscure names (such as ``predict_myTSLS()`` and ``inference_myTSLS()`` [uff]), we can simple create functions under the same name but with a different argument type. For example:
 ```julia
 function predict(fit::myTSLS, data = nothing)
   # Check for new data, then calculate and return predictions
@@ -186,7 +186,7 @@ If you've gone through the code carefully, you may have noticed that the predict
 
 In addition to concrete types, Julia also has _abstract_ types. Some abstract types defined in Base Julia are ``Real`` or ``AbstractFloat`` (duh!). Abstract types do not carry any data and cannot be explicitly constructed. Instead, their use lies in grouping objects so that functions can be shared across their _sub_-types.
 
-In the previous section, we encountered a scenario where ``predict()`` is the same for arguments of type ``myLS`` and ``myTSLS``. Because the ``inference()`` differs across both objects, we want some functions to be shared but some functions to be type-specific. It might there fore be useful to group the two existing types under the umbrella of an abstract type, say ``myEstimator``. The below figure illustrates the type hierarchy and how the prediction and inference functions should be shared.
+In the previous section, we encountered a scenario where ``predict()`` is the same for arguments of type ``myLS`` and ``myTSLS``, but where ``inference()`` differs. We thus want some &ndash; but not all &ndash; of the functions to be shared across types. It might therefore be useful to group the two existing types under the umbrella of an abstract type called, say, ``myEstimator``. The below figure illustrates the type hierarchy and how the prediction and inference functions should be shared.
 
 <img src="/assets/blog/2021-10-01-Types-and-Multiple-Dispatch-in-Julia/type_diagram.png" alt="drawing" class="center"
  width="80%"/>
@@ -215,5 +215,7 @@ function predict(fit::myEstimator, data = nothing)
   return(fitted)
 end #PREDICT.MYESTIMATOR
 ```
+
+The inference functions defined in the previous subsections do not need to be amended to work with the newly defined type hierarchy.
 
 This concludes my introduction to types and multiple dispatch in Julia.

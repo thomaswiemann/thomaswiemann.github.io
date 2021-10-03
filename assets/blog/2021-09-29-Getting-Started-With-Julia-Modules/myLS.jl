@@ -53,9 +53,8 @@ function inference(fit::myLS; heteroskedastic::Bool=false, print_df::Bool=true)
     N = length(fit.y)
     K = size(fit.X, 2)
 
-    # Calculate covariance matrix and standard errors
+    # Calculate the covariance matrix
     u = fit.y - predict(fit) # residuals
-    # Covariance for LS
     XX_inv = inv(fit.X' * fit.X)
     if !heteroskedastic
         # homoskedastic se
@@ -66,9 +65,9 @@ function inference(fit::myLS; heteroskedastic::Bool=false, print_df::Bool=true)
         covar = XX_inv * ((fit.X .* (u.^2))' * fit.X) * XX_inv
 		covar = covar .* (N / (N - K)) # dof adjustment
     end
-    se = sqrt.(covar[diagind(covar)])
 
-    # Calculate t-statistic and p-values
+    # Get standard errors, t-statistics and p-values
+    se = sqrt.(covar[diagind(covar)])
     t_stat = fit.β ./ se
     p_val = 2 * cdf.(Normal(), -abs.(t_stat))
 
@@ -78,7 +77,8 @@ function inference(fit::myLS; heteroskedastic::Bool=false, print_df::Bool=true)
         rename!(out_df, ["coef", "se", "t-stat", "p-val"])
         display(out_df)
     end
+
     # Organize and return output
-    output = (coef = fit.β, se = se, t = t_stat, p = p_val)
+    output = (β = fit.β, se = se, t = t_stat, p = p_val)
     return output
 end #INFERENCE.MYLS

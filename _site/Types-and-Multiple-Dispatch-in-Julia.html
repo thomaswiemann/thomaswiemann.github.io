@@ -90,7 +90,7 @@
 
 <p>Julia is primarily a functional programming language. Instead of building classes and defining methods for these classes – as you would in an object-oriented programming languange – you typically focus on writing functions that manipulate data.</p>
 
-<p>This is not to say that Julia doesn’t make use of object-oriented concepts at all. Each value in Julia is assigned a type (similar to a class in other languages), which limits the space of possible values it can store. Having a (rough) understanding of Julia’s type system for developing efficient code and can be leveraged for structuring your own research projects.</p>
+<p>This is not to say that Julia doesn’t make use of object-oriented concepts at all. Each value in Julia is assigned a type (similar to a class in other languages), which limits the space of possible values it can store. Having a (rough) understanding of Julia’s type system is useful for developing efficient code and can be leveraged for structuring your own research projects.</p>
 
 <p>This post is a tutorial on how to define your own types and methods. As a running example, I use user-defined types and methods from my applied econometrics module <code class="language-plaintext highlighter-rouge">MyMethods.jl</code>. You can find the most recent version of the package on <a href="https://www.github.com/thomaswiemann/MyMethods.jl">github.com/thomaswiemann/MyMethods.jl</a>.</p>
 
@@ -141,7 +141,7 @@
 
 <p>Notice that each time we want to calculate predictions, we need to pass both the regression coefficient <code class="language-plaintext highlighter-rouge">β</code> as well as an array of features <code class="language-plaintext highlighter-rouge">X</code>. When calculating standard errors, we’d also need to pass the outcomes <code class="language-plaintext highlighter-rouge">y</code>. This can quickly become bothersome and increase clutter in your code.</p>
 
-<p>This is where the named fields of a composite type come in handy! Instead of defining the least squares implementation using the <code class="language-plaintext highlighter-rouge">function</code> keyword, we can define our own Julia type using <code class="language-plaintext highlighter-rouge">struct</code>:</p>
+<p>That’s where the named fields of a composite type come in handy! Instead of defining the least squares implementation using the <code class="language-plaintext highlighter-rouge">function</code> keyword, we can define our own Julia type using <code class="language-plaintext highlighter-rouge">struct</code>:</p>
 <div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span><span class="nc"> myLS</span>
     <span class="n">β</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">}</span> <span class="c"># coefficient</span>
     <span class="n">y</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">}</span> <span class="c"># response</span>
@@ -187,7 +187,7 @@
 
 <h2 id="multiple-dispatch">Multiple dispatch</h2>
 
-<p>Whenever a command is run, a dispatch process is launched in which the function to be executed is determined. In Julia, this process – called <em>multiple dispatch</em> – determines the function using the types of the function arguments. This implies that the multiple functions can carry the same name as long as their argument types differ.</p>
+<p>Whenever a command is run, a dispatch process is launched in which the function to be executed is determined. In Julia, this process – called <em>multiple dispatch</em> – determines the function using the types of the function arguments. This implies that multiple functions can carry the same name as long as their argument types differ.</p>
 
 <p>If you have already been coding in Julia, you likely made use of multiple dispatch many times. Consider, for example, the following bits of code:</p>
 <div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"hello, "</span> <span class="o">*</span> <span class="s">"world!"</span>
@@ -198,7 +198,7 @@
 </code></pre></div></div>
 <p>The operator <code class="language-plaintext highlighter-rouge">*</code> thus maps to different functions, which are evidently different depending on whether its arguments are of type <code class="language-plaintext highlighter-rouge">String</code> or of type <code class="language-plaintext highlighter-rouge">Int64</code>. And this thankfully so. Coding Julia would be substantially more cumbersome if functions would only take  arguments of a predefined type (just think about all the subscripts we’d need for basic arithmetic operations alone!).</p>
 
-<p>To showcase how multiple dispatch can be leveraged to streamline your research projects, consider that in addition to the <code class="language-plaintext highlighter-rouge">myLS</code> type of the previous section, we also wanted to implement a two-stage least squares estimator and call it’s type, say, <code class="language-plaintext highlighter-rouge">myTSLS</code>. Using the <code class="language-plaintext highlighter-rouge">struct</code> keyword as before, this can be done as follows:</p>
+<p>To showcase how multiple dispatch can be leveraged to streamline your research projects, consider that in addition to the <code class="language-plaintext highlighter-rouge">myLS</code> type of the previous section, we also wanted to implement a two-stage least squares estimator and call its type, say, <code class="language-plaintext highlighter-rouge">myTSLS</code>. Using the <code class="language-plaintext highlighter-rouge">struct</code> keyword as before, this can be done as follows:</p>
 <div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span><span class="nc"> myTSLS</span>
     <span class="n">β</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">}</span> <span class="c"># coefficient</span>
     <span class="n">y</span><span class="o">::</span><span class="kt">Array</span><span class="x">{</span><span class="kt">Float64</span><span class="x">}</span> <span class="c"># response</span>
@@ -227,7 +227,7 @@
 <span class="k">end</span> <span class="c">#MYTSLS</span>
 </code></pre></div></div>
 
-<p>As with the least squares implementation, a set of functions that use the two-stage least squares output, e.g., for prediction and inference, would be helpful. Instead of renaming the functions defined for the <code class="language-plaintext highlighter-rouge">myLS</code> object  defined earlier or giving the new functions for the <code class="language-plaintext highlighter-rouge">myTSLS</code> object obscure names (such as <code class="language-plaintext highlighter-rouge">predict_myTSLS()</code> and <code class="language-plaintext highlighter-rouge">inference_myTSLS()</code> [uff]), we can simple create functions under the same name but with a different argument type. For example:</p>
+<p>As with the least squares implementation, a set of functions that use the two-stage least squares output, e.g., for prediction and inference, would be helpful. Instead of renaming the functions defined for the <code class="language-plaintext highlighter-rouge">myLS</code> object  defined earlier, or giving the new functions for the <code class="language-plaintext highlighter-rouge">myTSLS</code> object obscure names (such as <code class="language-plaintext highlighter-rouge">predict_myTSLS()</code> and <code class="language-plaintext highlighter-rouge">inference_myTSLS()</code> [uff]), we can simple create functions under the same name but with a different argument type. For example:</p>
 <div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span><span class="nf"> predict</span><span class="x">(</span><span class="n">fit</span><span class="o">::</span><span class="n">myTSLS</span><span class="x">,</span> <span class="n">data</span> <span class="o">=</span> <span class="nb">nothing</span><span class="x">)</span>
   <span class="c"># Check for new data, then calculate and return predictions</span>
   <span class="n">isnothing</span><span class="x">(</span><span class="n">data</span><span class="x">)</span> <span class="o">?</span> <span class="n">fitted</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">X</span> <span class="o">*</span> <span class="n">fit</span><span class="o">.</span><span class="n">β</span> <span class="o">:</span> <span class="n">fitted</span> <span class="o">=</span> <span class="n">data</span> <span class="o">*</span> <span class="n">fit</span><span class="o">.</span><span class="n">β</span>
@@ -262,7 +262,7 @@
 
 <p>In addition to concrete types, Julia also has <em>abstract</em> types. Some abstract types defined in Base Julia are <code class="language-plaintext highlighter-rouge">Real</code> or <code class="language-plaintext highlighter-rouge">AbstractFloat</code> (duh!). Abstract types do not carry any data and cannot be explicitly constructed. Instead, their use lies in grouping objects so that functions can be shared across their <em>sub</em>-types.</p>
 
-<p>In the previous section, we encountered a scenario where <code class="language-plaintext highlighter-rouge">predict()</code> is the same for arguments of type <code class="language-plaintext highlighter-rouge">myLS</code> and <code class="language-plaintext highlighter-rouge">myTSLS</code>. Because the <code class="language-plaintext highlighter-rouge">inference()</code> differs across both objects, we want some functions to be shared but some functions to be type-specific. It might there fore be useful to group the two existing types under the umbrella of an abstract type, say <code class="language-plaintext highlighter-rouge">myEstimator</code>. The below figure illustrates the type hierarchy and how the prediction and inference functions should be shared.</p>
+<p>In the previous section, we encountered a scenario where <code class="language-plaintext highlighter-rouge">predict()</code> is the same for arguments of type <code class="language-plaintext highlighter-rouge">myLS</code> and <code class="language-plaintext highlighter-rouge">myTSLS</code>, but where <code class="language-plaintext highlighter-rouge">inference()</code> differs. We thus want some – but not all – of the functions to be shared across types. It might therefore be useful to group the two existing types under the umbrella of an abstract type called, say, <code class="language-plaintext highlighter-rouge">myEstimator</code>. The below figure illustrates the type hierarchy and how the prediction and inference functions should be shared.</p>
 
 <p><img src="/assets/blog/2021-10-01-Types-and-Multiple-Dispatch-in-Julia/type_diagram.png" alt="drawing" class="center" width="80%" /></p>
 
@@ -287,6 +287,8 @@
   <span class="k">return</span><span class="x">(</span><span class="n">fitted</span><span class="x">)</span>
 <span class="k">end</span> <span class="c">#PREDICT.MYESTIMATOR</span>
 </code></pre></div></div>
+
+<p>The inference functions defined in the previous subsections do not need to be amended to work with the newly defined type hierarchy.</p>
 
 <p>This concludes my introduction to types and multiple dispatch in Julia.</p>
 
