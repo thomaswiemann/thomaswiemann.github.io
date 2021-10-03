@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="Personal Website">
+    <meta name="author" content="Thomas Wiemann">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="/assets/images/favicon.ico">
+
+    <title>GPU vs CPU benchmarks with Flux.jl</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="/assets/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/my-bootstrap.css" >
+    <link rel="stylesheet" type="text/css" href="/assets/css/styles.css">
+
+    <!-- MathJax -->
+    
+    <script src="/assets/js/load-mathjax.js" async></script>
+    
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BJZ23Q1WST"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-BJZ23Q1WST');
+    </script>
+
+  </head>
+  <body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Thomas Wiemann</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          
+          
+          
+
+  
+    
+      <li><a href="/">Home</a></li>
+    
+  
+
+  
+    
+      <li><a href="/research">Research</a></li>
+    
+  
+
+  
+    
+      <li><a href="/Computing">Computing</a></li>
+    
+  
+
+  
+    
+      <li><a href="/teaching">Teaching</a></li>
+    
+  
+
+
+
+
+          <li><a href="/assets/cv/wiemann_CV_2021_11_06.pdf">CV</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main">
+        <h1 id="gpu-vs-cpu-benchmarks-with-fluxjl">GPU vs CPU benchmarks with Flux.jl</h1>
+
+<p>This script compares the training time of a simple convolutional neural network on a GPU and CPU, respectively. The data, network architecture, and training loops are based on those provided in the fluxml.ai <a href="https://fluxml.ai/tutorials/2020/09/15/deep-learning-flux.html">tutorial</a> on deep learning with Flux.jl.</p>
+
+<p>The hardware I am using is a Dell XPS 13 laptop with an Intel i7-7500U CPU, connected to an Nvidia GTX 1080 using the Razer Core X external GPU dock. Neither the CPU nor the GPU are particularly fast compared to 2021 hardware, so you can expect to see much faster results on modern machines.</p>
+
+<p>You can download the notebook containing all the code <a href="/assets/blog/2021-10-03-GPU-vs-CPU-benchmarks-with-Flux.jl/GPU-vs-CPU-benchmarks-with-Flux.jl.ipynb">here</a>.</p>
+
+<h3 id="preliminaries">Preliminaries</h3>
+
+<p>As usual, the necessary packages are loaded. Unless you already have it stored locally, the image data, which we will train the neural networks on, also needs to be downloaded.</p>
+
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Load necessary packages</span>
+<span class="k">using</span> <span class="n">Statistics</span>
+<span class="k">using</span> <span class="n">Flux</span><span class="x">,</span> <span class="n">Flux</span><span class="o">.</span><span class="n">Optimise</span>
+<span class="k">using</span> <span class="n">Flux</span><span class="o">:</span> <span class="n">onehotbatch</span><span class="x">,</span> <span class="n">onecold</span>
+<span class="k">using</span> <span class="n">Flux</span><span class="o">:</span> <span class="n">crossentropy</span><span class="x">,</span> <span class="n">Momentum</span>
+<span class="k">using</span> <span class="n">Base</span><span class="o">.</span><span class="n">Iterators</span><span class="o">:</span> <span class="n">partition</span>
+<span class="k">using</span> <span class="n">CUDA</span>
+<span class="k">using</span> <span class="n">Metalhead</span><span class="x">,</span> <span class="n">Images</span>
+<span class="k">using</span> <span class="n">Metalhead</span><span class="o">:</span> <span class="n">trainimgs</span>
+<span class="k">using</span> <span class="n">Images</span><span class="o">.</span><span class="n">ImageCore</span>
+<span class="k">using</span> <span class="n">BenchmarkTools</span><span class="o">:</span> <span class="nd">@btime</span>
+
+<span class="c"># Download image data (unless stored locally)</span>
+<span class="n">Metalhead</span><span class="o">.</span><span class="n">download</span><span class="x">(</span><span class="n">CIFAR10</span><span class="x">);</span>
+</code></pre></div></div>
+
+<h3 id="data-preparation">Data preparation</h3>
+
+<p>Prior to training, the downloaded image data needs to be prepared and loaded onto the GPU. I don’t specify a validation sample here as the focus is entirely on benchmarking training time. (Note that explicit transfer to the cpu via <code class="language-plaintext highlighter-rouge">|&gt; cpu</code> is not necessary. I do this here solely for emphasis.)</p>
+
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Prepare data</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">trainimgs</span><span class="x">(</span><span class="n">CIFAR10</span><span class="x">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">onehotbatch</span><span class="x">([</span><span class="n">X</span><span class="x">[</span><span class="n">i</span><span class="x">]</span><span class="o">.</span><span class="n">ground_truth</span><span class="o">.</span><span class="n">class</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">50000</span><span class="x">],</span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="x">)</span>
+<span class="n">getarray</span><span class="x">(</span><span class="n">X</span><span class="x">)</span> <span class="o">=</span> <span class="n">float</span><span class="o">.</span><span class="x">(</span><span class="n">permutedims</span><span class="x">(</span><span class="n">channelview</span><span class="x">(</span><span class="n">X</span><span class="x">),</span> <span class="x">(</span><span class="mi">2</span><span class="x">,</span> <span class="mi">3</span><span class="x">,</span> <span class="mi">1</span><span class="x">)))</span>
+<span class="n">imgs</span> <span class="o">=</span> <span class="x">[</span><span class="n">getarray</span><span class="x">(</span><span class="n">X</span><span class="x">[</span><span class="n">i</span><span class="x">]</span><span class="o">.</span><span class="n">img</span><span class="x">)</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">50000</span><span class="x">]</span>
+
+<span class="c"># Load data to gpu and cpu</span>
+<span class="n">train_gpu</span> <span class="o">=</span> <span class="x">([(</span><span class="n">cat</span><span class="x">(</span><span class="n">imgs</span><span class="x">[</span><span class="n">i</span><span class="x">]</span><span class="o">...</span><span class="x">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="mi">4</span><span class="x">),</span>
+            <span class="n">labels</span><span class="x">[</span><span class="o">:</span><span class="x">,</span><span class="n">i</span><span class="x">])</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">partition</span><span class="x">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">50000</span><span class="x">,</span> <span class="mi">1000</span><span class="x">)])</span> <span class="o">|&gt;</span> <span class="n">gpu</span>
+<span class="n">train_cpu</span> <span class="o">=</span> <span class="x">([(</span><span class="n">cat</span><span class="x">(</span><span class="n">imgs</span><span class="x">[</span><span class="n">i</span><span class="x">]</span><span class="o">...</span><span class="x">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="mi">4</span><span class="x">),</span>
+            <span class="n">labels</span><span class="x">[</span><span class="o">:</span><span class="x">,</span><span class="n">i</span><span class="x">])</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">partition</span><span class="x">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">50000</span><span class="x">,</span> <span class="mi">1000</span><span class="x">)])</span> <span class="o">|&gt;</span> <span class="n">cpu</span>
+</code></pre></div></div>
+
+<h3 id="neural-network-construction">Neural network construction</h3>
+
+<p>The convolutional neural network here has a total of 39,558 trainable parameters. We need to define one for both the GPU and CPU separately.</p>
+
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Define neural networks for both gpu and cpu</span>
+<span class="n">m_gpu</span> <span class="o">=</span> <span class="n">Chain</span><span class="x">(</span>
+  <span class="n">Conv</span><span class="x">((</span><span class="mi">5</span><span class="x">,</span><span class="mi">5</span><span class="x">),</span> <span class="mi">3</span><span class="o">=&gt;</span><span class="mi">16</span><span class="x">,</span> <span class="n">relu</span><span class="x">),</span>
+  <span class="n">MaxPool</span><span class="x">((</span><span class="mi">2</span><span class="x">,</span><span class="mi">2</span><span class="x">)),</span>
+  <span class="n">Conv</span><span class="x">((</span><span class="mi">5</span><span class="x">,</span><span class="mi">5</span><span class="x">),</span> <span class="mi">16</span><span class="o">=&gt;</span><span class="mi">8</span><span class="x">,</span> <span class="n">relu</span><span class="x">),</span>
+  <span class="n">MaxPool</span><span class="x">((</span><span class="mi">2</span><span class="x">,</span><span class="mi">2</span><span class="x">)),</span>
+  <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">reshape</span><span class="x">(</span><span class="n">x</span><span class="x">,</span> <span class="o">:</span><span class="x">,</span> <span class="n">size</span><span class="x">(</span><span class="n">x</span><span class="x">,</span> <span class="mi">4</span><span class="x">)),</span>
+  <span class="n">Dense</span><span class="x">(</span><span class="mi">200</span><span class="x">,</span> <span class="mi">120</span><span class="x">),</span>
+  <span class="n">Dense</span><span class="x">(</span><span class="mi">120</span><span class="x">,</span> <span class="mi">84</span><span class="x">),</span>
+  <span class="n">Dense</span><span class="x">(</span><span class="mi">84</span><span class="x">,</span> <span class="mi">10</span><span class="x">),</span>
+  <span class="n">softmax</span><span class="x">)</span> <span class="o">|&gt;</span> <span class="n">gpu</span>
+
+<span class="n">m_cpu</span> <span class="o">=</span> <span class="n">Chain</span><span class="x">(</span>
+  <span class="n">Conv</span><span class="x">((</span><span class="mi">5</span><span class="x">,</span><span class="mi">5</span><span class="x">),</span> <span class="mi">3</span><span class="o">=&gt;</span><span class="mi">16</span><span class="x">,</span> <span class="n">relu</span><span class="x">),</span>
+  <span class="n">MaxPool</span><span class="x">((</span><span class="mi">2</span><span class="x">,</span><span class="mi">2</span><span class="x">)),</span>
+  <span class="n">Conv</span><span class="x">((</span><span class="mi">5</span><span class="x">,</span><span class="mi">5</span><span class="x">),</span> <span class="mi">16</span><span class="o">=&gt;</span><span class="mi">8</span><span class="x">,</span> <span class="n">relu</span><span class="x">),</span>
+  <span class="n">MaxPool</span><span class="x">((</span><span class="mi">2</span><span class="x">,</span><span class="mi">2</span><span class="x">)),</span>
+  <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">reshape</span><span class="x">(</span><span class="n">x</span><span class="x">,</span> <span class="o">:</span><span class="x">,</span> <span class="n">size</span><span class="x">(</span><span class="n">x</span><span class="x">,</span> <span class="mi">4</span><span class="x">)),</span>
+  <span class="n">Dense</span><span class="x">(</span><span class="mi">200</span><span class="x">,</span> <span class="mi">120</span><span class="x">),</span>
+  <span class="n">Dense</span><span class="x">(</span><span class="mi">120</span><span class="x">,</span> <span class="mi">84</span><span class="x">),</span>
+  <span class="n">Dense</span><span class="x">(</span><span class="mi">84</span><span class="x">,</span> <span class="mi">10</span><span class="x">),</span>
+  <span class="n">softmax</span><span class="x">)</span> <span class="o">|&gt;</span> <span class="n">cpu</span>
+</code></pre></div></div>
+
+<p>Finally, the loss and optimizers need to be defined. I again define these for the GPU and CPU separately to avoid any contamination.</p>
+
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Define loss and optimizer</span>
+<span class="n">loss_gpu</span><span class="x">(</span><span class="n">x</span><span class="x">,</span> <span class="n">y</span><span class="x">)</span> <span class="o">=</span> <span class="n">sum</span><span class="x">(</span><span class="n">crossentropy</span><span class="x">(</span><span class="n">m_gpu</span><span class="x">(</span><span class="n">x</span><span class="x">),</span> <span class="n">y</span><span class="x">))</span>
+<span class="n">opt_gpu</span> <span class="o">=</span> <span class="n">Momentum</span><span class="x">(</span><span class="mf">0.01</span><span class="x">)</span>
+
+<span class="n">loss_cpu</span><span class="x">(</span><span class="n">x</span><span class="x">,</span> <span class="n">y</span><span class="x">)</span> <span class="o">=</span> <span class="n">sum</span><span class="x">(</span><span class="n">crossentropy</span><span class="x">(</span><span class="n">m_cpu</span><span class="x">(</span><span class="n">x</span><span class="x">),</span> <span class="n">y</span><span class="x">))</span>
+<span class="n">opt_cpu</span> <span class="o">=</span> <span class="n">Momentum</span><span class="x">(</span><span class="mf">0.01</span><span class="x">)</span>
+</code></pre></div></div>
+
+<h3 id="benchmark-results">Benchmark Results</h3>
+
+<p>The training loops defined below are set to a single epoch to avoid overly long runtimes (on the CPU). Of course, feel free to increase the <code class="language-plaintext highlighter-rouge">epochs</code> for more extensive benchmarking.</p>
+
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Set number of training iterations</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c"># GPU benchmark</span>
+<span class="nd">@btime</span> <span class="k">for</span> <span class="n">epoch</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="n">epochs</span>
+  <span class="k">for</span> <span class="n">d</span> <span class="k">in</span> <span class="n">train_gpu</span>
+    <span class="n">gs</span> <span class="o">=</span> <span class="n">gradient</span><span class="x">(</span><span class="n">params</span><span class="x">(</span><span class="n">m_gpu</span><span class="x">))</span> <span class="k">do</span>
+      <span class="n">l</span> <span class="o">=</span> <span class="n">loss_gpu</span><span class="x">(</span><span class="n">d</span><span class="o">...</span><span class="x">)</span>
+    <span class="k">end</span>
+    <span class="n">update!</span><span class="x">(</span><span class="n">opt_gpu</span><span class="x">,</span> <span class="n">params</span><span class="x">(</span><span class="n">m_gpu</span><span class="x">),</span> <span class="n">gs</span><span class="x">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mf">828.756</span> <span class="n">ms</span> <span class="x">(</span><span class="mi">1407620</span> <span class="n">allocations</span><span class="o">:</span> <span class="mf">56.20</span> <span class="n">MiB</span><span class="x">)</span>
+
+<span class="c"># CPU benchmark</span>
+<span class="nd">@btime</span> <span class="k">for</span> <span class="n">epoch</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="n">epochs</span>
+  <span class="k">for</span> <span class="n">d</span> <span class="k">in</span> <span class="n">train_cpu</span>
+    <span class="n">gs</span> <span class="o">=</span> <span class="n">gradient</span><span class="x">(</span><span class="n">Flux</span><span class="o">.</span><span class="n">params</span><span class="x">(</span><span class="n">m_cpu</span><span class="x">))</span> <span class="k">do</span>
+      <span class="n">l</span> <span class="o">=</span> <span class="n">loss_cpu</span><span class="x">(</span><span class="n">d</span><span class="o">...</span><span class="x">)</span>
+    <span class="k">end</span>
+    <span class="n">update!</span><span class="x">(</span><span class="n">opt_cpu</span><span class="x">,</span> <span class="n">Flux</span><span class="o">.</span><span class="n">params</span><span class="x">(</span><span class="n">m_cpu</span><span class="x">),</span> <span class="n">gs</span><span class="x">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mf">82.470</span> <span class="n">s</span> <span class="x">(</span><span class="mi">107104</span> <span class="n">allocations</span><span class="o">:</span> <span class="mf">14.45</span> <span class="n">GiB</span><span class="x">)</span>
+</code></pre></div></div>
+
+<p>On my machine, a single training epoch takes about 0.83 seconds on the GPU but a whooping 82.47 seconds on the CPU. <strong>That’s a 98.99% speedup!</strong></p>
+
+
+      <em style="font-size:medium">You made it &ndash; thanks a lot for sticking with me till the end! If you've found
+        this post helpful or have any comments or suggestions, please don't hesitate
+        to reach out. My email is wiemann@uchicago.edu. I'd be happy about any feedback.<em>
+  </div>
+
+  <hr>
+  <ul class="flex-footer">
+  <li class="flex-footer-item" style="text-align: left; width: 160px">
+    <p><img src="/assets/images/GitHub-Mark-32px.png" alt="GitHub Icon" style="width:20px"> <a href="https://github.com/thomaswiemann">@thomaswiemann</a> </p>
+    <p><img src="/assets/images/2021 Twitter logo - blue.png" alt="Twitter Icon" style="width:20px"> <a href="https://twitter.com/econwiemann">@econwiemann</a> </p>
+    <p><img src="/assets/images/LI-In-Bug.png" alt="LinkedIn Icon" style="width:20px"> <a href="https://www.linkedin.com/in/thomas-wiemann">@thomaswiemann</a> </p>
+  </li>
+  <li class="flex-footer-item" style="width: 500px"><img src="/assets/images/uchicago-logo.jpg" alt="University of Chicago Seal" style="width:350px"></li>
+  <li class="flex-footer-item">
+    <p>Written in <a href="https://atom.io/">Atom</a>. Built with <a href="https://jekyllrb.com/">Jekyll</a>. Hosted on <a href="https://github.com/thomaswiemann/thomaswiemann.github.io">GitHub</a>.</p>
+    <p>&copy; 2021 Thomas Wiemann</p>
+  </li>
+  </ul>
+
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="/assets/js/jquery.min.js"><\/script>')</script>
+  <script src="/assets/js/bootstrap.min.js"></script>
+  </body>
+</html>
