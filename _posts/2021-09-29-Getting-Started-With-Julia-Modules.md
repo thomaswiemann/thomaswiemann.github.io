@@ -131,3 +131,5 @@ git push # this uploads your code to GitHub
 
 This concludes the basic workflow of 1) adding features to the module, 2) testing
 the module, and finally 3) committing the changes to Git and uploading the new improvements to GitHub.
+
+As a final advice, I recommend making use of ``Revise.jl`` when developing your Julia modules. With this package, your working enviroment is automatically updated whenever you edit source code (a _huge_ quality of life improvement). Once installed, (``using Pkg; Pkg.add("Revise")``), start the Julia REPL and navigate to your module directory. Then execute the following commands in turn: 1) ``using Revise``, 2) ``]`` (to enter the package mode), 3) ``dev .``. Now you're all set: much success with your Julia development and happy coding!
