@@ -3,13 +3,15 @@ layout: blog
 title: GPU vs CPU benchmarks with Flux.jl
 usemathjax: true
 published: true
+summary: A convolutional neural network training time comparison between GPU and CPU with Flux.jl.
+tags: [Julia, Flux.jl, Deep Learning]
 ---
 
 # {{ page.title }}
 
-This script compares the training time of a simple convolutional neural network on a GPU and CPU, respectively. The data, network architecture, and training loops are based on those provided in the fluxml.ai [tutorial](https://fluxml.ai/tutorials/2020/09/15/deep-learning-flux.html) on deep learning.
+This post compares the training time of a simple convolutional neural network on a GPU and CPU. The data, network architecture, and training loops are based on those provided in the fluxml.ai [tutorial](https://fluxml.ai/tutorials/2020/09/15/deep-learning-flux.html) on deep learning.
 
-I am using is a Dell XPS 13 laptop with an Intel i7-7500U CPU, connected to an Nvidia GTX 1080 using the Razer Core X external GPU dock. Neither the CPU nor the GPU are particularly fast compared to 2021 hardware, so you can expect to see much faster results on modern machines.
+I am using a Dell XPS 13 laptop with an Intel i7-7500U CPU, connected to an Nvidia GTX 1080 using the Razer Core X external GPU dock. Neither the CPU nor the GPU are particularly fast compared to 2021 hardware, so you can expect to see much faster results on modern machines.
 
 You can download the notebook containing all the code [here](/assets/blog/2021-10-03-GPU-vs-CPU-benchmarks-with-Flux.jl/GPU-vs-CPU-benchmarks-with-Flux.jl.ipynb).
 
