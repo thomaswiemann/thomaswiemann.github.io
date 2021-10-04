@@ -3,6 +3,8 @@ layout: default
 title: Research
 group: "navigation"
 order: 2
+summary: A complete list of (co-)authored research.
+tags: [Research, Working Paper]
 ---
 
 # Research

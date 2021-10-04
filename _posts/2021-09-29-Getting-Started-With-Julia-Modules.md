@@ -3,6 +3,8 @@ layout: blog
 title: Getting Started with Julia Modules
 usemathjax: true
 published: true
+summary: An introduction to creating personal Julia modules for research projects.
+tags: [Julia, Tutorial, Julia Modules, Coding]
 ---
 
 # {{ page.title }}

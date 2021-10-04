@@ -3,6 +3,8 @@ layout: blog
 title: Types and Multiple Dispatch in Julia
 usemathjax: true
 published: true
+summary: An introduction to types and multiple dispatch in Julia, with an application to structuring personal research projects.
+tags: [Julia, Tutorial, Coding]
 ---
 
 # {{ page.title }}

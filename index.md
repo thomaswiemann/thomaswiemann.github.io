@@ -3,6 +3,7 @@ layout: default
 title: Home
 group: "navigation"
 order: 1
+summary: I'm Thomas Wiemann, an Economics PhD student at the University of Chicago. Welcome to my personal website! 
 ---
 
 # Welcome!

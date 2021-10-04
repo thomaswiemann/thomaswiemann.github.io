@@ -4,7 +4,7 @@ title: GPU vs CPU benchmarks with Flux.jl
 usemathjax: true
 published: true
 summary: A convolutional neural network training time comparison between GPU and CPU with Flux.jl.
-tags: [Julia, Flux.jl, Deep Learning]
+tags: [Julia, Flux.jl, Deep Learning, Coding]
 ---
 
 # {{ page.title }}
