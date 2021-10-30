@@ -16,8 +16,11 @@ Coming soon.
 
 ## TA Positions
 
-**Applied Microeconometrics -- Econ 31720 (Fall 2021)** \
-Coming soon.
+**Applied Microeconometrics -- Econ 31720 (Fall 2021)** 
+- Statistical Programming in Julia ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_1.pdf))
+- Endogeneity in Additive Nonparametric Models ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_2.pdf))
+- Estimation and Inference in High-Dimensional IV ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_3.pdf); [annotated slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_3_annotated.pdf))
+- Endogeneity in Non-Additive Nonparametric Models ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_4.pdf); [annotated slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_4_annotated.pdf))
 
 **Econometrics -- Econ 21020 (Spring 2021)**
 - Gauss Markov Theorem ([slides](/assets/teaching/Spring2020-Econ-21020/Econ21020_GMT.pdf))
