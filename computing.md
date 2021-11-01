@@ -12,6 +12,11 @@ tags: [Computation, Blog, Software, Tutorial, Coding]
 
 ## Software
 Coming soon.
+## Computational Methods in Economics Working Group (Econ 61600)
+Together with [Thibaut Lamadon](https://lamadon.com/) and [Guillaume Pouliot](https://sites.google.com/site/guillaumeallairepouliot/), I co-created the UChicago economic department's computational methods in economics working group (Econ 61600). 
+
+We meet on a bi-weekly basis, donuts & coffee included. Please reach out if you're interested in participating! 
+
 
 ## Blog Posts
 <ul>

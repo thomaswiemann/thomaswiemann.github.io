@@ -11,18 +11,23 @@ tags: [Teaching, Econometrics, Economics, Coding, LaTeX]
 
 ## Courses
 
-**Econometrics -- Econ 21020 (Spring 2022)** \
-Coming soon.
+**Econometrics -- Econ 21020 (Spring 2022)**  
+Material coming soon.
 
-## TA Positions
+## Teaching Assistantships
 
-**Applied Microeconometrics -- Econ 31720 (Fall 2021)** 
+**Optimization-Conscious Econometrics -- Econ 31740 (Winter 2022)**   
+Taught by Prof. [Guillaume Pouliot](https://sites.google.com/site/guillaumeallairepouliot/). Material coming soon.
+
+**Applied Microeconometrics -- Econ 31720 (Fall 2021)**  
+Taught by Prof. [Alexander Torgovitsky](https://a-torgovitsky.github.io/).
 - Statistical Programming in Julia ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_1.pdf))
 - Endogeneity in Additive Nonparametric Models ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_2.pdf))
 - Estimation and Inference in High-Dimensional IV ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_3.pdf); [annotated slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_3_annotated.pdf))
 - Endogeneity in Non-Additive Nonparametric Models ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_4.pdf); [annotated slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_4_annotated.pdf))
 
-**Econometrics -- Econ 21020 (Spring 2021)**
+**Econometrics -- Econ 21020 (Spring 2021)**  
+Taught by Prof. [Max Tabord-Meehan](https://sites.google.com/site/mtabordmeehan).
 - Gauss Markov Theorem ([slides](/assets/teaching/Spring2020-Econ-21020/Econ21020_GMT.pdf))
 - Introduction to R ([slides](/assets/teaching/Spring2020-Econ-21020/assets/teaching/Spring2020-Econ-21020/Econ21020_Intro_to_R.pdf))
 - Linear and IV Regression in R ([slides](/assets/teaching/Spring2020-Econ-21020/Econ21020_Regression_in_R.pdf); [code](/assets/teaching/Spring2020-Econ-21020/linear_regression.R))
