@@ -25,6 +25,7 @@ Taught by Prof. [Alexander Torgovitsky](https://a-torgovitsky.github.io/).
 - Endogeneity in Additive Nonparametric Models ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_2.pdf))
 - Estimation and Inference in High-Dimensional IV ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_3.pdf); [annotated slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_3_annotated.pdf))
 - Endogeneity in Non-Additive Nonparametric Models ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_4.pdf); [annotated slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_4_annotated.pdf))
+- Monotone Instrumental Variables ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_5.pdf); [code](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_5.ipynb))
 
 **Econometrics -- Econ 21020 (Spring 2021)**  
 Taught by Prof. [Max Tabord-Meehan](https://sites.google.com/site/mtabordmeehan).
