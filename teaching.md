@@ -26,6 +26,7 @@ Taught by Prof. [Alexander Torgovitsky](https://a-torgovitsky.github.io/).
 - Estimation and Inference in High-Dimensional IV ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_3.pdf); [annotated slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_3_annotated.pdf))
 - Endogeneity in Non-Additive Nonparametric Models ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_4.pdf); [annotated slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_4_annotated.pdf))
 - Monotone Instrumental Variables ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_5.pdf); [code](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_5.ipynb))
+- Introduction to Parallel Computing in Julia ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_6.pdf))
 
 **Econometrics -- Econ 21020 (Spring 2021)**  
 Taught by Prof. [Max Tabord-Meehan](https://sites.google.com/site/mtabordmeehan).
@@ -39,6 +40,7 @@ Taught by Prof. [Max Tabord-Meehan](https://sites.google.com/site/mtabordmeehan)
 **Code**
 - Curated list of links related to coding in economics ([link](https://github.com/code-econ/awesome-econ))
 - Julia package for applied econometrics ([link](https://github.com/thomaswiemann/MyMethods.jl))
+- Julia Examples for the UChicago Acropolis Computing Cluster ([link](assets/teaching/Fall2021-Econ-31720/AcropolisExamples_Julia.zip))
 
 **<span class="latex">L<sup>a</sup>T<sub>e</sub>X</span> Templates**
 - Problem set template ([link](/assets/teaching/other/pset_template.zip))
