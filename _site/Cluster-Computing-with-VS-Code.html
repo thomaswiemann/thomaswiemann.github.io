@@ -14,7 +14,7 @@
 
     <link rel="icon" type="image/vnd.microsoft.icon" href="/assets/images/favicon.ico">
 
-    <title>Interactive Development on a Computing Cluster with VS Code</title>
+    <title>Cluster Computing with VS Code</title>
 
     <!-- Bootstrap core CSS -->
     <!-- <link href="/assets/css/bootstrap.min.css" rel="stylesheet"> -->
@@ -91,19 +91,17 @@
   </nav>
 
   <div class="main">
-        <h1 id="interactive-development-on-a-computing-cluster-with-vs-code">Interactive Development on a Computing Cluster with VS Code</h1>
+        <h1 id="cluster-computing-with-vs-code">Cluster Computing with VS Code</h1>
 
-<p>This post outlines how to set up Visual Studio Code (VS Code) for interactive development on a compute node (i.e., not the head node) of a computing cluster. Examples focus on the <a href="https://hpc-docs.chicagobooth.edu/">Mercury</a> and <a href="https://sscs.uchicago.edu/category/faq/cluster/">Acropolis</a> computing cluster based at the University of Chicago, but the tutorial should be broadly applicable to most university computing servers.</p>
+<p>This post outlines how to set up Visual Studio Code (VS Code) for interactive development on a compute node (i.e., not the head node) of a computing cluster. Examples focus on the <a href="https://hpc-docs.chicagobooth.edu/">Mercury</a> and <a href="https://sscs.uchicago.edu/category/faq/cluster/">Acropolis</a> computing cluster based at the University of Chicago, but the tutorial should be broadly applicable to many university computing servers.</p>
 
 <p>The four key steps discussed in this post are:</p>
 <ol>
-  <li>Setting up VS Code and SSH-Remote;</li>
+  <li>Setting up VS Code and the SSH-Remote extension;</li>
   <li>Setting up SSH keys on the computing cluster;</li>
   <li>Initializing a compute node with the desired resources; and</li>
-  <li>Connecting to the compute node with VS Code.</li>
+  <li>Connecting directly to the compute node with VS Code.</li>
 </ol>
-
-<p>The following covers each in turn.</p>
 
 <h2 id="1-vs-code-and-ssh-remote">1. VS Code and SSH-Remote</h2>
 
@@ -124,49 +122,47 @@ Host acropolis
   User wiemann
 </code></pre></div></div>
 
-<p><img src="/assets/blog/2021-11-13-Computing-Cluster-VS-Code/vscode_1.gif" alt="drawing" class="wrapped_right" width="50%" /></p>
-
-<p>As an alternative, you can also directly connect to a computing server using the terminal line above the drop-down menu. In particular, I could type <code class="language-plaintext highlighter-rouge">ssh wiemann@mercury.chicagobooth.edu</code> each time I want to connect to Mercury. But if coders are good at one thing, it’s being lazy – so I’d much rather set up the <code class="language-plaintext highlighter-rouge">config</code> file once and then select “mercury” from a dropdown menu instead.</p>
+<p><img src="/assets/blog/2021-11-13-Cluster-Computing-with-VS-Code/vscode_1.gif" alt="drawing" class="wrapped_right" width="50%" /></p>
 
 <p>At this point, VS Code is likely asking for a password to admit you to the cluster. The next section will illustrate how we can avoid this for future connections. For now, enter your password and wait for VS Code to establish it’s remote connection.</p>
 
 <h2 id="2-setting-up-ssh-keys">2. Setting up SSH Keys</h2>
 
-<p>When your connecting to the computing cluster in the above manner, you are using the Secure Shell (SSH) protocol. It is a widely used  tool that provides users with a secure channel to a remote host. A key feature is its use of cryptogrphic keys to authenticate users for access to the remote server. We’ve not yet made explicit use of these keys and instead used password-based authentication. To connect to a compute node, however, setting up our SSH keys appropriately is a necessary step.</p>
+<p>When your connecting to the computing cluster in the above manner, you are using the Secure Shell (SSH) protocol. It is a widely used  tool that provides users with a secure channel to a remote host. A key feature is its use of cryptographic keys to authenticate users for access to the remote server. We’ve not yet made explicit use of these keys and instead used password-based authentication. To connect to a compute node, however, setting up our SSH keys appropriately is a necessary step.</p>
 
 <p>If you don’t yet have a public SSH key for your local machine (you may already be using one for publishing code on GitHub, for example), you need to initialize one. The process of doing so differs across operating systems. If you are using Windows, install the SSH client <a href="https://www.ssh.com/academy/ssh/putty/windows/install">PuTTY</a> and follow  <a href="https://www.ssh.com/academy/ssh/putty/windows/puttygen">these instructions</a>. Linux and Mac systems typically come with an SSH client preinstalled. Simply run the command <code class="language-plaintext highlighter-rouge">ssh-keygen</code>, which will store the keys in the <code class="language-plaintext highlighter-rouge">~/.ssh</code> folder.</p>
 
-<p>Once you have a public SSH key (on Linux/Mac: <code class="language-plaintext highlighter-rouge">~/.ssh/id_rsa.pub</code>), copy it to the set of <em>authorized keys</em> on the computing cluster. Since you’ve already connected to the cluster in the previous step, simply navigate to the <code class="language-plaintext highlighter-rouge">/.ssh</code> folder on the computing cluster from within VS Code and paste the content of your public key (from your local machine) to a new line of the file <code class="language-plaintext highlighter-rouge">~/.ssh/authorized_keys</code> (on the computing cluster). Double-check that the key you pasted begins with <code class="language-plaintext highlighter-rouge">ssh-rsa</code>.</p>
+<p>Once you have a public SSH key (on Linux/Mac: <code class="language-plaintext highlighter-rouge">~/.ssh/id_rsa.pub</code>), copy it to the set of <em>authorized keys</em> on the computing cluster. Since you’ve already connected to the cluster in the previous step, simply navigate to the <code class="language-plaintext highlighter-rouge">/.ssh</code> folder on the computing cluster from within VS Code and paste the content of your public key (from your local machine) to a new line of the file <code class="language-plaintext highlighter-rouge">~/.ssh/authorized_keys</code> (on the computing cluster). Double-check that the pasted key begins with <code class="language-plaintext highlighter-rouge">ssh-rsa</code>.</p>
 
 <p>To test whether the SSH keys have correctly been set up, close the remote connection in VS Code (e.g., by simply close the application), then restart VS Code and attempt to reconnect to the cluster. If the remote connection is established without password-authentication, you’re set!</p>
 
 <h2 id="3-requesting-resources-on-compute-nodes">3. Requesting Resources on Compute Nodes</h2>
 
-<p>So far, your connection to the computing server has been to the <em>head node</em>. The head node may in some cases be suitable for running tasks that require little resources (as is the case with Acropolis, for example). Since the resources of the head node are shared across all users who are simultaneously connected to it, however, it is not good practice (and indeed not very nice) to use it for any coding sessions that require more computing power. To use the cluster for active development in settings where we want to leverage hardware exceeding that of our own machine, we thus need to request allocation of a computing node to our account on the server. Resources allocated to us are not shared across users and hence can be utilized in good conscience.</p>
+<p>So far, your connection to the computing server has been to the <em>head node</em>. The head node may be suitable for running tasks that require little resources (as is the case with Acropolis, for example). Since the resources of the head node are shared across all users, however, it is not good practice (and indeed not very nice) to use it for any coding sessions that require more computing power. To use the cluster for active development in settings where you want to leverage hardware exceeding that of you own machine, it’s thus necessary to request allocation of a computing node to your account on the server. Allocated resources are not shared across users and hence can be utilized in good conscience.</p>
 
-<p>Requesting an interactive session on a computing node is done via the terminal. The specific commands depend on the scheduler of the computing cluster. For example, the Mercury computing cluster uses <code class="language-plaintext highlighter-rouge">slurm</code>. The below code snippit requests a session with four CPU cores, 32 GB of memory, and one GPU. See the Mercury documentation for additional options on how to request an interactive session (<a href="https://hpc-docs.chicagobooth.edu/running.html">link</a>).</p>
+<p>Requesting an interactive session on a computing node is done via the terminal. The specific commands depend on the scheduler of the computing cluster. For example, the Mercury computing cluster uses <code class="language-plaintext highlighter-rouge">slurm</code>. The below code snippet requests a session with four CPU cores, 32 GB of memory, and one GPU. See the Mercury documentation for additional options on how to request an interactive session (<a href="https://hpc-docs.chicagobooth.edu/running.html">link</a>).</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Start an interactive session with a GPU on Mercury</span>
 srun <span class="nt">--account</span><span class="o">=</span>phd <span class="nt">--cpus-per-task</span><span class="o">=</span>4 <span class="nt">--mem-per-cpu</span><span class="o">=</span>8G <span class="nt">--partition</span><span class="o">=</span>gpu <span class="nt">--gres</span><span class="o">=</span>gpu:1 <span class="nt">--pty</span> bash <span class="nt">-l</span>
 </code></pre></div></div>
 
-<p>The Acropolis computing cluster uses the <code class="language-plaintext highlighter-rouge">qsub</code> scheduler instead. The below snippit request a session with 28 computing threads, and 60 GB of memory. The important bit here is the <code class="language-plaintext highlighter-rouge">-I</code> option. Requests of resources are the same as you would usually specify in your <code class="language-plaintext highlighter-rouge">qsub</code>-submission files.</p>
+<p>The Acropolis computing cluster uses the <code class="language-plaintext highlighter-rouge">qsub</code> scheduler instead. The below snippet request a session with 28 computing threads, and 60 GB of memory. The important bit here is the <code class="language-plaintext highlighter-rouge">-I</code> option. Requests of resources are the same as you would usually specify in your <code class="language-plaintext highlighter-rouge">qsub</code>-submission files.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Start an interactive session with 16 threads on Acropolis</span>
 qsub <span class="nt">-I</span> <span class="nt">-l</span> <span class="nv">nodes</span><span class="o">=</span>1:ppn<span class="o">=</span>28,mem<span class="o">=</span>60gb <span class="nt">-j</span> oe
 </code></pre></div></div>
 
-<p><img src="/assets/blog/2021-11-13-Computing-Cluster-VS-Code/vscode_2.gif" alt="drawing" class="wrapped_right" width="50%" /></p>
+<p><img src="/assets/blog/2021-11-13-Cluster-Computing-with-VS-Code/vscode_2.gif" alt="drawing" class="wrapped_right" width="50%" /></p>
 
 <p>Submit whichever command is suitable for the computing cluster you’re using via the terminal in your remotely connected VS Code and wait until the resources have been allocated (that can take a few seconds: see the .gif in real time). You should notice a change in the name of the node that you are connected to. For example, while the terminal read <code class="language-plaintext highlighter-rouge">wiemann@acropolis ~$</code> after initially connecting to the Acropolis cluster, it changed to <code class="language-plaintext highlighter-rouge">wiemann@acropolis-0-6 ~$</code> after requesting an interactive session via the above command.</p>
 
-<p>Next, you can start loading modules onto the session as you would when submitting jobs non-interactively. To see the list of available modules, run the command <code class="language-plaintext highlighter-rouge">module avail</code> in the terminal. For example, to load Python 3.6 on the Acropolis cluster, you can submit the following command on the terminal: <code class="language-plaintext highlighter-rouge">module load python/3.6.1</code>.</p>
+<p>Next, you can start loading modules onto the session as you would when submitting jobs non-interactively. To see the list of available modules, run the command <code class="language-plaintext highlighter-rouge">module avail</code> in the terminal. For example, to load Python 3.6 on the Acropolis cluster, you can submit the following command on the terminal: <code class="language-plaintext highlighter-rouge">module load python/3.6.1</code>. (If you’re frequently using the same modules, editing you <code class="language-plaintext highlighter-rouge">.profile</code> file is a good idea.)</p>
 
-<p>At this point, you could already utilize the compute node by simply running commands from your terminal (or parsing them to the terminal). This would not be an enjoyable experience, however. Among its many downsides is the inability for your VS Code session to access the environment variables. The reason for this is that while your terminal is now connected to the compute node, your VS Code session still rests on the head node of the cluster (so that variables are not shared).</p>
+<p>At this point, you could already utilize the compute node by simply running commands from your terminal (or parsing them to the terminal). But that would not be an enjoyable experience: Among its many downsides is the inability for your VS Code session to access the environment variables. The reason for this is that while your terminal is now connected to the compute node, your VS Code session still rests on the head node of the cluster (so that variables are not shared).</p>
 
-<p>To fix this issue, we need VS Code to directly connect to the compute node. The next section illustrates how this can be achieved.</p>
+<p>To fix this issue, VS Code needs to directly connect to the compute node. The next section illustrates how this can be achieved.</p>
 
 <h2 id="4-connection-to-a-compute-node-with-vs-code">4. Connection to a Compute Node with VS Code</h2>
 
-<p>Unlike the head node of the computing cluster, to which you can connect directly via SSH, the compute nodes of the cluster (generally) don’t have a direct connection to the internet. For VS Code to connect to a computing node, it’s therefore necessary to “go through” the head node. This is done via a proxy connection.</p>
+<p>Unlike the head node of the computing cluster – to which you can connect directly via SSH – the compute nodes of the cluster (generally) don’t have a direct connection to the internet. For VS Code to connect to a computing node, it’s therefore necessary to “go through” the head node. This is done via a proxy connection.</p>
 
 <p>First, check the exact name of the compute node that you have requested. In the previous example on Acropolis, the name of the compute node is <code class="language-plaintext highlighter-rouge">acropolis-0-6 ~$</code>.</p>
 
@@ -178,13 +174,13 @@ qsub <span class="nt">-I</span> <span class="nt">-l</span> <span class="nv">node
   User wiemann
 </code></pre></div></div>
 
-<p><img src="/assets/blog/2021-11-13-Computing-Cluster-VS-Code/vscode_3.gif" alt="drawing" class="center_2" width="98%" /></p>
+<p><img src="/assets/blog/2021-11-13-Cluster-Computing-with-VS-Code/vscode_3.gif" alt="drawing" class="center_2" width="98%" /></p>
 
 <p>Third, start a new VS Code session and connect to a remote host via the Remote-SSH extension as before. Select the address of the newly specified host (in my case <code class="language-plaintext highlighter-rouge">acropolis-compute</code>) and wait for the connection to establish.</p>
 
 <p>You’re almost done! As a last step, install any VS Code extensions that you may want to utilize. For example, install the <a href="https://marketplace.visualstudio.com/items?itemName=Ikuyadeu.r">R</a>, <a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Python</a>, and/or <a href="https://marketplace.visualstudio.com/items?itemName=julialang.language-julia">Julia</a> extensions on your remote machine.</p>
 
-<p><img src="/assets/blog/2021-11-13-Computing-Cluster-VS-Code/vscode_4.gif" alt="drawing" class="wrapped_right" width="50%" /></p>
+<p><img src="/assets/blog/2021-11-13-Cluster-Computing-with-VS-Code/vscode_4.gif" alt="drawing" class="wrapped_right" width="50%" /></p>
 
 <p>You can now use VS Code to code interactively on a compute node. Of course, next time around, you won’t have to jump through all these hoops again. You only have to repeat Section 3 (request resources on the cluster) and ensure that the name of the compute node that is allocated to your account matches the <code class="language-plaintext highlighter-rouge">HostName</code> in your <code class="language-plaintext highlighter-rouge">config</code> file from Section 4.</p>
 
