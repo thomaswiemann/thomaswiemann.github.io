@@ -28,6 +28,8 @@ The Remote-SSH extension allows you to connect to a computing server directly fr
 
 The best part about it? It's _super_ easy! Once the extension is installed, the bottom-left of your VS Code application will show a green box ("Open a Remote Window"). Clicking on it opens a dropdown menu (see the .gif), where you should select "Open SSH Configuration File...". This will open a ``config`` file where you can specify the address of the computing cluster (``HostName``) as well as your username (``User``) and store them under a convenient name (``Host``). See the below snipped for the entries in my file for the Mercury and Acropolis compting clusters at UChicago.
 
+<img src="/assets/blog/2021-11-13-Cluster-Computing-with-VS-Code/vscode_1.gif" alt="drawing" class="wrapped_right" width="50%"/>
+
 ```bash
 Host mercury
   HostName mercury.chicagobooth.edu
@@ -38,9 +40,9 @@ Host acropolis
   User wiemann
 ```
 
-<img src="/assets/blog/2021-11-13-Cluster-Computing-with-VS-Code/vscode_1.gif" alt="drawing" class="wrapped_right" width="50%"/>
+Once the ``config`` file is updated, open a remote window by selecting "Connect to Host..." and selecting the desired server from the dropdown menu. 
 
-At this point, VS Code is likely asking for a password to admit you to the cluster. The next section will illustrate how we can avoid this for future connections. For now, enter your password and wait for VS Code to establish it's remote connection. 
+At this point, VS Code is likely asking for a password before admitting you to the cluster. The next section illustrates how this can be avoided in the future. For now, enter your password and wait for VS Code to establish the remote connection. 
 
 ## 2. Setting up SSH Keys
 
