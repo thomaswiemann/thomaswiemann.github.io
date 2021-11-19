@@ -9,14 +9,15 @@ tags: [Tutorial, Coding, Computing cluster, Mercury, Acropolis]
 
 # {{ page.title }}
 
-This post outlines how to set up Visual Studio Code (VS Code) for interactive development on a compute node (i.e., not the head node) of a computing cluster. Examples focus on the [Mercury](https://hpc-docs.chicagobooth.edu/) and [Acropolis](https://sscs.uchicago.edu/category/faq/cluster/) computing cluster based at the University of Chicago, but the tutorial should be broadly applicable to many university computing servers. 
+This post outlines how to set up Visual Studio Code (VS Code) for interactive development on a compute node (i.e., not the head node) of a computing cluster. This has several key advantages. Most importantly, it lets you develop using the convenience of your local machine but leveraging the superior computation resources of the computing cluster (i.e., far more memory, CPU cores, and/or a GPU). The best part about it? It's _super_ easy once set up!
 
-The four key steps discussed in this post are:
+The following is meant as a guide for the setup process and for establishing your first remote connection. The four steps discussed in this post are:
 1. Setting up VS Code and the SSH-Remote extension;
 2. Setting up SSH keys on the computing cluster;
 3. Initializing a compute node with the desired resources; and
 4. Connecting directly to the compute node with VS Code.
 
+Examples focus on the [Mercury](https://hpc-docs.chicagobooth.edu/) and [Acropolis](https://sscs.uchicago.edu/category/faq/cluster/) computing clusters based at the University of Chicago, but the tutorial should be broadly applicable to many university computing servers. 
 
 ## 1. VS Code and SSH-Remote
 
@@ -24,9 +25,7 @@ To get started, download and install the appropriate version of VS Code for your
 
 Next, install the VS Code extension [Remote-SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh). You can do so directly within VS Code: Use the top-menu bar and navigate to File->Preferences->Extensions (or use ``Ctrl+Shift+X``). Then search for _Remote-SSH_ and install.
 
-The Remote-SSH extension allows you to connect to a computing server directly from your local machine. This is incredibly useful for many reasons. Most importantly, it lets you develop using the convenience of your local machine but leveraging the superior computation resources of the computing cluster (i.e., far more memory, CPU cores, and/or a GPU). 
-
-The best part about it? It's _super_ easy! Once the extension is installed, the bottom-left of your VS Code application will show a green box ("Open a Remote Window"). Clicking on it opens a dropdown menu (see the .gif), where you should select "Open SSH Configuration File...". This will open a ``config`` file where you can specify the address of the computing cluster (``HostName``) as well as your username (``User``) and store them under a convenient name (``Host``). See the below snipped for the entries in my file for the Mercury and Acropolis compting clusters at UChicago.
+The Remote-SSH extension allows you to connect to a computing server directly from your local machine. Once the extension is installed, the bottom-left of your VS Code application will show a green box ("Open a Remote Window"). Clicking on it opens a dropdown menu (see the .gif), where you should select "Open SSH Configuration File...". This will open a ``config`` file where you can specify the address of the computing cluster (``HostName``) as well as your username (``User``) and store them under a convenient name (``Host``). See the below snipped for the entries in my file for the Mercury and Acropolis compting clusters at UChicago.
 
 <img src="/assets/blog/2021-11-13-Cluster-Computing-with-VS-Code/vscode_1.gif" alt="drawing" class="wrapped_right" width="50%"/>
 
@@ -56,7 +55,7 @@ To test whether the SSH keys have correctly been set up, close the remote connec
 
 ## 3. Requesting Resources on Compute Nodes
 
-So far, your connection to the computing server has been to the _head node_. The head node may be suitable for running tasks that require little resources (as is the case with Acropolis, for example). Since the resources of the head node are shared across all users, however, it is not good practice (and indeed not very nice) to use it for any coding sessions that require more computing power. To use the cluster for active development in settings where you want to leverage hardware exceeding that of you own machine, it's thus necessary to request allocation of a computing node to your account on the server. Allocated resources are not shared across users and hence can be utilized in good conscience. 
+So far, your connection to the computing server has been to the _head node_. The head node may be suitable for running tasks that require little resources. Since the resources of the head node are shared across all users, however, it is not good practice (and indeed not very nice) to use it for any coding sessions that require more computing power. To use the cluster for active development in settings where you want to leverage hardware exceeding that of you own machine, it's thus necessary to request allocation of a computing node to your account on the server. Allocated resources are not shared across users and hence can be utilized in good conscience. 
 
 Requesting an interactive session on a computing node is done via the terminal. The specific commands depend on the scheduler of the computing cluster. For example, the Mercury computing cluster uses ``slurm``. The below code snippet requests a session with four CPU cores, 32 GB of memory, and one GPU. See the Mercury documentation for additional options on how to request an interactive session ([link](https://hpc-docs.chicagobooth.edu/running.html)). 
 ```bash
