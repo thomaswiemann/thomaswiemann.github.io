@@ -9,7 +9,7 @@ tags: [Julia, Tutorial, Coding]
 
 # {{ page.title }}
 
-Julia is primarily a functional programming language. Instead of building classes and defining methods for these classes &ndash; as you would in an object-oriented programming languange &ndash; you typically focus on writing functions that manipulate data.
+Julia is primarily a functional programming language. Instead of building classes and defining methods for these classes &ndash; as you would in an object-oriented programming language &ndash; you typically focus on writing functions that manipulate data.
 
 This is not to say that Julia doesn't make use of object-oriented concepts at all. Each value in Julia is assigned a type (similar to a class in other languages), which limits the space of possible values it can store. Having a (rough) understanding of Julia's type system is useful for developing efficient code and can be leveraged for structuring your own research projects.
 

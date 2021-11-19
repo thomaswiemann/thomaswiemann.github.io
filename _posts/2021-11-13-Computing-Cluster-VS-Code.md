@@ -9,25 +9,25 @@ tags: [Tutorial, Coding, Computing cluster, Mercury, Acropolis]
 
 # {{ page.title }}
 
-This post outlines how to set up Visual Studio Code (VS Code) for interactive development on a compute node (i.e., not the head node) of a computing cluster. Examples focus on the [Mercury](https://hpc-docs.chicagobooth.edu/) and [Acropolis](https://sscs.uchicago.edu/category/faq/cluster/) computing cluster based at the Unversity of Chicago, but the tutorial should be broadly applicable to most university computing servers. 
+This post outlines how to set up Visual Studio Code (VS Code) for interactive development on a compute node (i.e., not the head node) of a computing cluster. Examples focus on the [Mercury](https://hpc-docs.chicagobooth.edu/) and [Acropolis](https://sscs.uchicago.edu/category/faq/cluster/) computing cluster based at the University of Chicago, but the tutorial should be broadly applicable to most university computing servers. 
 
 The four key steps discussed in this post are:
 1. Setting up VS Code and SSH-Remote;
 2. Setting up SSH keys on the computing cluster;
-3. Initalizing a compute node with the desired resources; and
+3. Initializing a compute node with the desired resources; and
 4. Connecting to the compute node with VS Code.
 
 The following covers each in turn.
 
 ## 1. VS Code and SSH-Remote
 
-To get started, download and install the approriate version of VS Code for your system. You can find the download links [here](https://code.visualstudio.com/download).
+To get started, download and install the appropriate version of VS Code for your system. You can find the download links [here](https://code.visualstudio.com/download).
 
 Next, install the VS Code extension [Remote-SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh). You can do so directly within VS Code: Use the top-menu bar and navigate to File->Preferences->Extensions (or use ``Ctrl+Shift+X``). Then search for _Remote-SSH_ and install.
 
-The Remote-SSH extension allows you to connect to a computing server directly from your local machine. This is incredibly useful for many reasons. Most importantly, it lets you develop using the convinience of your local machine but leveraging the superior computation resources of the computing cluster (i.e., far more memory, CPU cores, and/or a GPU). 
+The Remote-SSH extension allows you to connect to a computing server directly from your local machine. This is incredibly useful for many reasons. Most importantly, it lets you develop using the convenience of your local machine but leveraging the superior computation resources of the computing cluster (i.e., far more memory, CPU cores, and/or a GPU). 
 
-The best part about it? It's _super_ easy! Once the extension is installed, the bottom-left of your VS Code application will show a green box ("Open a Remote Window"). Clicking on it opens a dropdown menu (see the .gif), where you should select "Open SSH Configuration File...". This will open a ``config`` file where you can specify the address of the computing cluster (``HostName``) as well as your username (``User``) and store them under a convinient name (``Host``). See the below snipped for the entries in my file for the Mercury and Acropolis compting clusters at UChicago.
+The best part about it? It's _super_ easy! Once the extension is installed, the bottom-left of your VS Code application will show a green box ("Open a Remote Window"). Clicking on it opens a dropdown menu (see the .gif), where you should select "Open SSH Configuration File...". This will open a ``config`` file where you can specify the address of the computing cluster (``HostName``) as well as your username (``User``) and store them under a convenient name (``Host``). See the below snipped for the entries in my file for the Mercury and Acropolis compting clusters at UChicago.
 
 ```bash
 Host mercury
@@ -49,7 +49,7 @@ At this point, VS Code is likely asking for a password to admit you to the clust
 
 When your connecting to the computing cluster in the above manner, you are using the Secure Shell (SSH) protocol. It is a widely used  tool that provides users with a secure channel to a remote host. A key feature is its use of cryptogrphic keys to authenticate users for access to the remote server. We've not yet made explicit use of these keys and instead used password-based authentication. To connect to a compute node, however, setting up our SSH keys appropriately is a necessary step.
 
-If you don't yet have a public SSH key for your local machine (you may already be using one for publishing code on GitHub, for example), you need to intialize one. The process of doing so differes across operating systems. If you are using Windows, install the SSH client [PuTTY](https://www.ssh.com/academy/ssh/putty/windows/install) and follow  [these instructions](https://www.ssh.com/academy/ssh/putty/windows/puttygen). Linux and Mac systems typically come with an SSH client preinstalled. Simply run the command ``ssh-keygen``, which will store the keys in the ``~/.ssh`` folder. 
+If you don't yet have a public SSH key for your local machine (you may already be using one for publishing code on GitHub, for example), you need to initialize one. The process of doing so differs across operating systems. If you are using Windows, install the SSH client [PuTTY](https://www.ssh.com/academy/ssh/putty/windows/install) and follow  [these instructions](https://www.ssh.com/academy/ssh/putty/windows/puttygen). Linux and Mac systems typically come with an SSH client preinstalled. Simply run the command ``ssh-keygen``, which will store the keys in the ``~/.ssh`` folder. 
 
 Once you have a public SSH key (on Linux/Mac: ``~/.ssh/id_rsa.pub``), copy it to the set of _authorized keys_ on the computing cluster. Since you've already connected to the cluster in the previous step, simply navigate to the ``/.ssh`` folder on the computing cluster from within VS Code and paste the content of your public key (from your local machine) to a new line of the file ``~/.ssh/authorized_keys`` (on the computing cluster). Double-check that the key you pasted begins with ``ssh-rsa``.
 
@@ -57,7 +57,7 @@ To test whether the SSH keys have correctly been set up, close the remote connec
 
 ## 3. Requesting Resources on Compute Nodes
 
-So far, your connection to the computing server has been to the _head node_. The head node may in some cases be suitable for running tasks that require little resources (as is the case with Acropolis, for example). Since the resources of the head node are shared across all users who are simulateneously connected to it, however, it is not good practice (and indeed not very nice) to use it for any coding sessions that require more computing power. To use the cluster for active development in settings where we want to leverage hardware exceeding that of our own machine, we thus need to request allocation of a computing node to our account on the server. Resources allocated to us are not shared across users and hence can be utilized in good conscience. 
+So far, your connection to the computing server has been to the _head node_. The head node may in some cases be suitable for running tasks that require little resources (as is the case with Acropolis, for example). Since the resources of the head node are shared across all users who are simultaneously connected to it, however, it is not good practice (and indeed not very nice) to use it for any coding sessions that require more computing power. To use the cluster for active development in settings where we want to leverage hardware exceeding that of our own machine, we thus need to request allocation of a computing node to our account on the server. Resources allocated to us are not shared across users and hence can be utilized in good conscience. 
 
 Requesting an interactive session on a computing node is done via the terminal. The specific commands depend on the scheduler of the computing cluster. For example, the Mercury computing cluster uses ``slurm``. The below code snippit requests a session with four CPU cores, 32 GB of memory, and one GPU. See the Mercury documentation for additional options on how to request an interactive session ([link](https://hpc-docs.chicagobooth.edu/running.html)). 
 ```bash
