@@ -39,7 +39,7 @@ Host acropolis
   User wiemann
 ```
 
-<img src="/assets/blog/2021-11-13-Computing-Cluster-VS-Code/vscode_1.gif" alt="drawing" class="wrapped_left" width="50%"/>
+<img src="/assets/blog/2021-11-13-Computing-Cluster-VS-Code/vscode_1.gif" alt="drawing" class="wrapped_right" width="50%"/>
 
 As an alternative, you can also directly connect to a computing server using the terminal line above the drop-down menu. In particular, I could type ``ssh wiemann@mercury.chicagobooth.edu`` each time I want to connect to Mercury. But if coders are good at one thing, it's being lazy -- so I'd much rather set up the ``config`` file once and then select "mercury" from a dropdown menu instead.
 
