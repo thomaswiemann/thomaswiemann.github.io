@@ -28,6 +28,7 @@ Taught by Prof. [Alexander Torgovitsky](https://a-torgovitsky.github.io/).
 - Monotone Instrumental Variables ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_5.pdf); [code](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_5.ipynb))
 - Introduction to Parallel Computing in Julia ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_6.pdf))
 - Introduction to the Bootstrap ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_7.pdf))
+- Partial Identification of Marginal Treatment Response Functions ([html](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_8.html); [code](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_8.ipynb))
 
 **Econometrics -- Econ 21020 (Spring 2021)**  
 Taught by Prof. [Max Tabord-Meehan](https://sites.google.com/site/mtabordmeehan).
