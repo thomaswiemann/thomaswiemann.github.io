@@ -1,0 +1,3 @@
+# Block Googlebot from  assets
+User-agent: Googlebot
+Disallow: assets/
