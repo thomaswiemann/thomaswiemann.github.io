@@ -19,7 +19,7 @@ Material coming soon.
 **Optimization-Conscious Econometrics -- Econ 31740 (Winter 2022)**   
 Taught by Prof. [Guillaume Pouliot](https://sites.google.com/site/guillaumeallairepouliot/). 
 - Basic Frequentist Motivation for Bayesian Statistics ([slides](assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_1.pdf))
-- Implementing MH-MCMC ([html](/assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_2.html);[code](/assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_2.ipynb))
+- Implementing MH-MCMC ([html](/assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_2.html); [code](/assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_2.ipynb))
 - Introduction to Quantile Regression ([slides](assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_3.pdf))
 
 **Applied Microeconometrics -- Econ 31720 (Fall 2021)**  
