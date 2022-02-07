@@ -1,3 +1,4 @@
-# Block Googlebot from  assets
+# Block Googlebot from  assets and pdf documents
 User-agent: Googlebot
-Disallow: assets/
+Disallow: /assets/
+Disallow: *.pdf
