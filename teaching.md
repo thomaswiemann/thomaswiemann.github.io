@@ -22,6 +22,7 @@ Taught by Prof. [Guillaume Pouliot](https://sites.google.com/site/guillaumeallai
 - Implementing MH-MCMC ([html](/assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_2.html); [code](/assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_2.ipynb))
 - Introduction to Quantile Regression ([slides](assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_3.pdf))
 - Introduction to Linear Programming ([slides](assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_4.pdf))
+- Nonparametric Quantile Regression ([slides](assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_5.pdf), [code](assets/teaching/Winter2022-Econ-31740/example_npqr.ipynb))
 
 **Applied Microeconometrics -- Econ 31720 (Fall 2021)**  
 Taught by Prof. [Alexander Torgovitsky](https://a-torgovitsky.github.io/).
