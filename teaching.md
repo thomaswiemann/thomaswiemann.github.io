@@ -23,7 +23,7 @@ Taught by Prof. [Guillaume Pouliot](https://sites.google.com/site/guillaumeallai
 - Introduction to Quantile Regression ([slides](assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_3.pdf))
 - Introduction to Linear Programming ([slides](assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_4.pdf))
 - Nonparametric Quantile Regression ([slides](assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_5.pdf), [code](assets/teaching/Winter2022-Econ-31740/example_npqr.ipynb))
-- Identification of Discrete Choice Models using Optimal Transport ([slides](assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_6.pdf), [code](assets/teaching/Winter2022-Econ-31740/example_mta.ipynb))
+- Duality in Discrete Choice Models ([slides](assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_6.pdf))
 - Matching via Mixed Integer Programming ([slides](assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_7.pdf))
 
 **Applied Microeconometrics -- Econ 31720 (Fall 2021)**  
