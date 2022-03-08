@@ -25,6 +25,7 @@ Taught by Prof. [Guillaume Pouliot](https://sites.google.com/site/guillaumeallai
 - Nonparametric Quantile Regression ([slides](assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_5.pdf), [code](assets/teaching/Winter2022-Econ-31740/example_npqr.ipynb))
 - Duality in Discrete Choice Models ([slides](assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_6.pdf))
 - Matching via Mixed Integer Programming ([slides](assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_7.pdf))
+- Instrumental Variable Quantile Regression ([slides](assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_8.pdf))
 
 **Applied Microeconometrics -- Econ 31720 (Fall 2021)**  
 Taught by Prof. [Alexander Torgovitsky](https://a-torgovitsky.github.io/).
