@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Thomas Wiemann">
+    {% if page.summary %}
+      <meta name="description" content="{{ page.summary | escape }}">
+    {% endif %}
+    {%if page.tags %}
+      <meta name="keywords" content="{{ page.tags | join: ', ' | escape }}"/>
+    {%endif %}
+
+    <link rel="icon" type="image/vnd.microsoft.icon" href="/assets/images/favicon.ico">
+
+    <title>{{ page.title }}</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="/assets/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/my-bootstrap.css" >
+    <link rel="stylesheet" type="text/css" href="/assets/css/styles.css">
+
+    <!-- MathJax -->
+    {% if page.usemathjax %}
+    <script src="/assets/js/load-mathjax.js" async></script>
+    {% endif %}
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BJZ23Q1WST"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-BJZ23Q1WST');
+    </script>
+
+  </head>
+  <body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Thomas Wiemann</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-left">
+          {% assign pages_list = site.pages | sort:"order" %}
+          {% assign group = 'navigation' %}
+          {% include pages_list %}
+          <li><a href="/assets/pdfs/wiemann_cv_2022_01_17.pdf">CV</a></li>
+        </ul>
+        <ul class="nav navbar-nav" style="border-top: 1px solid black">
+          {% assign pages_list = site.econ21020 | sort:"order" %}
+          {% assign group = 'navigation' %}
+          {% include pages_list %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main" style="padding-top: 5rem">
+        {{ content }}
+  </div>
+
+  <hr>
+  <ul class="flex-footer">
+  <li class="flex-footer-item" style="text-align: left; width: 160px">
+    <p><img src="/assets/images/GitHub-Mark-32px.png" alt="GitHub Icon" style="width:20px"> <a href="https://github.com/thomaswiemann">@thomaswiemann</a> </p>
+    <p><img src="/assets/images/2021 Twitter logo - blue.png" alt="Twitter Icon" style="width:20px"> <a href="https://twitter.com/econwiemann">@econwiemann</a> </p>
+    <p><img src="/assets/images/LI-In-Bug.png" alt="LinkedIn Icon" style="width:20px"> <a href="https://www.linkedin.com/in/thomas-wiemann">@thomaswiemann</a> </p>
+  </li>
+  <li class="flex-footer-item" style="width: 500px"><img src="/assets/images/uchicago-logo.jpg" alt="University of Chicago Seal" style="width:350px"></li>
+  <li class="flex-footer-item">
+    <p>Written in <a href="https://atom.io/">Atom</a>. Built with <a href="https://jekyllrb.com/">Jekyll</a>. Hosted on <a href="https://github.com/thomaswiemann/thomaswiemann.github.io">GitHub</a>.</p>
+    <p>&copy; 2021 Thomas Wiemann</p>
+  </li>
+  </ul>
+
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="/assets/js/jquery.min.js"><\/script>')</script>
+  <script src="/assets/js/bootstrap.min.js"></script>
+  </body>
+</html>

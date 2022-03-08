@@ -11,3 +11,7 @@ kramdown:
 
 #include:
 # - _pages
+
+collections:
+  econ21020:
+    output: true
