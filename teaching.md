@@ -11,12 +11,12 @@ tags: [Teaching, Econometrics, Economics, Coding, LaTeX]
 
 ## Courses
 
-**Econometrics -- Econ 21020 (Spring 2022)**  
-Material coming soon.
+**Econometrics &ndash; Econ 21020 (Spring 2022)**  
+The course website can be found [here](econ21020).
 
 ## Teaching Assistantships
 
-**Optimization-Conscious Econometrics -- Econ 31740 (Winter 2022)**   
+**Optimization-Conscious Econometrics &ndash; Econ 31740 (Winter 2022)**   
 Taught by Prof. [Guillaume Pouliot](https://sites.google.com/site/guillaumeallairepouliot/). 
 - Basic Frequentist Motivation for Bayesian Statistics ([slides](assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_1.pdf))
 - Implementing MH-MCMC ([html](/assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_2.html); [code](/assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_2.ipynb))
@@ -27,7 +27,7 @@ Taught by Prof. [Guillaume Pouliot](https://sites.google.com/site/guillaumeallai
 - Matching via Mixed Integer Programming ([slides](assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_7.pdf))
 - Instrumental Variable Quantile Regression ([slides](assets/teaching/Winter2022-Econ-31740/Econ_31740_discussion_8.pdf))
 
-**Applied Microeconometrics -- Econ 31720 (Fall 2021)**  
+**Applied Microeconometrics &ndash; Econ 31720 (Fall 2021)**  
 Taught by Prof. [Alexander Torgovitsky](https://a-torgovitsky.github.io/).
 - Statistical Programming in Julia ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_1.pdf))
 - Endogeneity in Additive Nonparametric Models ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_2.pdf))
@@ -38,12 +38,12 @@ Taught by Prof. [Alexander Torgovitsky](https://a-torgovitsky.github.io/).
 - Introduction to the Bootstrap ([slides](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_7.pdf))
 - Partial Identification of Marginal Treatment Response Functions ([html](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_8.html); [code](/assets/teaching/Fall2021-Econ-31720/Econ_31720_discussion_8.ipynb))
 
-**Econometrics -- Econ 21020 (Spring 2021)**  
+**Econometrics &ndash; Econ 21020 (Spring 2021)**  
 Taught by Prof. [Max Tabord-Meehan](https://sites.google.com/site/mtabordmeehan).
-- Gauss Markov Theorem ([slides](/assets/teaching/Spring2020-Econ-21020/Econ21020_GMT.pdf))
-- Introduction to R ([slides](/assets/teaching/Spring2020-Econ-21020/assets/teaching/Spring2020-Econ-21020/Econ21020_Intro_to_R.pdf))
-- Linear and IV Regression in R ([slides](/assets/teaching/Spring2020-Econ-21020/Econ21020_Regression_in_R.pdf); [code](/assets/teaching/Spring2020-Econ-21020/linear_regression.R))
-- Z-test in R ([code](/assets/teaching/Spring2020-Econ-21020/z-test.R))
+- Gauss Markov Theorem ([slides](/assets/teaching/Spring2021-Econ-21020/Econ_21020_GMT.pdf))
+- Introduction to R ([slides](/assets/teaching/Spring2021-Econ-21020/Econ_21020_Intro_to_R.pdf))
+- Linear and IV Regression in R ([slides](/assets/teaching/Spring2021-Econ-21020/Econ_21020_Regression_in_R.pdf); [code](/assets/teaching/Spring2021-Econ-21020/linear_regression.R))
+- Z-test in R ([code](/assets/teaching/Spring2021-Econ-21020/z-test.R))
 
 ## Student Resources
 

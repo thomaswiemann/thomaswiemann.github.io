@@ -7,4 +7,6 @@ summary: Course Notes for Econ 21020 (Econometrics).
 tags: [Teaching, Econometrics]
 ---
 
-# Econ 21020 (Econometrics)
+# Course Notes
+
+_Coming soon._

@@ -7,4 +7,6 @@ summary: Assignments for Econ 21020 (Econometrics).
 tags: [Teaching, Econometrics]
 ---
 
-# Econ 21020 (Econometrics)
+# Assignments
+
+_Coming soon._
