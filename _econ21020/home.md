@@ -40,7 +40,7 @@ There will be six problem sets, a midterm, and a final exam. The course score is
 | Problem sets | 30% |
 | Midterm | 20% |
 | Final exam | 50% |
-| <img width=50/> | <img width=100/> | <img width=50/> | <img width=100/> | <img width=100/> |
+| <img width=70/> | <img width=70/> | 
 
 All problem set and exam scores are final except for correcting obvious grading mistakes. For example, points are added up incorrectly. Students should bring these to the attention of the teaching assistant within three working days. Note that partial credit is systematically awarded. Therefore, partial credit cannot be revised for one student without implicitly penalizing his or her classmates.
 
