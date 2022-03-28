@@ -29,7 +29,7 @@ Lecture material and problem sets will be shared via [Canvas](https://canvas.uch
 This course requires using R, a high-level statistical programming language. Students should install [R](https://mirror.las.iastate.edu/CRAN/) along with a suitable IDE (e.g., [R Studio](https://www.rstudio.com/products/rstudio/download/#download)). Albeit not mandatory, it is highly encouraged to use the version control system Git when working on the programming exercises. The [GitHub desktop app](https://desktop.github.com/) provides an accessible interface for getting started with Git. An introduction to statistical programming with R and Git is provided in the first TA session.
 
 ## Textbook
-There is no required textbook as the course material is meant to be self-contained. Students interested in supplementary readings may want to consider ""Introduction to Econometrics" by James Stock and Mark Watson, or "Introductory Econometrics: A Modern Approach" by Jeffrey Wooldridge.
+There is no required textbook as the course material is meant to be self-contained. Students interested in supplementary readings may want to consider "Introduction to Econometrics" by James Stock and Mark Watson, or "Introductory Econometrics: A Modern Approach" by Jeffrey Wooldridge.
 
 
 ## Grading
