@@ -19,4 +19,5 @@ tags: [Teaching, Econometrics]
     - Part A: Probability Distributions ([slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_2A.pdf); [annotated slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_2A_annotated.pdf))
     - Part B: Expectations ([slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_2B.pdf); [annotated slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_2B_annotated.pdf))
 - Topic 3: Review of Statistics
-    - Part A: Properties of Estimators ([slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_3A.pdf))
+    - Part A: Properties of Estimators ([slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_3A.pdf); [annotated slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_3A_annotated.pdf))
+    - Part B: Hypothesis Testing ([slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_3B.pdf); [annotated slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_3B_annotated.pdf))
