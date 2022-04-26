@@ -12,6 +12,7 @@ tags: [Teaching, Econometrics]
 ## Problem Sets
 - [Problem Set 1](/assets/teaching/Spring2022-Econ-21020/Econ_21020_pset1.pdf)
 - [Problem Set 2](/assets/teaching/Spring2022-Econ-21020/Econ_21020_pset2.pdf)
+- [Problem Set 3](/assets/teaching/Spring2022-Econ-21020/Econ_21020_pset3.pdf)
 
 ## Lecture Notes
 - Topic 1: Logistics & Motivation ([syllabus](/assets/teaching/Spring2022-Econ-21020/Econ_21020_syllabus.pdf); [slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_1.pdf))
@@ -23,3 +24,5 @@ tags: [Teaching, Econometrics]
     - Part B: Hypothesis Testing ([slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_3B.pdf); [annotated slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_3B_annotated.pdf))
 - Topic 4: Introduction to Causal Inference ([slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_4.pdf); [annotated slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_4_annotated.pdf))
 - Topic 5: Random Assignment ([slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_5.pdf); [annotated slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_5_annotated.pdf))
+- Topic 6: Simple Linear Regression
+    - Part A: The Best Linear Predictor ([slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_6A.pdf); [annotated slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_6A_annotated.pdf))
