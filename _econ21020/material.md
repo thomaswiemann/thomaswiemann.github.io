@@ -26,3 +26,4 @@ tags: [Teaching, Econometrics]
 - Topic 5: Random Assignment ([slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_5.pdf); [annotated slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_5_annotated.pdf))
 - Topic 6: Simple Linear Regression
     - Part A: The Best Linear Predictor ([slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_6A.pdf); [annotated slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_6A_annotated.pdf))
+    - Part B: Ordinary Least Squares ([slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_6B.pdf))
