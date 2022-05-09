@@ -9,6 +9,9 @@ tags: [Teaching, Econometrics]
 
 # Course Material
 
+## Exams
+- [Midterm](/assets/teaching/Spring2022-Econ-21020/Econ_21020_midterm.pdf)
+
 ## Problem Sets
 - [Problem Set 1](/assets/teaching/Spring2022-Econ-21020/Econ_21020_pset1.pdf)
 - [Problem Set 2](/assets/teaching/Spring2022-Econ-21020/Econ_21020_pset2.pdf)
