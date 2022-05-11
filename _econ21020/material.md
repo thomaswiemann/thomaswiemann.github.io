@@ -30,3 +30,4 @@ tags: [Teaching, Econometrics]
 - Topic 6: Simple Linear Regression
     - Part A: The Best Linear Predictor ([slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_6A.pdf); [annotated slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_6A_annotated.pdf))
     - Part B: Ordinary Least Squares ([slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_6B.pdf); [annotated slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_6B_annotated.pdf))
+- Topic 7: Selection on Observables ([slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_7.pdf); [annotated slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_7_annotated.pdf))
