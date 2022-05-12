@@ -16,6 +16,7 @@ tags: [Teaching, Econometrics]
 - [Problem Set 1](/assets/teaching/Spring2022-Econ-21020/Econ_21020_pset1.pdf)
 - [Problem Set 2](/assets/teaching/Spring2022-Econ-21020/Econ_21020_pset2.pdf)
 - [Problem Set 3](/assets/teaching/Spring2022-Econ-21020/Econ_21020_pset3.pdf)
+- [Problem Set 4](/assets/teaching/Spring2022-Econ-21020/Econ_21020_pset4.pdf)
 
 ## Lecture Notes
 - Topic 1: Logistics & Motivation ([syllabus](/assets/teaching/Spring2022-Econ-21020/Econ_21020_syllabus.pdf); [slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_1.pdf))
