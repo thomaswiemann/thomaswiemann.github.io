@@ -34,3 +34,4 @@ tags: [Teaching, Econometrics]
 - Topic 7: Selection on Observables ([slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_7.pdf); [annotated slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_7_annotated.pdf))
 - Topic 8: Multiple Linear Regression
     - Part A: The Best Linear Predictor ([slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_8A.pdf); [annotated slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_8A_annotated.pdf))
+    - Part B: Ordinary Least Squares ([slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_8B.pdf); [annotated slides](/assets/teaching/Spring2022-Econ-21020/Econ_21020_lecture_8B_annotated.pdf))
