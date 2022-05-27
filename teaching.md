@@ -30,7 +30,7 @@ Taught by Prof. [Max Tabord-Meehan](https://sites.google.com/site/mtabordmeehan)
 
 **Code**
 - Julia package for applied econometrics ([link](https://github.com/thomaswiemann/MyMethods.jl))
-- Julia Examples for the UChicago Acropolis Computing Cluster ([link](assets/teaching/Fall2021-Econ-31720/AcropolisExamples_Julia.zip))
+- Julia Examples for the UChicago Acropolis Computing Cluster ([link](assets/teaching/other/AcropolisExamples_Julia.zip))
 - Introduction to R ([slides](/assets/teaching/Spring2021-Econ-21020/Econ_21020_Intro_to_R.pdf))
 - Linear and IV Regression in R ([slides](/assets/teaching/Spring2021-Econ-21020/Econ_21020_Regression_in_R.pdf); [code](/assets/teaching/Spring2021-Econ-21020/linear_regression.R))
 - Curated list of links related to coding in economics ([link](https://github.com/code-econ/awesome-econ))
