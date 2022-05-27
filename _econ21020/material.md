@@ -11,6 +11,7 @@ tags: [Teaching, Econometrics]
 
 ## Exams
 - [Midterm](/assets/teaching/Spring2022-Econ-21020/Econ_21020_midterm.pdf)
+- [Final](/assets/teaching/Spring2022-Econ-21020/Econ_21020_final.pdf)
 
 ## Problem Sets
 - [Problem Set 1](/assets/teaching/Spring2022-Econ-21020/Econ_21020_pset1.pdf)
