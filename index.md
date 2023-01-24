@@ -8,7 +8,7 @@ summary: I'm Thomas Wiemann, an Economics PhD student at the University of Chica
 
 # Welcome!
 
-### I'm Thomas Wiemann, an Economics PhD student at the University of Chicago.
+### I'm Thomas Wiemann, Economics PhD student at the University of Chicago.
 
 <img src="/assets/images/thomaswiemann_mini.jpg" class="wrapped rounded">
 
