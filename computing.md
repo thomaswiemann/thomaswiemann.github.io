@@ -11,7 +11,7 @@ tags: [Computation, Blog, Software, Tutorial, Coding]
 # Computing
 
 ## Software
-Coming soon.
+- [``ddml``: Double/Debiased Machine Learning implementation for Stata](https://statalasso.github.io/docs/ddml/)
 
 ## Computational Methods in Economics Working Group (Econ 61600)
 Together with [Thibaut Lamadon](https://lamadon.com/) and [Guillaume Pouliot](https://sites.google.com/site/guillaumeallairepouliot/), I co-organize the UChicago economic department's computational methods in economics working group (Econ 61600). 
