@@ -1,4 +1,5 @@
 .jekyll-cache/*
 .ipynb_checkpoints/*
 .ipynb_checkpoints
+.direnv
 NEW7080.dta
