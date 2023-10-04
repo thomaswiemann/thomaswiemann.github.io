@@ -13,8 +13,10 @@ tags: [Computation, Blog, Software, Tutorial, Coding]
 ## Software
 [``ddml``: Double/Debiased Machine Learning in Stata](https://statalasso.github.io/docs/ddml/)
 
-[``ddml``: Double/Debiased Machine Learning in R](https://thomaswiemann.com/ddml/)\
-[![R-CMD-check](https://github.com/thomaswiemann/ddml/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/thomaswiemann/ddml/actions/workflows/R-CMD-check.yaml) [![codecov](https://codecov.io/gh/thomaswiemann/ddml/branch/master/graph/badge.svg?token=PHB9W2TJ6S)](https://codecov.io/gh/thomaswiemann/ddml) [![CodeFactor](https://www.codefactor.io/repository/github/thomaswiemann/ddml/badge)](https://www.codefactor.io/repository/github/thomaswiemann/ddml)
+[``ddml``: Double/Debiased Machine Learning in R](https://thomaswiemann.com/ddml/) [![CRAN
+Version](https://www.r-pkg.org/badges/version/ddml)](https://cran.r-project.org/package=ddml)
+[![CRAN
+Downloads](https://cranlogs.r-pkg.org/badges/ddml)](https://cran.r-project.org/package=ddml)
 
 ## Computational Methods in Economics Working Group (Econ 61600)
 Together with [Thibaut Lamadon](https://lamadon.com/) and [Guillaume Pouliot](https://sites.google.com/site/guillaumeallairepouliot/), I co-organize the UChicago economic department's computational methods in economics working group (Econ 61600). 
