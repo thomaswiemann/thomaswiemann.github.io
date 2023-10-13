@@ -19,7 +19,7 @@ Version](https://www.r-pkg.org/badges/version/ddml)](https://cran.r-project.org/
 Downloads](https://cranlogs.r-pkg.org/badges/ddml)](https://cran.r-project.org/package=ddml)
 
 ## Computational Methods in Economics Working Group (Econ 61600)
-Together with [Thibaut Lamadon](https://lamadon.com/) and [Guillaume Pouliot](https://sites.google.com/site/guillaumeallairepouliot/), I co-organize the UChicago economic department's computational methods in economics working group (Econ 61600). 
+Together with [Thibaut Lamadon](https://lamadon.com/) and [Guillaume Pouliot](https://sites.google.com/site/guillaumeallairepouliot/), I co-founded the UChicago economic department's computational methods in economics working group (Econ 61600). 
 
 We meet on a bi-weekly basis. Please reach out if you're interested in participating! 
 

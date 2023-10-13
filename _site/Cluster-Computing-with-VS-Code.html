@@ -11,7 +11,7 @@
       <meta name="description" content="An guide on using VS Code for interactive development on the computing node of a computing cluster.">
     
     
-      <meta name="keywords" content="Tutorial, Coding, Computing cluster, Mercury, Acropolis"/>
+      <meta name="keywords" content="Tutorial, Coding, Computing cluster, slurm, PBS"/>
     
 
     <link rel="icon" type="image/vnd.microsoft.icon" href="/assets/images/favicon.ico">
@@ -98,7 +98,7 @@
   <div class="main">
         <h1 id="cluster-computing-with-vs-code">Cluster Computing with VS Code</h1>
 
-<p>This post outlines how to set up Visual Studio Code (VS Code) for interactive development on a compute node (i.e., not the head node) of a computing cluster. This has several key advantages. Most importantly, it lets you develop using the convenience of your local machine but leveraging the superior computation resources of the computing cluster (i.e., far more memory, CPU cores, and/or a GPU). The best part about it? It’s <em>super</em> easy once set up!</p>
+<p>This post outlines how to set up Visual Studio Code (VS Code) for interactive development on a compute node of a computing cluster. This has several key advantages. Most importantly, it lets you develop using the convenience of your local machine but leveraging the superior computation resources of the computing cluster (i.e., far more memory, CPU cores, and/or a GPU). The best part about it? It’s <em>super</em> easy once set up!</p>
 
 <p>The following is meant as a guide for the setup process and for establishing your first remote connection. The four steps discussed in this post are:</p>
 <ol>
@@ -108,7 +108,7 @@
   <li>Connecting directly to the compute node with VS Code.</li>
 </ol>
 
-<p>Examples focus on the <a href="https://hpc-docs.chicagobooth.edu/">Mercury</a> and <a href="https://sscs.uchicago.edu/category/faq/cluster/">Acropolis</a> computing clusters based at the University of Chicago, but the tutorial should be broadly applicable to many university computing servers.</p>
+<p>Examples focus on the <a href="https://slurm.schedmd.com/documentation.html">slurm</a> and PBS schedulers used by the computing clusters based at the University of Chicago, but the tutorial should be broadly applicable to many university computing servers using the slurm or PBS schedulers.</p>
 
 <h2 id="1-vs-code-and-ssh-remote">1. VS Code and SSH-Remote</h2>
 
@@ -116,7 +116,7 @@
 
 <p>Next, install the VS Code extension <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh">Remote-SSH</a>. You can do so directly within VS Code: Use the top-menu bar and navigate to File-&gt;Preferences-&gt;Extensions (or use <code class="language-plaintext highlighter-rouge">Ctrl+Shift+X</code>). Then search for <em>Remote-SSH</em> and install.</p>
 
-<p>The Remote-SSH extension allows you to connect to a computing server directly from your local machine. Once the extension is installed, the bottom-left of your VS Code application will show a green box (“Open a Remote Window”). Clicking on it opens a dropdown menu (see the .gif), where you should select “Open SSH Configuration File…”. This will open a <code class="language-plaintext highlighter-rouge">config</code> file where you can specify the address of the computing cluster (<code class="language-plaintext highlighter-rouge">HostName</code>) as well as your username (<code class="language-plaintext highlighter-rouge">User</code>) and store them under a convenient name (<code class="language-plaintext highlighter-rouge">Host</code>). See the below snippet for the entries in my file for the Mercury and Acropolis computing clusters at UChicago.</p>
+<p>The Remote-SSH extension allows you to connect to a computing server directly from your local machine. Once the extension is installed, the bottom-left of your VS Code application will show a green box (“Open a Remote Window”). Clicking on it opens a dropdown menu (see the .gif), where you should select “Open SSH Configuration File…”. This will open a <code class="language-plaintext highlighter-rouge">config</code> file where you can specify the address of the computing cluster (<code class="language-plaintext highlighter-rouge">HostName</code>) as well as your username (<code class="language-plaintext highlighter-rouge">User</code>) and store them under a convenient name (<code class="language-plaintext highlighter-rouge">Host</code>). See the below snippet for the entries in my file for the <a href="https://hpc-docs.chicagobooth.edu/">Mercury</a> and <a href="https://sscs.uchicago.edu/acropolis/">Acropolis</a> computing clusters at UChicago.</p>
 
 <p><img src="/assets/blog/2021-11-13-Cluster-Computing-with-VS-Code/vscode_1.gif" alt="drawing" class="wrapped_right" width="50%" /></p>
 
@@ -135,7 +135,7 @@ Host acropolis
 
 <h2 id="2-setting-up-ssh-keys">2. Setting up SSH Keys</h2>
 
-<p>When your connecting to the computing cluster in the above manner, you are using the Secure Shell (SSH) protocol. It is a widely used  tool that provides users with a secure channel to a remote host. A key feature is its use of cryptographic keys to authenticate users for access to the remote server. We’ve not yet made explicit use of these keys and instead used password-based authentication. To connect to a compute node, however, setting up our SSH keys appropriately is a necessary step.</p>
+<p>When your connecting to the computing cluster in the above manner, you are using the Secure Shell (SSH) protocol. It is a widely used tool that provides users with a secure channel to a remote host. A key feature is its use of cryptographic keys to authenticate users for access to the remote server. We’ve not yet made explicit use of these keys and instead used password-based authentication. To connect to a compute node, however, setting up our SSH keys appropriately is a necessary step.</p>
 
 <p>If you don’t yet have a public SSH key for your local machine (you may already be using one for publishing code on GitHub, for example), you need to initialize one. The process of doing so differs across operating systems. If you are using Windows, install the SSH client <a href="https://www.ssh.com/academy/ssh/putty/windows/install">PuTTY</a> and follow  <a href="https://www.ssh.com/academy/ssh/putty/windows/puttygen">these instructions</a>. Linux and Mac systems typically come with an SSH client preinstalled. Simply run the command <code class="language-plaintext highlighter-rouge">ssh-keygen</code>, which will store the keys in the <code class="language-plaintext highlighter-rouge">~/.ssh</code> folder.</p>
 
@@ -147,12 +147,12 @@ Host acropolis
 
 <p>So far, your connection to the computing server has been to the <em>head node</em>. The head node may be suitable for running tasks that require little resources. Since the resources of the head node are shared across all users, however, it is not good practice (and indeed not very nice) to use it for any coding sessions that require more computing power. To use the cluster for active development in settings where you want to leverage hardware exceeding that of you own machine, it’s thus necessary to request allocation of a computing node to your account on the server. Allocated resources are not shared across users and hence can be utilized in good conscience.</p>
 
-<p>Requesting an interactive session on a computing node is done via the terminal. The specific commands depend on the scheduler of the computing cluster. For example, the Mercury computing cluster uses <code class="language-plaintext highlighter-rouge">slurm</code>. The below code snippet requests a session with four CPU cores, 32 GB of memory, and one GPU. See the Mercury documentation for additional options on how to request an interactive session (<a href="https://hpc-docs.chicagobooth.edu/running.html">link</a>).</p>
+<p>Requesting an interactive session on a computing node is done via the terminal. The specific commands depend on the scheduler of the computing cluster. For example, the Mercury computing cluster uses slurm. The below code snippet requests a session with four CPU cores, 32 GB of memory, and one GPU. See the Mercury documentation for additional options on how to request an interactive session (<a href="https://hpc-docs.chicagobooth.edu/running.html">link</a>).</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Start an interactive session with a GPU on Mercury</span>
 srun <span class="nt">--account</span><span class="o">=</span>phd <span class="nt">--cpus-per-task</span><span class="o">=</span>4 <span class="nt">--mem-per-cpu</span><span class="o">=</span>8G <span class="nt">--partition</span><span class="o">=</span>gpu <span class="nt">--gres</span><span class="o">=</span>gpu:1 <span class="nt">--pty</span> bash <span class="nt">-l</span>
 </code></pre></div></div>
 
-<p>The Acropolis computing cluster uses the <code class="language-plaintext highlighter-rouge">qsub</code> scheduler instead. The below snippet request a session with 28 computing threads, and 60 GB of memory. The important bit here is the <code class="language-plaintext highlighter-rouge">-I</code> option. Requests of resources are the same as you would usually specify in your <code class="language-plaintext highlighter-rouge">qsub</code>-submission files.</p>
+<p>The Acropolis computing cluster uses the PBS scheduler instead. The below snippet request a session with 28 computing threads, and 60 GB of memory. The important bit here is the <code class="language-plaintext highlighter-rouge">-I</code> option. Requests of resources are the same as you would usually specify in your PBS-submission files.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Start an interactive session with 16 threads on Acropolis</span>
 qsub <span class="nt">-I</span> <span class="nt">-l</span> <span class="nv">nodes</span><span class="o">=</span>1:ppn<span class="o">=</span>28,mem<span class="o">=</span>60gb <span class="nt">-j</span> oe
 </code></pre></div></div>
@@ -185,7 +185,7 @@ qsub <span class="nt">-I</span> <span class="nt">-l</span> <span class="nv">node
 
 <p>Third, start a new VS Code session and connect to a remote host via the Remote-SSH extension as before. Select the address of the newly specified host (in my case <code class="language-plaintext highlighter-rouge">acropolis-compute</code>) and wait for the connection to establish.</p>
 
-<p>You’re almost done! As a last step, install any VS Code extensions that you may want to utilize. For example, install the <a href="https://marketplace.visualstudio.com/items?itemName=Ikuyadeu.r">R</a>, <a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Python</a>, and/or <a href="https://marketplace.visualstudio.com/items?itemName=julialang.language-julia">Julia</a> extensions on your remote machine.</p>
+<p>You’re almost done! As a last step, install any VS Code extensions that you may want to utilize.</p>
 
 <p><img src="/assets/blog/2021-11-13-Cluster-Computing-with-VS-Code/vscode_4.gif" alt="drawing" class="wrapped_right" width="50%" /></p>
 
