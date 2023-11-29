@@ -11,7 +11,8 @@ tags: [Teaching, Econometrics, Economics, Coding, LaTeX]
 
 ## Courses
 
-**Econometrics &ndash; Econ 21020 (Spring 2022)**
+**Econometrics &ndash; Econ 21020 (Spring 2022)**\
+[Course Website](econ21020):
 - Syllabus ([link](econ21020))
 - Schedule ([link](econ21020/schedule))
 - Course Material ([link](econ21020/material))
