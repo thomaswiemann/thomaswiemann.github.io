@@ -19,4 +19,4 @@ I also greatly enjoy working on computational projects. My co-authors and I rece
 
 One highlight of my PhD was to design and lecture an undergraduate course in econometrics. The course focused on the three distinct tasks arising in the analysis of causal questions (see Heckman and Vytlacil, 2007): Definition, identification, and estimation of causal parameters. See [Teaching](/teaching) for the course materials.
 
-Don't hestitate to reach out if any our interests overlap: I'm sure we'll find something exciting to chat about! See [CV](/assets/pdfs/wiemann_cv_2023_06_23.pdf) for my contact details.
+Don't hestitate to reach out if any our interests overlap: I'm sure we'll find something exciting to chat about! See [CV](/assets/pdfs/wiemann_cv_2024_01_02.pdf) for my contact details.
