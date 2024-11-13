@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Common Target Parameters</title>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Thomas Wiemann">
+    
+    
+      <meta name="keywords" content=""/>
+    
+
+    <link rel="icon" type="image/vnd.microsoft.icon" href="/assets/images/favicon.ico">
+
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="/assets/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/my-bootstrap.css" >
+    <link rel="stylesheet" type="text/css" href="/assets/css/styles.css">
+
+    <!-- MathJax -->
+    
+    <script src="/assets/js/load-mathjax.js" async></script>
+    
+
+    <!-- Copyright (c) 2000-2023 etracker GmbH. All rights reserved. -->
+    <!-- This material may not be reproduced, displayed, modified or distributed -->
+    <!-- without the express prior written permission of the copyright holder. -->
+    <!-- etracker tracklet 5.0 -->
+    <script type="text/javascript">
+      // var et_pagename = "";
+      // var et_areas = "";
+      // var et_tval = 0;
+      // var et_tsale = 0;
+      // var et_tonr = "";
+      // var et_basket = "";
+      </script>
+      <script id="_etLoader" type="text/javascript" charset="UTF-8" data-block-cookies="true" data-secure-code="6ggnmg" src="//code.etracker.com/code/e.js" async></script>
+      <!-- etracker tracklet 5.0 end -->
+  
+  </head>
+  <body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand">Thomas Wiemann</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          
+          
+          
+
+  
+    
+      <li><a href="/">Home</a></li>
+    
+  
+
+
+
+
+          <li><a href="/assets/pdfs/wiemann_cv_2024_01_02.pdf">CV</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main" style="font-size:1.2em">
+        <!----------------------------------------------------------------------------->
+<!-- Treatment Effects -------------------------------------------------------->
+<h2 id="treatment-effects">Treatment Effects</h2>
+
+<!----------------------------------------------------------------------------->
+<!-- Average Treatment Effect ------------------------------------------------->
+
+<details>
+  <summary>Average Treatment Effect</summary>
+  
+<p><em>Observation:</em><br />
+$W_i \equiv (Y_i, D_i, X_i)$, where:</p>
+<ul>
+  <li>$Y_i$: outcome</li>
+  <li>$D_i$: binary treatment variable</li>
+  <li>$X_i$: controls</li>
+</ul>
+
+<p><em>Nuisance Parameter:</em><br />
+$\eta \equiv (m, g^{(0)}, g^{(1)})$ with true values:</p>
+<ul>
+  <li>$m_0(X_i) \equiv E[D_i \vert X_i]$</li>
+  <li>$g^{(d)}_0(X_i) \equiv E[Y_i \vert D_i=0, X_i], \, d \in {0,1}$</li>
+</ul>
+
+<p><em>Neyman Orthogonal Score:</em><br />
+\(\begin{align}
+\psi(W_i; \theta, \eta) &amp;= \frac{D_i(Y_i - g^{(1)}(X_i))}{m(X_i)} - \frac{(1 - D_i)(Y_i - g^{(0)}(X_i))}{1 - m(X_i)} \\
+&amp;\quad + g^{(1)}(X_i) - g^{(0)}(X_i) - \theta
+\end{align}\)</p>
+
+<p><em>Software:</em></p>
+<ul>
+  <li>R: <a href="https://thomaswiemann.com/ddml/">ddml</a>, <a href="https://docs.doubleml.org/r/stable/">DoubleML</a></li>
+  <li>Stata: <a href="https://statalasso.github.io/docs/ddml/">ddml</a></li>
+  <li>Python: <a href="https://docs.doubleml.org/stable/index.html">DoubleML</a></li>
+</ul>
+
+</details>
+
+<!----------------------------------------------------------------------------->
+<!-- Average Treatment Effect on the Treated ---------------------------------->
+
+<details>
+  <summary>Average Treatment Effect on the Treated</summary>
+  
+<p><em>Observation:</em><br />
+$W_i \equiv (Y_i, D_i, X_i)$, where:</p>
+<ul>
+  <li>$Y_i$: outcome</li>
+  <li>$D_i$: binary treatment variable</li>
+  <li>$X_i$: controls</li>
+</ul>
+
+<p><em>Nuisance Parameter:</em><br />
+$\eta \equiv (m, g^{(0)}, p)$ with true values:</p>
+<ul>
+  <li>$m_0(X_i) \equiv E[D_i \vert X_i]$</li>
+  <li>$g^{(0)}_0(X_i) \equiv E[Y_i \vert D_i=0, X_i]$</li>
+  <li>$p_0 \equiv E[D_i]$</li>
+</ul>
+
+<p><em>Neyman Orthogonal Score:</em>   <br />
+\(\begin{align}
+\psi(W_i; \theta, \eta) = \frac{D_i(Y_i - g^{(0)}(X_i))}{p} - \frac{m(X_i)(1-D_i)(Y_i-g^{(0)}(X_i))}{p(1-m(X_i))}  -\frac{D_i}{p}\theta
+\end{align}\)</p>
+
+<p><em>Software:</em></p>
+<ul>
+  <li>R: <a href="https://thomaswiemann.com/ddml/">ddml</a>, <a href="https://docs.doubleml.org/r/stable/">DoubleML</a></li>
+  <li>Stata: <a href="https://statalasso.github.io/docs/ddml/">ddml</a></li>
+  <li>Python: <a href="https://docs.doubleml.org/stable/index.html">DoubleML</a></li>
+</ul>
+
+</details>
+
+<!----------------------------------------------------------------------------->
+<!-- Local Average Treatment Effect or Average Causal Response ---------------->
+
+<details>
+  <summary>Local Average Treatment Effect or Average Causal Response</summary>
+  
+<p><em>Observation:</em><br />
+$W_i \equiv (Y_i, D_i, X_i, Z_i)$, where:</p>
+<ul>
+  <li>$Y_i$: outcome</li>
+  <li>$D_i$: treatment variable</li>
+  <li>$X_i$: controls</li>
+  <li>$Z_i$: binary instrument</li>
+</ul>
+
+<p><em>Nuisance Parameter:</em><br />
+$\eta \equiv (r, \ell^{(0)}, \ell^{(1)}, p^{(0)}, p^{(1)})$ with true values:</p>
+<ul>
+  <li>$r_0(X_i) \equiv E[Z_i \vert X_i]$</li>
+  <li>$\ell^{(z)}_0(X_i) \equiv E[Y_i \vert Z_i=z, X_i], \, z \in {0,1}$</li>
+  <li>$p^{(z)}_0(X_i) \equiv E[D_i \vert Z_i=z, X_i], \, z \in {0,1}$</li>
+</ul>
+
+<p><em>Neyman Orthogonal Score:</em>  <br />
+\(\begin{align}
+\psi(W_i; \theta, \eta) &amp;=  \frac{Z_i(Y_i-\ell^{(1)}(X_i))}{r(X_i)} - \frac{(1-Z_i)(Y_i - \ell^{(0)}(X_i))}{1 - r(X_i)} + \ell^{(1)}(X_i) - \ell^{(0)}(X_i) \\
+&amp;\quad - \left(\frac{Z_i(D_i-p^{(1)}(X_i))}{r(X_i)} - \frac{(1-Z_i)(D_i - p^{(0)}(X_i))}{1 - r(X_i)} + p^{(1)}(X_i) - p^{(0)}(X_i)\right)\theta
+\end{align}\)</p>
+
+<p><em>Software:</em></p>
+<ul>
+  <li>R: <a href="https://thomaswiemann.com/ddml/">ddml</a>, <a href="https://docs.doubleml.org/r/stable/">DoubleML</a></li>
+  <li>Stata: <a href="https://statalasso.github.io/docs/ddml/">ddml</a></li>
+  <li>Python: <a href="https://docs.doubleml.org/stable/index.html">DoubleML</a></li>
+</ul>
+
+</details>
+
+<!----------------------------------------------------------------------------->
+<!-- Group-Time Average Treatment Effects on the Treated ---------------------->
+
+<details>
+  <summary>Group-Time Average Treatment Effects on the Treated</summary>
+  
+<p><em>Observation:</em><br />
+$W_i \equiv (Y_{it}, D_{it}, G_i, X_i)_{t=0}^T$, where:</p>
+<ul>
+  <li>$Y_{it}$: outcome at time $t$</li>
+  <li>$D_{it}$: binary treatment indicator at time $t$</li>
+  <li>$G_i$: time of first treatment</li>
+  <li>$X_i$: controls</li>
+  <li>Define $\Delta Y_{it}\equiv Y_{it}-Y_{it-1}$</li>
+</ul>
+
+<p><em>Nuisance Parameter:</em><br />
+$\eta \equiv (h^{(0)}, h^{(1)}, \ell^{(0)}, p)$ with true values:</p>
+<ul>
+  <li>$h_0^{(0)}(X_i) \equiv P(G_i&gt;t \vert X_i)$</li>
+  <li>$h_0^{(1)}(X_i) \equiv P(D_{it}=1, G_i=g \vert X_i)$</li>
+  <li>$\ell_0^{(0)}(X_i) \equiv E[\Delta Y_{it} \vert G_i&gt;t, X_i]$</li>
+  <li>$p_0 \equiv P(D_{it}=1, G_i=g)$</li>
+</ul>
+
+<p><em>Neyman Orthogonal Score:</em> <br />
+\(\begin{align}
+\psi(W_i; \theta, \eta) &amp;= \frac{\mathbb{1}\{D_{it}=1, G_i=g\}(\Delta Y_{it} - \ell^{(0)}(X_i))}{p} \\
+&amp;\quad - \frac{h^{(1)}(X_{i})\mathbb{1}\{G_i&gt;t\}(\Delta Y_{it} - \ell^{(0)}(X_i))}{ph^{(0)}(X_i)} \\
+&amp;\quad - \frac{\mathbb{1}\{D_{it}=1, G_i=g\}}{p}\theta
+\end{align}\)</p>
+
+<p><em>Software:</em></p>
+<ul>
+  <li>R: <a href="https://thomaswiemann.com/ddml/articles/did.html">ddml+did</a></li>
+</ul>
+
+<p><em>Notes:</em><br />
+Discuss estimation if control is never-treated.</p>
+
+</details>
+
+<!----------------------------------------------------------------------------->
+<!-- Regression Coefficients -------------------------------------------------->
+<h2 id="regression-coefficients">Regression Coefficients</h2>
+
+<!----------------------------------------------------------------------------->
+<!-- Partially Linear Regression Coefficient ---------------------------------->
+
+<details>
+  <summary>Partially Linear Regression Coefficient</summary>
+  
+<p><em>Observation:</em><br />
+$W_i \equiv (Y_i, D_i, X_i)$, where:</p>
+<ul>
+  <li>$Y_i$: outcome</li>
+  <li>$D_i$: treatment variable</li>
+  <li>$X_i$: controls</li>
+</ul>
+
+<p><em>Nuisance Parameter:</em><br />
+$\eta \equiv (m, \ell)$ with true values:</p>
+<ul>
+  <li>$m_0(X_i) \equiv E[D_i \vert X_i]$</li>
+  <li>$\ell_0(X_i) \equiv E[Y_i \vert X_i]$</li>
+</ul>
+
+<p><em>Neyman Orthogonal Score:</em><br />
+\(\begin{align}
+\psi(W_i; \theta, \eta) &amp;= \left(D_i - m_0(X_i)\right)\left(Y_i - \ell_0(X_i)\right) \\
+&amp;\quad - \left(D_i - m_0(X_i)\right)\left(D_i - m_0(X_i)\right)^\top \theta
+\end{align}\)</p>
+
+<p><em>Software:</em></p>
+<ul>
+  <li>R: <a href="https://thomaswiemann.com/ddml/">ddml</a>, <a href="https://docs.doubleml.org/r/stable/">DoubleML</a></li>
+  <li>Stata: <a href="https://statalasso.github.io/docs/ddml/">ddml</a></li>
+  <li>Python: <a href="https://docs.doubleml.org/stable/index.html">DoubleML</a></li>
+</ul>
+
+</details>
+
+<!-- Partially Linear Regression Coefficient ---------------------------------->
+
+<details>
+  <summary>Partially Linear IV Regression Coefficient</summary>
+  
+<p><em>Observation:</em><br />
+$W_i \equiv (Y_i, D_i, X_i, Z_i)$, where:</p>
+<ul>
+  <li>$Y_i$: outcome</li>
+  <li>$D_i$: treatment variable</li>
+  <li>$X_i$: controls</li>
+  <li>$Z_i$: instrument</li>
+</ul>
+
+<p><em>Nuisance Parameter:</em><br />
+$\eta \equiv (m, \ell, r)$ with true values:</p>
+<ul>
+  <li>$m_0(X_i) \equiv E[D_i \vert X_i]$</li>
+  <li>$\ell_0(X_i) \equiv E[Y_i \vert X_i]$</li>
+  <li>$r_0(X_i) \equiv E[Z_i \vert X_i]$</li>
+</ul>
+
+<p><em>Neyman Orthogonal Score:</em><br />
+\(\begin{align}
+\psi(W_i; \theta, \eta) &amp;= (Z_i - r(X_i))(Y_i - \ell(X_i)) \\
+&amp;\quad -(Z_i - r(X_i))(D_i - m(X_i))^\top\theta
+\end{align}\)</p>
+
+<p><em>Software:</em></p>
+<ul>
+  <li>R: <a href="https://thomaswiemann.com/ddml/">ddml</a>, <a href="https://docs.doubleml.org/r/stable/">DoubleML</a></li>
+  <li>Stata: <a href="https://statalasso.github.io/docs/ddml/">ddml</a></li>
+  <li>Python: <a href="https://docs.doubleml.org/stable/index.html">DoubleML</a></li>
+</ul>
+
+</details>
+
+<!-- Partially Linear Regression Coefficient ---------------------------------->
+
+<details>
+  <summary>Flexible Partially Linear IV Regression Coefficient</summary>
+  
+<p><em>Observation:</em><br />
+$W_i \equiv (Y_i, D_i, X_i, Z_i)$, where:</p>
+<ul>
+  <li>$Y_i$: outcome</li>
+  <li>$D_i$: treatment variable</li>
+  <li>$X_i$: controls</li>
+  <li>$Z_i$: instrument</li>
+</ul>
+
+<p><em>Nuisance Parameter:</em><br />
+$\eta \equiv (m, \ell, p)$ with true values:</p>
+<ul>
+  <li>$m_0(X_i) \equiv E[D_i \vert X_i]$</li>
+  <li>$\ell_0(X_i) \equiv E[Y_i \vert X_i]$</li>
+  <li>$p_0(Z_i, X_i) \equiv E[D_i \vert Z_i, X_i]$</li>
+</ul>
+
+<p><em>Neyman Orthogonal Score:</em><br />
+\(\begin{align}
+\psi(W_i; \theta, \eta) &amp;= (p(Z_i,X_i) - m(X_i))(Y_i - \ell(X_i)) \\
+&amp;\quad - (p(Z_i,X_i) - m(X_i))(D_i - m(X_i))^\top\theta
+\end{align}\)</p>
+
+<p><em>Software:</em></p>
+<ul>
+  <li>R: <a href="https://thomaswiemann.com/ddml/">ddml</a>, <a href="https://docs.doubleml.org/r/stable/">DoubleML</a></li>
+  <li>Stata: <a href="https://statalasso.github.io/docs/ddml/">ddml</a></li>
+  <li>Python: <a href="https://docs.doubleml.org/stable/index.html">DoubleML</a></li>
+</ul>
+
+</details>
+
+<!-- Fixed Effects Partially Linear Regression Coefficient -------------------->
+
+<details>
+  <summary>Fixed Effects Partially Linear Regression Coefficient</summary>
+  
+<p><em>Observation:</em><br />
+$W_i \equiv (Y_{it}, D_{it}, X_{it})_{t=0}^T$, where:</p>
+<ul>
+  <li>$Y_{it}$: outcome at time $t$</li>
+  <li>$D_{it}$: treatment variable at time $t$</li>
+  <li>$X_{it}$: controls at time $t$</li>
+  <li>Define $\Delta Y_{it} \equiv Y_{it} - Y_{it-1}$, $\Delta D_{it} \equiv D_{it} - D_{it-1}$</li>
+</ul>
+
+<p><em>Nuisance Parameter:</em><br />
+$\eta \equiv (m_t, \ell_t)_{t=1}^T$ with true values:</p>
+<ul>
+  <li>$m_{t0}(X_{it}, X_{it-1}) \equiv E[\Delta D_{it} \vert X_{it}, X_{it-1}]$</li>
+  <li>$\ell_{t0}(X_{it}, X_{it-1}) \equiv E[\Delta Y_{it} \vert X_{it}, X_{it-1}]$</li>
+</ul>
+
+<p><em>Neyman Orthogonal Score:</em><br />
+\(\begin{align}
+\psi(W_i; \theta, \eta) &amp;= \sum_{t=1}^T \left(\Delta D_{it} - m_t(X_{it}, X_{it-1})\right)\left(\Delta Y_{it} - \ell_t(X_{it}, X_{it-1})\right) \\
+&amp;\quad - \sum_{t=1}^T \left(\Delta D_{it} - m_t(X_{it}, X_{it-1})\right)\left(\Delta D_{it} - m_t(X_{it}, X_{it-1})\right)^\top \theta
+\end{align}\)</p>
+
+<p><em>Software:</em></p>
+<ul>
+  <li>R: <a href="https://thomaswiemann.com/ddml/">ddml</a>, <a href="https://docs.doubleml.org/r/stable/">DoubleML</a></li>
+  <li>Stata: <a href="https://statalasso.github.io/docs/ddml/">ddml</a></li>
+  <li>Python: <a href="https://docs.doubleml.org/stable/index.html">DoubleML</a></li>
+</ul>
+
+</details>
+
+<!----------------------------------------------------------------------------->
+<!-- Fixed Effects Partially Linear IV Regression Coefficient ----------------->
+
+<details>
+  <summary>Fixed Effects Partially Linear IV Regression Coefficient</summary>
+  
+<p><em>Observation:</em><br />
+$W_i \equiv (Y_{it}, D_{it}, Z_{it}, X_{it})_{t=0}^T$, where:</p>
+<ul>
+  <li>$Y_{it}$: outcome at time $t$</li>
+  <li>$D_{it}$: treatment variable at time $t$</li>
+  <li>$Z_{it}$: instrument at time $t$</li>
+  <li>$X_{it}$: controls at time $t$</li>
+  <li>Define $\Delta Y_{it} \equiv Y_{it} - Y_{it-1}$, $\Delta D_{it} \equiv D_{it} - D_{it-1}$, $\Delta Z_{it} \equiv Z_{it} - Z_{it-1}$</li>
+</ul>
+
+<p><em>Nuisance Parameter:</em><br />
+$\eta \equiv (m_t, \ell_t, r_t)_{t=1}^T$ with true values:</p>
+<ul>
+  <li>$m_{t0}(X_{it}, X_{it-1}) \equiv E[\Delta D_{it} \vert X_{it}, X_{it-1}]$</li>
+  <li>$\ell_{t0}(X_{it}, X_{it-1}) \equiv E[\Delta Y_{it} \vert X_{it}, X_{it-1}]$</li>
+  <li>$r_{t0}(X_{it}, X_{it-1}) \equiv E[\Delta Z_{it} \vert X_{it}, X_{it-1}]$</li>
+</ul>
+
+<p><em>Neyman Orthogonal Score:</em><br />
+\(\begin{align}
+\psi(W_i; \theta, \eta) &amp;= \sum_{t=1}^T \left(\Delta Z_{it} - r_t(X_{it}, X_{it-1})\right)\left(\Delta Y_{it} - \ell_t(X_{it}, X_{it-1})\right) \\
+&amp;\quad - \sum_{t=1}^T \left(\Delta Z_{it} - r_t(X_{it}, X_{it-1})\right)(\Delta D_{it} - m_t(X_{it}, X_{it-1}))^\top \theta
+\end{align}\)</p>
+
+<p><em>Software:</em></p>
+<ul>
+  <li>R: <a href="https://thomaswiemann.com/ddml/">ddml</a>, <a href="https://docs.doubleml.org/r/stable/">DoubleML</a></li>
+  <li>Stata: <a href="https://statalasso.github.io/docs/ddml/">ddml</a></li>
+  <li>Python: <a href="https://docs.doubleml.org/stable/index.html">DoubleML</a></li>
+</ul>
+
+</details>
+
+
+      <!-- <em style="font-size:medium">That's a wrap! If you've found
+        this post helpful or have any comments or suggestions, please don't hesitate
+        to reach out. My email is wiemann@uchicago.edu. I'd be happy about any feedback.<em> -->
+  </div>
+
+  <hr>
+  <ul class="flex-footer">
+  <li class="flex-footer-item" style="text-align: left; width: 160px">
+    <p><img src="/assets/images/GitHub-Mark-32px.png" alt="GitHub Icon" style="width:20px"> <a href="https://github.com/thomaswiemann">@thomaswiemann</a> </p>
+    <p><img src="/assets/images/LI-In-Bug.png" alt="LinkedIn Icon" style="width:20px"> <a href="https://www.linkedin.com/in/thomas-wiemann">@thomaswiemann</a> </p>
+  </li>
+  <li class="flex-footer-item" style="width: 500px"><img src="/assets/images/uchicago-logo.jpg" alt="University of Chicago Seal" style="width:300px"></li>
+  <li class="flex-footer-item">
+    <p>&copy; 2024 Thomas Wiemann</p>
+  </li>
+  </ul>
+
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="/assets/js/jquery.min.js"><\/script>')</script>
+  <script src="/assets/js/bootstrap.min.js"></script>
+  </body>
+</html>

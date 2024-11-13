@@ -2,3 +2,4 @@
 User-agent: Googlebot
 Disallow: /assets/
 Disallow: *.pdf
+Disallow: /scores/

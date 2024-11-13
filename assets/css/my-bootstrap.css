@@ -14,7 +14,6 @@ body {
 }
 article,
 aside,
-details,
 figcaption,
 figure,
 footer,
@@ -27,6 +26,23 @@ section,
 summary {
   display: block;
 }
+details summary {
+  cursor: pointer;
+  position: relative;
+  padding-left: 1em; /* Adjust padding if needed */
+}
+details summary::before {
+  content: "\25B6"; /* Right-pointing triangle */
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 0.8em; /* Smaller size */
+  transform: translateY(0.1em); /* Slightly raise the icon */
+}
+details[open] summary::before {
+  content: "\25BC"; /* Downward-pointing triangle */
+}
+
 audio,
 canvas,
 progress,
