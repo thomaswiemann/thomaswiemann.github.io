@@ -50,10 +50,16 @@ Presented at: Stanford Institute for Theoretical Economics 2019, International A
 </em>
 </div> 
 
+## Work in progress
+
+**The Hitchhiker's Guide to Double/Debiased Machine Learning**\
+with [Achim Ahrens](https://achimahrens.de/), [Victor Chernozhukov](http://www.mit.edu/~vchern/), [Christian Hansen](https://voices.uchicago.edu/christianhansen/), [Damian Kozbur](https://www.econ.uzh.ch/en/people/faculty/kozbur.html), [Mark Schaffer](https://ideas.repec.org/e/psc51.html).\
+Revise and Resubmit at the _Journal of Economic Literature_.
+
 ## Publications
 
 **Model Averaging and Double Machine Learning**\
-with [Achim Ahrens](https://achimahrens.de/), [Christian B Hansen](https://voices.uchicago.edu/christianhansen/), [Mark E Schaffer](https://ideas.repec.org/e/psc51.html).\
+with [Achim Ahrens](https://achimahrens.de/), [Christian Hansen](https://voices.uchicago.edu/christianhansen/), [Mark Schaffer](https://ideas.repec.org/e/psc51.html).\
 Accepted at the _Journal of Applied Econometrics_.\
 [<a style="cursor:pointer;" onclick="toggleVisibility('abstract_ddml_applied');">abstract</a>; [arXiv](https://arxiv.org/abs/2401.01645); [Stata package](https://statalasso.github.io/docs/ddml/); [R package](https://thomaswiemann.com/ddml/)]
 <div id="abstract_ddml_applied" style="display:none;"> 
@@ -65,7 +71,7 @@ Presented at: Machine Learning in Economics Summer Institute 2022
 </div> 
 \
 **ddml: Double/debiased machine learning in Stata**\
-with [Achim Ahrens](https://achimahrens.de/), [Christian B Hansen](https://voices.uchicago.edu/christianhansen/), [Mark E Schaffer](https://ideas.repec.org/e/psc51.html).\
+with [Achim Ahrens](https://achimahrens.de/), [Christian Hansen](https://voices.uchicago.edu/christianhansen/), [Mark Schaffer](https://ideas.repec.org/e/psc51.html).\
 _Stata Journal, 2024, 24(1): 3-45._\
 [<a style="cursor:pointer;" onclick="toggleVisibility('abstract_ddml_stata');">abstract</a>; [article](https://journals.sagepub.com/doi/full/10.1177/1536867X241233641); [Stata package](https://statalasso.github.io/docs/ddml/); [R package](https://thomaswiemann.com/ddml/)] 
 <div id="abstract_ddml_stata" style="display:none;">
