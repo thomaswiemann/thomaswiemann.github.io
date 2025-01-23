@@ -60,8 +60,8 @@ Revise and Resubmit at the _Journal of Economic Literature_.
 
 **Model Averaging and Double Machine Learning**\
 with [Achim Ahrens](https://achimahrens.de/), [Christian Hansen](https://voices.uchicago.edu/christianhansen/), [Mark Schaffer](https://ideas.repec.org/e/psc51.html).\
-Accepted at the _Journal of Applied Econometrics_.\
-[<a style="cursor:pointer;" onclick="toggleVisibility('abstract_ddml_applied');">abstract</a>; [arXiv](https://arxiv.org/abs/2401.01645); [Stata package](https://statalasso.github.io/docs/ddml/); [R package](https://thomaswiemann.com/ddml/)]
+Forthcoming at the _Journal of Applied Econometrics_.\
+[<a style="cursor:pointer;" onclick="toggleVisibility('abstract_ddml_applied');">abstract</a>; [article](https://onlinelibrary.wiley.com/doi/10.1002/jae.3103); [Stata package](https://statalasso.github.io/docs/ddml/); [R package](https://thomaswiemann.com/ddml/)]
 <div id="abstract_ddml_applied" style="display:none;"> 
 This paper discusses pairing double/debiased machine learning (DDML) with stacking, a model averaging method for combining multiple candidate learners, to estimate structural parameters. We introduce two new stacking approaches for DDML: short-stacking exploits the cross-fitting step of DDML to substantially reduce the computational burden and pooled stacking enforces common stacking weights over cross-fitting folds. Using calibrated simulation studies and two applications estimating gender gaps in citations and wages, we show that DDML with stacking is more robust to partially unknown functional forms than common alternative approaches based on single pre-selected learners. We provide Stata and R software implementing our proposals.
 <br>
