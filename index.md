@@ -29,6 +29,14 @@ This paper discusses estimation with a categorical instrumental variable in sett
 </em>
 </div> 
 \
+**An Introduction to Double/Debiased Machine Learning**\
+with [Achim Ahrens](https://achimahrens.de/), [Victor Chernozhukov](http://www.mit.edu/~vchern/), [Christian Hansen](https://voices.uchicago.edu/christianhansen/), [Damian Kozbur](https://www.econ.uzh.ch/en/people/faculty/kozbur.html), [Mark Schaffer](https://ideas.repec.org/e/psc51.html).\
+Revise and Resubmit at the _Journal of Economic Literature_.\
+ [<a style="cursor:pointer;" onclick="toggleVisibility('abstract_jel');">abstract</a>; [arXiv](https://arxiv.org/abs/2504.08324)].
+<div id="abstract_jel" style="display:none;">
+This paper provides a practical introduction to Double/Debiased Machine Learning (DML). DML provides a general approach to performing inference about a target parameter in the presence of nuisance parameters. The aim of DML is to reduce the impact of nuisance parameter estimation on estimators of the parameter of interest. We describe DML and its two essential components: Neyman orthogonality and cross-fitting. We highlight that DML reduces functional form dependence and accommodates the use of complex data types, such as text data. We illustrate its application through three empirical examples that demonstrate DML's applicability in cross-sectional and panel settings.
+</div> 
+\
 **Demand Estimation with Finitely Many Consumers** \
 with [Jonas Lieber](https://jonaslieber.com/index.html).\
 [<a style="cursor:pointer;" onclick="toggleVisibility('abstract_EZMPEC');">abstract</a>; [draft](/assets/pdfs/ezmpec_lw.pdf); [slides](/assets/pdfs/ezmpec_lw_slides.pdf)]
@@ -50,11 +58,6 @@ Presented at: Stanford Institute for Theoretical Economics 2019, International A
 </em>
 </div> 
 
-## Work in progress
-
-**The Hitchhiker's Guide to Double/Debiased Machine Learning**\
-with [Achim Ahrens](https://achimahrens.de/), [Victor Chernozhukov](http://www.mit.edu/~vchern/), [Christian Hansen](https://voices.uchicago.edu/christianhansen/), [Damian Kozbur](https://www.econ.uzh.ch/en/people/faculty/kozbur.html), [Mark Schaffer](https://ideas.repec.org/e/psc51.html).\
-Revise and Resubmit at the _Journal of Economic Literature_.
 
 ## Publications
 
