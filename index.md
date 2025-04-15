@@ -20,7 +20,7 @@ I'm a PhD student in Economics at the University of Chicago. My primary research
 ## Working papers
 
 **Optimal Categorical Instrumental Variables** \
- Revise and Resubmit at the _Journal of Business & Economic Statistics_.\
+ Revision requested at the _Journal of Business & Economic Statistics_.\
  [<a style="cursor:pointer;" onclick="toggleVisibility('abstract_CIV');">abstract</a>; [arXiv](https://arxiv.org/abs/2311.17021); [R package](https://thomaswiemann.com/civ/)].
 <div id="abstract_CIV" style="display:none;">
 This paper discusses estimation with a categorical instrumental variable in settings with potentially few observations per category. The proposed categorical instrumental variable estimator (CIV) leverages a regularization assumption that implies existence of a latent categorical variable with fixed finite support achieving the same first stage fit as the observed instrument. In asymptotic regimes that allow the number of observations per category to grow at arbitrary small polynomial rate with the sample size, I show that when the cardinality of the support of the optimal instrument is known, CIV is root-n asymptotically normal, achieves the same asymptotic variance as the oracle IV estimator that presumes knowledge of the optimal instrument, and is semiparametrically efficient under homoskedasticity. Under-specifying the number of support points reduces efficiency but maintains asymptotic normality. In an application that leverages judge fixed effects as instruments, CIV compares favorably to commonly used jackknife-based instrumental variable estimators. 
@@ -31,8 +31,8 @@ This paper discusses estimation with a categorical instrumental variable in sett
 \
 **An Introduction to Double/Debiased Machine Learning**\
 with [Achim Ahrens](https://achimahrens.de/), [Victor Chernozhukov](http://www.mit.edu/~vchern/), [Christian Hansen](https://voices.uchicago.edu/christianhansen/), [Damian Kozbur](https://www.econ.uzh.ch/en/people/faculty/kozbur.html), [Mark Schaffer](https://ideas.repec.org/e/psc51.html).\
-Revise and Resubmit at the _Journal of Economic Literature_.\
- [<a style="cursor:pointer;" onclick="toggleVisibility('abstract_jel');">abstract</a>; [arXiv](https://arxiv.org/abs/2504.08324)].
+Revision requested at the _Journal of Economic Literature_.\
+ [<a style="cursor:pointer;" onclick="toggleVisibility('abstract_jel');">abstract</a>; [arXiv](https://arxiv.org/abs/2504.08324); [tutorial](https://dmlguide.github.io/)].
 <div id="abstract_jel" style="display:none;">
 This paper provides a practical introduction to Double/Debiased Machine Learning (DML). DML provides a general approach to performing inference about a target parameter in the presence of nuisance parameters. The aim of DML is to reduce the impact of nuisance parameter estimation on estimators of the parameter of interest. We describe DML and its two essential components: Neyman orthogonality and cross-fitting. We highlight that DML reduces functional form dependence and accommodates the use of complex data types, such as text data. We illustrate its application through three empirical examples that demonstrate DML's applicability in cross-sectional and panel settings.
 </div> 
@@ -63,7 +63,7 @@ Presented at: Stanford Institute for Theoretical Economics 2019, International A
 
 **Model Averaging and Double Machine Learning**\
 with [Achim Ahrens](https://achimahrens.de/), [Christian Hansen](https://voices.uchicago.edu/christianhansen/), [Mark Schaffer](https://ideas.repec.org/e/psc51.html).\
-Forthcoming at the _Journal of Applied Econometrics_.\
+_Journal of Applied Econometrics, 2025, 40(3): 249-269._\
 [<a style="cursor:pointer;" onclick="toggleVisibility('abstract_ddml_applied');">abstract</a>; [article](https://onlinelibrary.wiley.com/doi/10.1002/jae.3103); [Stata package](https://statalasso.github.io/docs/ddml/); [R package](https://thomaswiemann.com/ddml/)]
 <div id="abstract_ddml_applied" style="display:none;"> 
 This paper discusses pairing double/debiased machine learning (DDML) with stacking, a model averaging method for combining multiple candidate learners, to estimate structural parameters. We introduce two new stacking approaches for DDML: short-stacking exploits the cross-fitting step of DDML to substantially reduce the computational burden and pooled stacking enforces common stacking weights over cross-fitting folds. Using calibrated simulation studies and two applications estimating gender gaps in citations and wages, we show that DDML with stacking is more robust to partially unknown functional forms than common alternative approaches based on single pre-selected learners. We provide Stata and R software implementing our proposals.
@@ -104,4 +104,4 @@ Downloads](https://cranlogs.r-pkg.org/badges/civ)](https://cran.r-project.org/pa
 ## Teaching
 
 **Econometrics &ndash; Econ 21020 (Spring 2022)**\
-[[Course Website](econ21020); [Syllabus](econ21020); [Course Material](econ21020/material); [Evaluations](assets/teaching/Spring2022-Econ-21020/Econ_21020_wiemann_evaluations.pdf)]
+[[course website](econ21020); [syllabus](econ21020); [course material](econ21020/material); [evaluations](assets/teaching/Spring2022-Econ-21020/Econ_21020_wiemann_evaluations.pdf)]
