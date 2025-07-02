@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Thomas Wiemann">
     
-      <meta name="description" content="I&#39;m Thomas Wiemann, Economics PhD student at UChicago. Welcome to my personal website!">
+      <meta name="description" content="I&#39;m Thomas Wiemann, Postdoctoral Scholar in Marketing at the University of Chicago Booth School of Business. I&#39;m on the 2025-26 academic job market!">
     
     
 
@@ -88,13 +88,35 @@
   <div class="main">
         <p><br /><br /></p>
 
-<p><img src="/assets/images/thomaswiemann_mini.jpg" class="wrapped" /></p>
+<div class="intro-container">
+    <div class="intro-image">
+        <img src="/assets/images/thomastest.jpg" alt="Thomas Wiemann" style="width: 230px;" />
+    </div>
+    <div class="intro-text">
+        <h1 style="margin-top: 0;">Thomas Wiemann</h1>
+        Welcome! I'm a Postdoctoral Scholar in Marketing at the University of Chicago Booth School of Business. I obtained my PhD in Economics from the University of Chicago Department of Economics in 2025. My research interests lie in the intersection of marketing, econometrics, and machine learning.
+        
+<div style="text-align: center;">
+      <p><strong>I’m on the 2025-26 academic job market.</strong></p>
 
-<h1 style="margin-top: 0;">Thomas Wiemann</h1>
+      <p><strong><a href="/assets/pdfs/jmp_wiemann.pdf">Job Market Paper</a></strong>, <strong><a href="/assets/pdfs/cv_wiemann.pdf">CV</a></strong></p>
 
-<p>I’m a PhD student in Economics at the University of Chicago. My primary research interest lie in demand estimation, machine learning, and causal inference.</p>
+      <p><a href="mailto:wiemann@uchicago.edu">wiemann@uchicago.edu</a></p>
+    </div>
 
-<p><a href="mailto:wiemann@uchicago.edu">wiemann@uchicago.edu</a></p>
+    </div>
+</div>
+
+<!-- <br> -->
+
+<h2 id="job-market-paper">Job Market Paper</h2>
+
+<p><strong>Personalization with HART</strong> <br />
+ [<a href="assets/pdfs/jmp_wiemann.pdf">draft</a>].<br />
+Firms personalize prices, advertising, product design, and more to find and serve their—often highly heterogeneous—consumers. When personalizing to <em>known</em> consumers, these marketing decisions can be informed by past choice behavior. However, personalization must rely on observed characteristics for <em>new</em> consumers with limited or no purchase histories. I propose Bayesian <em>hierarchical</em> additive regression trees (HART) to define optimal marketing decisions that adapt to the firm’s familiarity with the consumer. HART combines the strengths of supervised machine learning and hierarchical Bayesian models in one framework: First, it flexibly leverages potentially many observed characteristics to personalize to new consumers. Second, it optimally adapts to the consumer’s specific preferences as their choices are recorded over time. I develop an efficient Metropolis-within-Gibbs sampler for fully Bayesian inference and apply it in two discrete choice applications. Using data from a canonical conjoint study, I illustrate how HART discovers marketing opportunities for product design in new markets. In a CPG scanner data application, HART leverages observed characteristics to improve out-of-sample choice prediction by 60% for new consumers, and raises profits by 13% and 2% compared to conventional personalization approaches for new and known consumers, respectively.
+<br />
+<em>Presented at: ISMS Marketing Science Conference 2025
+</em></p>
 
 <h2 id="working-papers">Working papers</h2>
 
@@ -109,7 +131,7 @@ This paper discusses estimation with a categorical instrumental variable in sett
 </div>
 <p><br />
 <strong>An Introduction to Double/Debiased Machine Learning</strong><br />
-with <a href="https://achimahrens.de/">Achim Ahrens</a>, <a href="http://www.mit.edu/~vchern/">Victor Chernozhukov</a>, <a href="https://voices.uchicago.edu/christianhansen/">Christian Hansen</a>, <a href="https://www.econ.uzh.ch/en/people/faculty/kozbur.html">Damian Kozbur</a>, <a href="https://ideas.repec.org/e/psc51.html">Mark Schaffer</a>.<br />
+with <a href="https://achimahrens.de/">Achim Ahrens</a>, <a href="https://www.victorchernozhukov.com/">Victor Chernozhukov</a>, <a href="https://voices.uchicago.edu/christianhansen/">Christian Hansen</a>, <a href="https://www.econ.uzh.ch/en/people/faculty/kozbur.html">Damian Kozbur</a>, <a href="https://ideas.repec.org/e/psc51.html">Mark Schaffer</a>.<br />
 Revision requested at the <em>Journal of Economic Literature</em>.<br />
  [<a style="cursor:pointer;" onclick="toggleVisibility('abstract_jel');">abstract</a>; <a href="https://arxiv.org/abs/2504.08324">arXiv</a>; <a href="https://dmlguide.github.io/">tutorial</a>].</p>
 <div id="abstract_jel" style="display:none;">
@@ -126,11 +148,17 @@ Although market shares are frequently estimated via averages of finitely many co
 </em>
 </div>
 <p><br />
+<strong>Guarantees on Correct Conclusions with Incorrect Likelihoods</strong> <br />
+[<a style="cursor:pointer;" onclick="toggleVisibility('abstract_sign');">abstract</a>; <a href="/assets/pdfs/sign_w.pdf">draft</a>]</p>
+<div id="abstract_sign" style="display:none;">
+This note studies robustness properties of (non)linear control function estimands such as (mixed) Logistic or Poisson pseudo maximum likelihood estimands. I show that under misspecification, commonly-applied estimands are not informative about the sign of the true partial effects. For example, (mixed) logistic regression estimands potentially imply positive partial effects even if all true partial effects are negative. I provide sufficient conditions to admit valid conclusions about the sign of partial effects. For a large class of estimands, including common pseudo maximum likelihood estimands based on natural exponential family distributions, nonparametrically conditioning on the control function is sufficient for sign preservation.
+</div>
+<p><br />
 <strong>Effects of Health Care Policy Uncertainty on Households’ Portfolio Choice</strong><br />
 with <a href="https://www.american.edu/kogod/faculty/lumsdain.cfm">Robin L Lumsdaine</a>.<br />
 [<a style="cursor:pointer;" onclick="toggleVisibility('abstract_HCPU');">abstract</a>; <a href="/assets/pdfs/hcpu_wl.pdf">draft</a>; <a href="/assets/pdfs/hcpu_wl_slides.pdf">slides</a>]</p>
 <div id="abstract_HCPU" style="display:none;">
-This paper develops a nonparametric identification approach for causal effects of an endogenous macroeconomic variable on microeconomic outcomes. The key assumption is the existence of an exogenous variable that shifts responsiveness to the variable of interest without shifting responsiveness to other macroeconomic time series. We apply the approach  to study the effect of health care policy uncertainty (HCPU) on households’ portfolio choice using health shocks to capture cross-sectional heterogeneity. Under the additional assumption of risk averse agents, our approach provides an informative bound on the average causal effect of HCPU. The empirical results highlight HCPU as an important determinant of households’ financial behavior, and showcase substantial heterogeneity in HCPU effects across varying unexpected changes to health.
+This paper develops a nonparametric identification approach for causal effects of an endogenous macroeconomic variable on microeconomic outcomes. The key assumption is the existence of an exogenous variable that shifts responsiveness to the variable of interest without shifting responsiveness to other macroeconomic time series. We apply the approach  to study the effect of health care policy uncertainty (HCPU) on households' portfolio choice using health shocks to capture cross-sectional heterogeneity. Under the additional assumption of risk averse agents, our approach provides an informative bound on the average causal effect of HCPU. The empirical results highlight HCPU as an important determinant of households' financial behavior, and showcase substantial heterogeneity in HCPU effects across varying unexpected changes to health.
 <br />
 <em>
 Presented at: Stanford Institute for Theoretical Economics 2019, International Association for Applied Econometrics 2019, Society for Financial Econometrics 2019, Royal Economic Society 2023
@@ -158,6 +186,11 @@ with <a href="https://achimahrens.de/">Achim Ahrens</a>, <a href="https://voices
 <div id="abstract_ddml_stata" style="display:none;">
 We introduce the package ddml for Double/Debiased Machine Learning (DDML) in Stata. Estimators of causal parameters for five different econometric models are supported, allowing for flexible estimation of causal effects of endogenous variables in settings with unknown functional forms and/or many exogenous variables. ddml is compatible with many existing supervised machine learning programs in Stata. We recommend using DDML in combination with stacking estimation which combines multiple machine learners into a final predictor. We provide Monte Carlo evidence to support our recommendation.
 </div>
+
+<h2 id="work-in-progress">Work in Progress</h2>
+
+<p><strong>Machine Learning learns Bayes</strong><br />
+with Andrew Bai, <a href="https://sanjogmisra.com/">Sanjog Misra</a>.</p>
 
 <h2 id="software">Software</h2>
 
@@ -195,7 +228,7 @@ Downloads" /></a></li>
     </li>
     <li class="flex-footer-item" style="width: 500px"><img src="/assets/images/uchicago-logo.jpg" alt="University of Chicago Seal" style="width:300px"></li>
     <li class="flex-footer-item">
-      <p>&copy; 2024 Thomas Wiemann</p>
+      <p>&copy; 2025 Thomas Wiemann</p>
     </li>
     </ul>
 
