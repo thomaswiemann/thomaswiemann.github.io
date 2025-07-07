@@ -9,11 +9,11 @@ summary: I'm Thomas Wiemann, Postdoctoral Scholar in Marketing at the University
 
 <div class="intro-container">
     <div class="intro-image">
-        <img src="/assets/images/jm_portrait_540.jpg" alt="Thomas Wiemann" style="width: 230px;">
+        <img src="/assets/images/jm_portrait_540.jpg" alt="Thomas Wiemann" style="width: 240px;">
     </div>
     <div class="intro-text">
         <h1 style="margin-top: 0;">Thomas Wiemann</h1>
-        Welcome! I'm a Postdoctoral Scholar in Marketing at the University of Chicago Booth School of Business. I obtained my PhD in Economics from the University of Chicago Department of Economics in 2025. My research interests lie in the intersection of marketing, econometrics, and machine learning.
+        Welcome! I'm a Postdoctoral Scholar in Marketing at the University of Chicago Booth School of Business. I obtained my PhD in Economics from the University of Chicago Department of Economics in June 2025. My research interests lie in the intersection of marketing, econometrics, and machine learning/AI.
         
 <div style="text-align: center;" markdown="1">
 **I'm on the 2025-26 academic job market.**
