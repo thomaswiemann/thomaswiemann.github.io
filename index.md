@@ -9,39 +9,35 @@ summary: I'm Thomas Wiemann, Postdoctoral Scholar in Marketing at the University
 
 <div class="intro-container">
     <div class="intro-image">
-        <img src="/assets/images/jm_portrait_540.jpg" alt="Thomas Wiemann" style="width: 240px;">
+        <img src="/assets/images/jm_portrait_540.jpg" alt="Thomas Wiemann" style="width: 140px;">
     </div>
     <div class="intro-text">
         <h1 style="margin-top: 0;">Thomas Wiemann</h1>
-        Welcome! I'm a Postdoctoral Scholar in Marketing at the University of Chicago Booth School of Business. I obtained my PhD in Economics from the University of Chicago Department of Economics in June 2025. My research interests lie in the intersection of marketing, econometrics, and machine learning/AI.
+        Welcome! I'm a Postdoctoral Scholar at the University of Chicago Booth School of Business. My research interests lie in the intersection of marketing, econometrics, and machine learning/AI.
         
-<div style="text-align: center;" markdown="1">
-**I'm on the 2025-26 academic job market.**
-
-**[Job Market Paper](/assets/pdfs/jmp_wiemann.pdf)**, **[CV](/assets/pdfs/cv_wiemann.pdf)**
-
-[wiemann@uchicago.edu](mailto:wiemann@uchicago.edu)
-</div>
-
+        <p></p>
+        <a href="mailto:thomas.wiemann@chicagobooth.edu">thomas.wiemann@chicagobooth.edu</a>
+        <p><img src="/assets/images/GitHub-Mark-32px.png" alt="GitHub Icon" style="width:20px"> <a href="https://github.com/thomaswiemann">@thomaswiemann</a> </p>
+  
     </div>
 </div>
 
 
 <!-- <br> -->
 
-## Job Market Paper
-
-**Personalization with HART** \
-[[draft](assets/pdfs/jmp_wiemann.pdf); [R package](https://thomaswiemann.com/bayesm.HART/)].\
-Firms personalize prices, advertising, product design, and more to find and serve their---often highly heterogeneous---consumers. When personalizing to *known* consumers, these marketing decisions can be informed by past choice behavior. However, firms must rely on observed characteristics for *new* consumers with limited or no purchase histories. Existing methods are tailored for either new or known consumers, complicating personalization both across and within consumers. I propose Bayesian *hierarchical* additive regression trees (HART) to define optimal marketing decisions that adapt to the firm's familiarity with the consumer. HART combines the strengths of supervised machine learning and hierarchical Bayesian models in one framework: First, it flexibly leverages potentially many observed characteristics to personalize to new consumers. Second, it optimally adapts to the consumer's specific preferences as their choices are recorded over time. I develop an efficient Metropolis-within-Gibbs sampler for fully Bayesian inference and apply it in two discrete choice applications. Using data from a canonical conjoint study, I illustrate how HART discovers marketing opportunities for product design in new markets. In a CPG scanner data application, HART leverages observed characteristics to improve out-of-sample choice prediction by 60% for new consumers, and raises profits by 13% and 2% compared to conventional personalization approaches for new and known consumers, respectively. 
-<br>
-<em>Presented at: ISMS Marketing Science Conference 2025
-</em>
-
 
 
 ## Working papers
 
+**Personalization with HART** \
+ [<a style="cursor:pointer;" onclick="toggleVisibility('abstract_HART');">abstract</a>; [draft](assets/pdfs/jmp_wiemann.pdf); [R package](https://thomaswiemann.com/bayesm.HART/)].
+<div id="abstract_HART" style="display:none;">
+Firms personalize prices, advertising, product design, and more to find and serve their---often highly heterogeneous---consumers. When personalizing to *known* consumers, these marketing decisions can be informed by past choice behavior. However, firms must rely on observed characteristics for *new* consumers with limited or no purchase histories. Existing methods are tailored for either new or known consumers, complicating personalization both across and within consumers. I propose Bayesian *hierarchical* additive regression trees (HART) to define optimal marketing decisions that adapt to the firm's familiarity with the consumer. HART combines the strengths of supervised machine learning and hierarchical Bayesian models in one framework: First, it flexibly leverages potentially many observed characteristics to personalize to new consumers. Second, it optimally adapts to the consumer's specific preferences as their choices are recorded over time. I develop an efficient Metropolis-within-Gibbs sampler for fully Bayesian inference and apply it in two discrete choice applications. Using data from a canonical conjoint study, I illustrate how HART discovers marketing opportunities for product design in new markets. In a CPG scanner data application, HART leverages observed characteristics to improve out-of-sample choice prediction by 60% for new consumers, and raises profits by 13% and 2% compared to conventional personalization approaches for new and known consumers, respectively.
+<br>
+<em>Presented at: ISMS Marketing Science Conference 2025
+</em>
+</div> 
+\
 **Optimal Categorical Instrumental Variables** \
  Revision requested at the _Journal of Business & Economic Statistics_.\
  [<a style="cursor:pointer;" onclick="toggleVisibility('abstract_CIV');">abstract</a>; [arXiv](https://arxiv.org/abs/2311.17021); [R package](https://thomaswiemann.com/civ/)].
