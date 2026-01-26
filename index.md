@@ -3,7 +3,7 @@ layout: default
 title: Home
 group: "navigation"
 order: 1
-summary: I'm Thomas Wiemann, Postdoctoral Scholar in Marketing at the University of Chicago Booth School of Business. I'm on the 2025-26 academic job market! 
+summary: I'm a Postdoctoral Scholar at the University of Chicago Booth School of Business. My research interests lie in the intersection of marketing, econometrics, and machine learning/AI.
 ---
 <br><br>
 
@@ -16,7 +16,7 @@ summary: I'm Thomas Wiemann, Postdoctoral Scholar in Marketing at the University
         Welcome! I'm a Postdoctoral Scholar at the University of Chicago Booth School of Business. My research interests lie in the intersection of marketing, econometrics, and machine learning/AI.
         <p></p>
 
-        I will join the <a href="https://www.chicagobooth.edu/faculty/academic-areas/marketing">University of Chicago Booth School of Business</a> as an Assistant Professor in Marketing in July 2026.
+        I will join the <a href="https://www.chicagobooth.edu/faculty/academic-areas/marketing">University of Chicago Booth School of Business</a> as an Assistant Professor of Marketing in July 2026.
         
         <p></p>
         <a href="mailto:thomas.wiemann@chicagobooth.edu">thomas.wiemann@chicagobooth.edu</a>
