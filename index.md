@@ -3,17 +3,17 @@ layout: default
 title: Home
 group: "navigation"
 order: 1
-summary: I'm a Postdoctoral Scholar at the University of Chicago Booth School of Business. My research interests lie in the intersection of marketing, econometrics, and machine learning/AI.
+summary: I'm a Postdoctoral Scholar at the University of Chicago Booth School of Business. My research integrates marketing, econometrics, and machine learning/AI.
 ---
 <br><br>
 
 <div class="intro-container">
     <div class="intro-image">
-        <img src="/assets/images/jm_portrait_540.jpg" alt="Thomas Wiemann" style="width: 140px;">
+        <img src="/assets/images/portrait-compressed.jpg" alt="Thomas Wiemann" style="width: 222px;">
     </div>
     <div class="intro-text">
         <h1 style="margin-top: 0;">Thomas Wiemann</h1>
-        Welcome! I'm a Postdoctoral Scholar at the University of Chicago Booth School of Business. My research interests lie in the intersection of marketing, econometrics, and machine learning/AI.
+        Welcome! I'm a Postdoctoral Scholar at the University of Chicago Booth School of Business. My research integrates marketing, econometrics, and machine learning/AI.
         <p></p>
 
         I will join the <a href="https://www.chicagobooth.edu/faculty/academic-areas/marketing">University of Chicago Booth School of Business</a> as an Assistant Professor of Marketing in July 2026.
@@ -42,21 +42,13 @@ Firms personalize prices, advertising, product design, and more to find and serv
 </div> 
 \
 **Optimal Categorical Instrumental Variables** \
- Revision requested at the _Journal of Business & Economic Statistics_.\
+ Conditionally accepted at the _Journal of Business & Economic Statistics_.\
  [<a style="cursor:pointer;" onclick="toggleVisibility('abstract_CIV');">abstract</a>; [arXiv](https://arxiv.org/abs/2311.17021); [R package](https://thomaswiemann.com/civ/)].
 <div id="abstract_CIV" style="display:none;">
 This paper discusses estimation with a categorical instrumental variable in settings with potentially few observations per category. The proposed categorical instrumental variable estimator (CIV) leverages a regularization assumption that implies existence of a latent categorical variable with fixed finite support achieving the same first stage fit as the observed instrument. In asymptotic regimes that allow the number of observations per category to grow at arbitrary small polynomial rate with the sample size, I show that when the cardinality of the support of the optimal instrument is known, CIV is root-n asymptotically normal, achieves the same asymptotic variance as the oracle IV estimator that presumes knowledge of the optimal instrument, and is semiparametrically efficient under homoskedasticity. Under-specifying the number of support points reduces efficiency but maintains asymptotic normality. In an application that leverages judge fixed effects as instruments, CIV compares favorably to commonly used jackknife-based instrumental variable estimators. 
 <br>
 <em>Presented at: International Association for Applied Econometrics 2023, North American Winter Meeting of the Econometric Society 2024
 </em>
-</div> 
-\
-**An Introduction to Double/Debiased Machine Learning**\
-with [Achim Ahrens](https://achimahrens.de/), [Victor Chernozhukov](https://www.victorchernozhukov.com/), [Christian Hansen](https://voices.uchicago.edu/christianhansen/), [Damian Kozbur](https://www.econ.uzh.ch/en/people/faculty/kozbur.html), [Mark Schaffer](https://ideas.repec.org/e/psc51.html).\
-Revision requested at the _Journal of Economic Literature_.\
- [<a style="cursor:pointer;" onclick="toggleVisibility('abstract_jel');">abstract</a>; [arXiv](https://arxiv.org/abs/2504.08324); [tutorial](https://dmlguide.github.io/)].
-<div id="abstract_jel" style="display:none;">
-This paper provides a practical introduction to Double/Debiased Machine Learning (DML). DML provides a general approach to performing inference about a target parameter in the presence of nuisance parameters. The aim of DML is to reduce the impact of nuisance parameter estimation on estimators of the parameter of interest. We describe DML and its two essential components: Neyman orthogonality and cross-fitting. We highlight that DML reduces functional form dependence and accommodates the use of complex data types, such as text data. We illustrate its application through three empirical examples that demonstrate DML's applicability in cross-sectional and panel settings.
 </div> 
 \
 **Demand Estimation with Finitely Many Consumers** \
@@ -88,7 +80,14 @@ Presented at: Stanford Institute for Theoretical Economics 2019, International A
 
 
 ## Publications
-
+**An Introduction to Double/Debiased Machine Learning**\
+with [Achim Ahrens](https://achimahrens.de/), [Victor Chernozhukov](https://www.victorchernozhukov.com/), [Christian Hansen](https://voices.uchicago.edu/christianhansen/), [Damian Kozbur](https://www.econ.uzh.ch/en/people/faculty/kozbur.html), [Mark Schaffer](https://ideas.repec.org/e/psc51.html).\
+_Journal of Economic Literature, forthcoming._\
+ [<a style="cursor:pointer;" onclick="toggleVisibility('abstract_jel');">abstract</a>; [arXiv](https://arxiv.org/abs/2504.08324); [tutorial](https://dmlguide.github.io/)].
+<div id="abstract_jel" style="display:none;">
+This paper provides a practical introduction to Double/Debiased Machine Learning (DML). DML provides a general approach to performing inference about a target parameter in the presence of nuisance parameters. The aim of DML is to reduce the impact of nuisance parameter estimation on estimators of the parameter of interest. We describe DML and its two essential components: Neyman orthogonality and cross-fitting. We highlight that DML reduces functional form dependence and accommodates the use of complex data types, such as text data. We illustrate its application through three empirical examples that demonstrate DML's applicability in cross-sectional and panel settings.
+</div> 
+\
 **Model Averaging and Double Machine Learning**\
 with [Achim Ahrens](https://achimahrens.de/), [Christian Hansen](https://voices.uchicago.edu/christianhansen/), [Mark Schaffer](https://ideas.repec.org/e/psc51.html).\
 _Journal of Applied Econometrics, 2025, 40(3): 249-269._\
@@ -108,11 +107,6 @@ _Stata Journal, 2024, 24(1): 3-45._\
 <div id="abstract_ddml_stata" style="display:none;">
 We introduce the package ddml for Double/Debiased Machine Learning (DDML) in Stata. Estimators of causal parameters for five different econometric models are supported, allowing for flexible estimation of causal effects of endogenous variables in settings with unknown functional forms and/or many exogenous variables. ddml is compatible with many existing supervised machine learning programs in Stata. We recommend using DDML in combination with stacking estimation which combines multiple machine learners into a final predictor. We provide Monte Carlo evidence to support our recommendation.
 </div> 
-
-## Work in Progress
-
-**Machine Learning learns Bayes**\
-with Andrew Bai, [Sanjog Misra](https://sanjogmisra.com/).
 
 ## Software
 
