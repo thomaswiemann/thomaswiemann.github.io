@@ -3,7 +3,7 @@ layout: default
 title: Home
 group: "navigation"
 order: 1
-summary: I'm a Postdoctoral Scholar at the University of Chicago Booth School of Business. My research integrates marketing, econometrics, and machine learning/AI.
+summary: I'm an Assistant Professor of Marketing at the University of Chicago Booth School of Business. My research integrates marketing, econometrics, and machine learning/AI.
 ---
 <br><br>
 
@@ -13,10 +13,8 @@ summary: I'm a Postdoctoral Scholar at the University of Chicago Booth School of
     </div>
     <div class="intro-text">
         <h1 style="margin-top: 0;">Thomas Wiemann</h1>
-        Welcome! I'm a Postdoctoral Scholar at the University of Chicago Booth School of Business. My research integrates marketing, econometrics, and machine learning/AI.
+        Welcome! I'm an Assistant Professor of Marketing and Beatrice Foods Co. Faculty Scholar at the <a href="https://www.chicagobooth.edu/faculty/academic-areas/marketing">University of Chicago Booth School of Business</a>. My research integrates marketing, econometrics, and machine learning/AI.
         <p></p>
-
-        I will join the <a href="https://www.chicagobooth.edu/faculty/academic-areas/marketing">University of Chicago Booth School of Business</a> as an Assistant Professor of Marketing in July 2026.
         
         <p></p>
         <a href="mailto:thomas.wiemann@chicagobooth.edu">thomas.wiemann@chicagobooth.edu</a>
